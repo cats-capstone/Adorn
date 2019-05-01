@@ -1,5 +1,12 @@
 import { AppRegistry } from 'react-native';
+import React, { Component } from 'react';
 import App from './App.js';
+
+export default class RnrfExample extends Component {
+  render() {
+    return <App />;
+  }
+}
 
 AppRegistry.registerComponent('CatsCapstone', () => App);
 
