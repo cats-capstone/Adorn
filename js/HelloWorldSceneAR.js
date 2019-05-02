@@ -15,16 +15,15 @@ import {
   ViroNode
 } from 'react-viro';
 
+import { Actions } from 'react-native-router-flux';
+
 
 
 export default class HelloWorldSceneAR extends Component {
-
   constructor() {
     super();
-
-    // Set initial state here
     this.state = {
-      text : "Initializing AR..."
+      text: 'Initializing AR...',
     };
 
     // bind 'this' to functions
@@ -63,10 +62,10 @@ export default class HelloWorldSceneAR extends Component {
     );
   }
 
-  _onInitialized(state, reason) {
+  initialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text : "Hello World!"
+        text: 'Hello World!',
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
@@ -96,7 +95,7 @@ var styles = StyleSheet.create({
     fontSize: 30,
     color: '#ffffff',
     textAlignVertical: 'center',
-    textAlign: 'center',  
+    textAlign: 'center',
   },
 });
 

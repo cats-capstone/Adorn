@@ -6,15 +6,16 @@ import HomePage from './HomePage';
 export default class Routes extends React.Component {
   render() {
     return (
-      <Router hideNavBar="true">
+      <Router>
         <Scene key="root">
           <Scene
             key="HomePage"
             component={HomePage}
             title="HomePage"
             initial={true}
+            hideNavBar="true"
           />
-          <Scene key="DisplayAR" component={DisplayAR} title="DisplayAR" />
+          <Scene key="DisplayAR" component={DisplayAR} />
         </Scene>
       </Router>
     );
