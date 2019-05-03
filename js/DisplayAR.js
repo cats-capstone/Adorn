@@ -3,7 +3,10 @@ import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
 import HomePage from './HomePage';
 import InitialARScene from './HelloWorldSceneAR';
+import { View } from 'native-base';
+import { StatusBar, StyleSheet } from 'react-native';
 // import { viroKey } from '../secrets';
+import AddButton from './AddButton';
 
 const apiKey = 'D09E03E6-54C9-48B1-BB65-EC71FB38943D';
 
@@ -13,23 +16,35 @@ export default class DisplayAR extends Component {
     this.state = {
       run: true,
     };
-    this.goToHomePage = this.goToHomePage.bind(this);
-  }
-
-  goToHomePage() {
-    Actions.HomePage();
   }
 
   render() {
-    if (this.state.run) {
-      return (
+    return (
+      <View style={localStyles.flex}>
+        <StatusBar hidden={true} />
         <ViroARSceneNavigator
+          style={localStyles.arView}
           apiKey={apiKey}
           initialScene={{ scene: InitialARScene }}
         />
-      );
-    } else {
-      return <HomePage />;
-    }
+        <AddButton style={localStyles.AddButton} />
+      </View>
+    );
   }
 }
+
+var localStyles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
+  arView: {
+    flex: 1,
+  },
+  AddButton: {
+    position: 'absolute',
+    height: 90,
+    width: 90,
+    left: 0,
+    alignSelf: 'center',
+  },
+});

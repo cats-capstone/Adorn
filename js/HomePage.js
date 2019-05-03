@@ -39,7 +39,7 @@ export default class HomePage extends Component {
               Actions.DisplayAR();
             }}
           >
-            <Text>Go to AR</Text>
+            <Text>WOW</Text>
           </Button>
         </Content>
       </Container>
