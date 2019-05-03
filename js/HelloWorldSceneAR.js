@@ -9,6 +9,7 @@ import {
   ViroText,
   ViroConstants,
   ViroARPlane,
+  ViroARPlaneSelector,
   ViroBox,
   Viro3DObject,
   ViroAmbientLight,
@@ -21,30 +22,24 @@ export default class HelloWorldSceneAR extends Component {
   constructor() {
     super();
     this.state = {
-      text: 'Initializing AR...',
+      worldCenterPosition: [0, 0, 0],
+      rotation: [0, 0, 0],
     };
 
-    // bind 'this' to functions
-    this._onInitialized = this._onInitialized.bind(this);
-    this._onLoadEnd = this._onLoadEnd.bind(this);
-    this._onLoadStart = this._onLoadStart.bind(this);
+    this._setRef = this._setRef.bind(this);
+    this._onAnchorFound = this._onAnchorFound.bind(this);
+    this._onRotate = this._onRotate.bind(this);
   }
-
   render() {
-    console.log('IN RENDER!');
     return (
-      <ViroARScene ref="arscene" onTrackingUpdated={this._onInitialized}>
-        <ViroNode>
-          <ViroAmbientLight color="#FFFFFF" />
-          {/* <Viro3DObject source={require('./res/Eames-chair-DSW.obj')}
-                        resources={[require('./res/teak_B.jpg'),
-                                    require('./res/teak_R.jpg'),
-                                    require('./res/teak_D.jpg')]}
-                        position={[0, 0, 0]}
-                        scale={[.01, .01, .01]}
-                        type='OBJ'
-                        onLoadStart={this._onLoadStart}/> */}
-
+      <ViroARScene ref="arscene" anchorDetectionTypes="PlanesHorizontal">
+        <ViroAmbientLight color="#FFFFFF" />
+        <ViroARPlane
+          minHeight={0.5}
+          minWidth={0.5}
+          alignment={'Horizontal'}
+          onAnchorFound={this._onAnchorFound}
+        >
           <Viro3DObject
             source={require('./res/object_flowers/object_flowers.vrx')}
             resources={[
@@ -52,38 +47,54 @@ export default class HelloWorldSceneAR extends Component {
               require('./res/object_flowers/object_flowers_normal.png'),
               require('./res/object_flowers/object_flowers_specular.png'),
             ]}
+            ref={this._setRef}
             position={[0, 0, 0]}
             scale={[0.5, 0.5, 0.5]}
             type="VRX"
+            onDrag={() => {}}
+            dragType="FixedToPlane"
+            dragPlane={{
+              planePoint: this.state.worldCenterPosition,
+              planeNormal: [0, 1, 0],
+            }}
+            rotation={this.state.rotation}
+            onRotate={this._onRotate}
           />
-        </ViroNode>
+        </ViroARPlane>
       </ViroARScene>
     );
   }
-
-  _onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text: 'Hello World!',
-      });
-    } else if (state == ViroConstants.TRACKING_NONE) {
-      // Handle loss of tracking
+  _onAnchorFound(anchorMap) {
+    if (anchorMap.type != 'plane') {
+      return;
     }
+    var worldCenterPosition = anchorMap.position;
+    this.setState({ worldCenterPosition });
   }
 
-  _onLoadStart() {
-    console.log('STARTED LOADING!');
-  }
+  _onRotate(rotateState, rotationFactor, source) {
+    if (rotateState === 3) {
+      this.setState({
+        rotation: [
+          this.state.rotation[0],
+          this.state.rotation[1] + rotationFactor,
+          this.state.rotation[2],
+        ],
+      });
+      return;
+    }
 
-  _onLoadEnd() {
-    this.refs['arscene'].getCameraOrientationAsync().then(orientation => {
-      console.log('got camera orientation!', orientation);
-      this.refs['arscene']
-        .performARHitTestWithRay(orientation.forward)
-        .then(results => {
-          console.log('hit test results!', results);
-        });
+    this.arRef.setNativeProps({
+      rotation: [
+        this.state.rotation[0],
+        this.state.rotation[1] + rotationFactor,
+        this.state.rotation[2],
+      ],
     });
+  }
+
+  _setRef(component) {
+    this.arRef = component;
   }
 }
 
