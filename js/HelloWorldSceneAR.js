@@ -9,6 +9,7 @@ import {
   ViroText,
   ViroConstants,
   ViroARPlane,
+  ViroARPlaneSelector,
   ViroBox,
   Viro3DObject,
   ViroAmbientLight,
@@ -24,6 +25,7 @@ export default class HelloWorldSceneAR extends Component {
     super();
     this.state = {
       text: 'Initializing AR...',
+      worldCenterPosition: [0, 0, 0]
     };
 
     // bind 'this' to functions
@@ -31,39 +33,43 @@ export default class HelloWorldSceneAR extends Component {
     this._onLoadEnd = this._onLoadEnd.bind(this)
     this._onLoadStart = this._onLoadStart.bind(this)
     this._onDrag = this._onDrag.bind(this)
+    this._onAnchorFound = this._onAnchorFound.bind(this)
   }
 
   render() {
     console.log('IN RENDER!')
     return (
-      <ViroARScene ref="arscene" onTrackingUpdated={this._onInitialized} anchorDetectionTypes="PlanesHorizontal" >
-                  {/* <ViroNode> */}
-                  <ViroAmbientLight color="#FFFFFF" />
-                  {/* <Viro3DObject source={require('./res/Eames-chair-DSW.obj')}
-                        resources={[require('./res/teak_B.jpg'),
-                                    require('./res/teak_R.jpg'),
-                                    require('./res/teak_D.jpg')]}
-                        position={[0, 0, 0]}
-                        scale={[.01, .01, .01]}
-                        type='OBJ'
-                        onLoadStart={this._onLoadStart}/> */}
-                  <ViroARPlane minHeight={.5} minWidth={.5} alignment={"Horizontal"}>
-                    <Viro3DObject source={require('./res/object_flowers/object_flowers.vrx')}
-                                  resources={[require('./res/object_flowers/object_flowers_diffuse.png'),
-                                              require('./res/object_flowers/object_flowers_normal.png'),
-                                              require('./res/object_flowers/object_flowers_specular.png')]}
-                                  position={[0, 0, 0]}
-                                  scale={[.5, .5, .5]}
-                                  type="VRX"
-                                  onDrag={this._onDrag}/>
-                  </ViroARPlane>
-                  
-                  {/* </ViroNode> */}
-          
-          
-                        
+      <ViroARScene ref="arscene" 
+                  onTrackingUpdated={this._onInitialized} 
+                  anchorDetectionTypes="PlanesHorizontal" 
+                  // dragType="FixedToPlane"
+                  // dragPlane={{planePoint: [0, 0, 0,], planeNormal: [0, 1, 0]}}
+                   >
+        <ViroAmbientLight color="#FFFFFF" />
+          <ViroARPlane minHeight={.5} minWidth={.5} alignment={"Horizontal"} onAnchorFound={this._onAnchorFound}>
+                
+            <Viro3DObject source={require('./res/object_flowers/object_flowers.vrx')}
+                          resources={[require('./res/object_flowers/object_flowers_diffuse.png'),
+                                      require('./res/object_flowers/object_flowers_normal.png'),
+                                      require('./res/object_flowers/object_flowers_specular.png')]}
+                          position={[0, 0, 0]}
+                          scale={[.5, .5, .5]}
+                          type="VRX"
+                          onDrag={this._onDrag}
+                          dragType="FixedToPlane"
+                            dragPlane={{planePoint: this.state.worldCenterPosition, planeNormal: [0, 1, 0]}}
+          />
+          </ViroARPlane>
+
       </ViroARScene>
     );
+  }
+  _onAnchorFound(anchorMap) {
+    if (anchorMap.type != "plane") {
+      return;
+    }
+    var worldCenterPosition = anchorMap.position
+    this.setState({worldCenterPosition})
   }
 
   _onInitialized(state, reason) {
@@ -93,9 +99,6 @@ export default class HelloWorldSceneAR extends Component {
     console.log('DRAGGING OBJ!')
   }
 }
-
-
-
 
 var styles = StyleSheet.create({
   helloWorldTextStyle: {
