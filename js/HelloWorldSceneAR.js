@@ -30,13 +30,14 @@ export default class HelloWorldSceneAR extends Component {
     this._onInitialized = this._onInitialized.bind(this);
     this._onLoadEnd = this._onLoadEnd.bind(this)
     this._onLoadStart = this._onLoadStart.bind(this)
+    this._onDrag = this._onDrag.bind(this)
   }
 
   render() {
     console.log('IN RENDER!')
     return (
-      <ViroARScene ref="arscene" onTrackingUpdated={this._onInitialized} >
-                  <ViroNode>
+      <ViroARScene ref="arscene" onTrackingUpdated={this._onInitialized} anchorDetectionTypes="PlanesHorizontal" >
+                  {/* <ViroNode> */}
                   <ViroAmbientLight color="#FFFFFF" />
                   {/* <Viro3DObject source={require('./res/Eames-chair-DSW.obj')}
                         resources={[require('./res/teak_B.jpg'),
@@ -46,15 +47,18 @@ export default class HelloWorldSceneAR extends Component {
                         scale={[.01, .01, .01]}
                         type='OBJ'
                         onLoadStart={this._onLoadStart}/> */}
-
-                  <Viro3DObject source={require('./res/object_flowers/object_flowers.vrx')}
-                                resources={[require('./res/object_flowers/object_flowers_diffuse.png'),
-                                            require('./res/object_flowers/object_flowers_normal.png'),
-                                            require('./res/object_flowers/object_flowers_specular.png')]}
-                                position={[0, 0, 0]}
-                                scale={[.5, .5, .5]}
-                                type="VRX"/>
-                  </ViroNode>
+                  <ViroARPlane minHeight={.5} minWidth={.5} alignment={"Horizontal"}>
+                    <Viro3DObject source={require('./res/object_flowers/object_flowers.vrx')}
+                                  resources={[require('./res/object_flowers/object_flowers_diffuse.png'),
+                                              require('./res/object_flowers/object_flowers_normal.png'),
+                                              require('./res/object_flowers/object_flowers_specular.png')]}
+                                  position={[0, 0, 0]}
+                                  scale={[.5, .5, .5]}
+                                  type="VRX"
+                                  onDrag={this._onDrag}/>
+                  </ViroARPlane>
+                  
+                  {/* </ViroNode> */}
           
           
                         
@@ -83,6 +87,10 @@ export default class HelloWorldSceneAR extends Component {
         console.log('hit test results!', results)
       })
     })
+  }
+
+  _onDrag() {
+    console.log('DRAGGING OBJ!')
   }
 }
 
