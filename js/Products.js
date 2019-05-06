@@ -33,6 +33,20 @@ export default class Products extends Component {
             <Icon name="ios-menu" />
           </Button>
         </Header>
+        <Content padder>
+          <Card>
+            <CardItem>
+              <Body>
+                <Text>
+                  Do you like me? Click the icon to add me to your room.
+                </Text>
+                <Button transparent>
+                  <Icon name="ios-add-circle-outline" />
+                </Button>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
       </Container>
     );
   }
