@@ -16,19 +16,40 @@ import {
   ViroNode,
 } from 'react-viro';
 
+import ObjComponent from './objComponent'
+
 import { Actions } from 'react-native-router-flux';
 
+////////////////
+let flowerSource = require('./res/object_flowers/object_flowers.vrx')
+let flowerResources = [
+  require('./res/object_flowers/object_flowers_diffuse.png'),
+  require('./res/object_flowers/object_flowers_normal.png'),
+  require('./res/object_flowers/object_flowers_specular.png'),
+]
+
+let chairSource = require('./res/Eames-chair-DSW.obj')
+let chairResources = [
+  require('./res/teak_B.jpg'),
+  require('./res/teak_D.jpg'),
+  require('./res/teak_R.jpg'),
+]
+////////////////
 export default class HelloWorldSceneAR extends Component {
   constructor() {
     super();
     this.state = {
       worldCenterPosition: [0, 0, 0],
-      rotation: [0, 0, 0],
+      objs : [{source: flowerSource,
+              resources: flowerResources,
+              type: "VRX"},
+            {source: flowerSource,
+            resources: flowerResources,
+          type: "VRX"}]
     };
 
     this._setRef = this._setRef.bind(this);
     this._onAnchorFound = this._onAnchorFound.bind(this);
-    this._onRotate = this._onRotate.bind(this);
   }
   render() {
     return (
@@ -40,26 +61,11 @@ export default class HelloWorldSceneAR extends Component {
           alignment={'Horizontal'}
           onAnchorFound={this._onAnchorFound}
         >
-          <Viro3DObject
-            source={require('./res/object_flowers/object_flowers.vrx')}
-            resources={[
-              require('./res/object_flowers/object_flowers_diffuse.png'),
-              require('./res/object_flowers/object_flowers_normal.png'),
-              require('./res/object_flowers/object_flowers_specular.png'),
-            ]}
-            ref={this._setRef}
-            position={[0, 0, 0]}
-            scale={[0.5, 0.5, 0.5]}
-            type="VRX"
-            onDrag={() => {}}
-            dragType="FixedToPlane"
-            dragPlane={{
-              planePoint: this.state.worldCenterPosition,
-              planeNormal: [0, 1, 0],
-            }}
-            rotation={this.state.rotation}
-            onRotate={this._onRotate}
-          />
+        {this.state.objs.map(obj=>(<ObjComponent horizontal={this.state.worldCenterPosition} 
+                                                  source={obj.source}
+                                                  resources={obj.resources}
+                                                  type={obj.type}/>))}
+         
         </ViroARPlane>
       </ViroARScene>
     );
@@ -72,26 +78,6 @@ export default class HelloWorldSceneAR extends Component {
     this.setState({ worldCenterPosition });
   }
 
-  _onRotate(rotateState, rotationFactor, source) {
-    if (rotateState === 3) {
-      this.setState({
-        rotation: [
-          this.state.rotation[0],
-          this.state.rotation[1] + rotationFactor,
-          this.state.rotation[2],
-        ],
-      });
-      return;
-    }
-
-    this.arRef.setNativeProps({
-      rotation: [
-        this.state.rotation[0],
-        this.state.rotation[1] + rotationFactor,
-        this.state.rotation[2],
-      ],
-    });
-  }
 
   _setRef(component) {
     this.arRef = component;
