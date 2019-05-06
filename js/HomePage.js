@@ -9,6 +9,7 @@ import {
   Button,
   Title,
   CardItem,
+  Icon,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
@@ -20,6 +21,14 @@ export default class HomePage extends Component {
           <Body>
             <Title>Home Page</Title>
           </Body>
+          <Button transparent>
+            <Icon
+              name="ios-menu"
+              onPress={() => {
+                Actions.Products();
+              }}
+            />
+          </Button>
         </Header>
         <Content padder>
           <Card>
