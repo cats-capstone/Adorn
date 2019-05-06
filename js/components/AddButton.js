@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { TouchableHighlight, View } from 'react-native';
+import { TouchableHighlight, View, StyleSheet } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
@@ -20,6 +20,7 @@ export default class AddButton extends Component {
               onPress={() => {
                 Actions.Products();
               }}
+              style={localStyles.AddButton}
             />
           </Button>
         </View>
@@ -27,3 +28,13 @@ export default class AddButton extends Component {
     );
   }
 }
+
+const localStyles = StyleSheet.create({
+  AddButton: {
+    position: 'absolute',
+    height: 90,
+    width: 90,
+    left: 0,
+    alignSelf: 'center',
+  },
+});

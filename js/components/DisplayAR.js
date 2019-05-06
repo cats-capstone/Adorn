@@ -27,7 +27,7 @@ export default class DisplayAR extends Component {
           apiKey={apiKey}
           initialScene={{ scene: InitialARScene }}
         />
-        <AddButton style={localStyles.AddButton} />
+        <AddButton />
       </View>
     );
   }
@@ -39,12 +39,5 @@ var localStyles = StyleSheet.create({
   },
   arView: {
     flex: 1,
-  },
-  AddButton: {
-    position: 'absolute',
-    height: 90,
-    width: 90,
-    left: 0,
-    alignSelf: 'center',
   },
 });

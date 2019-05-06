@@ -41,11 +41,11 @@ export default class HelloWorldSceneAR extends Component {
           onAnchorFound={this._onAnchorFound}
         >
           <Viro3DObject
-            source={require('./res/object_flowers/object_flowers.vrx')}
+            source={require('../res/object_flowers/object_flowers.vrx')}
             resources={[
-              require('./res/object_flowers/object_flowers_diffuse.png'),
-              require('./res/object_flowers/object_flowers_normal.png'),
-              require('./res/object_flowers/object_flowers_specular.png'),
+              require('../res/object_flowers/object_flowers_diffuse.png'),
+              require('../res/object_flowers/object_flowers_normal.png'),
+              require('../res/object_flowers/object_flowers_specular.png'),
             ]}
             ref={this._setRef}
             position={[0, 0, 0]}
