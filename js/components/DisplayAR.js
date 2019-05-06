@@ -3,8 +3,8 @@ import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
 import HomePage from './HomePage';
 import InitialARScene from './HelloWorldSceneAR';
-import { View } from 'native-base';
-import { StatusBar, StyleSheet } from 'react-native';
+import { View, Button, Icon, Footer } from 'native-base';
+import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 // import { viroKey } from '../secrets';
 import AddButton from './AddButton';
 
@@ -27,7 +27,15 @@ export default class DisplayAR extends Component {
           apiKey={apiKey}
           initialScene={{ scene: InitialARScene }}
         />
-        <AddButton style={localStyles.AddButton} />
+        <View style={localStyles.noFlex}>
+          <Icon
+            name="ios-add-circle-outline"
+            onPress={() => {
+              Actions.Products();
+            }}
+            style={localStyles.icon}
+          />
+        </View>
       </View>
     );
   }
@@ -40,11 +48,16 @@ var localStyles = StyleSheet.create({
   arView: {
     flex: 1,
   },
-  AddButton: {
+  icon: {
+    // position: 'absolute',
+    height: 58,
+    width: 58,
+    top: 10,
+    left: 10,
+  },
+  noFlex: {
     position: 'absolute',
-    height: 90,
-    width: 90,
+    bottom: 0,
     left: 0,
-    alignSelf: 'center',
   },
 });

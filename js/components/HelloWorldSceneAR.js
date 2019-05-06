@@ -16,36 +16,34 @@ import {
   ViroNode,
 } from 'react-viro';
 
-import ObjComponent from './objComponent'
+import ObjComponent from './objComponent';
 
 import { Actions } from 'react-native-router-flux';
 
 ////////////////
-let flowerSource = require('./res/object_flowers/object_flowers.vrx')
+let flowerSource = require('../res/object_flowers/object_flowers.vrx');
 let flowerResources = [
-  require('./res/object_flowers/object_flowers_diffuse.png'),
-  require('./res/object_flowers/object_flowers_normal.png'),
-  require('./res/object_flowers/object_flowers_specular.png'),
-]
+  require('../res/object_flowers/object_flowers_diffuse.png'),
+  require('../res/object_flowers/object_flowers_normal.png'),
+  require('../res/object_flowers/object_flowers_specular.png'),
+];
 
-let chairSource = require('./res/Eames-chair-DSW.obj')
+let chairSource = require('../res/Eames-chair-DSW.obj');
 let chairResources = [
-  require('./res/teak_B.jpg'),
-  require('./res/teak_D.jpg'),
-  require('./res/teak_R.jpg'),
-]
+  require('../res/teak_B.jpg'),
+  require('../res/teak_D.jpg'),
+  require('../res/teak_R.jpg'),
+];
 ////////////////
 export default class HelloWorldSceneAR extends Component {
   constructor() {
     super();
     this.state = {
       worldCenterPosition: [0, 0, 0],
-      objs : [{source: flowerSource,
-              resources: flowerResources,
-              type: "VRX"},
-            {source: flowerSource,
-            resources: flowerResources,
-          type: "VRX"}]
+      objs: [
+        { source: flowerSource, resources: flowerResources, type: 'VRX' },
+        { source: flowerSource, resources: flowerResources, type: 'VRX' },
+      ],
     };
 
     this._setRef = this._setRef.bind(this);
@@ -61,11 +59,14 @@ export default class HelloWorldSceneAR extends Component {
           alignment={'Horizontal'}
           onAnchorFound={this._onAnchorFound}
         >
-        {this.state.objs.map(obj=>(<ObjComponent horizontal={this.state.worldCenterPosition} 
-                                                  source={obj.source}
-                                                  resources={obj.resources}
-                                                  type={obj.type}/>))}
-         
+          {this.state.objs.map(obj => (
+            <ObjComponent
+              horizontal={this.state.worldCenterPosition}
+              source={obj.source}
+              resources={obj.resources}
+              type={obj.type}
+            />
+          ))}
         </ViroARPlane>
       </ViroARScene>
     );
@@ -77,7 +78,6 @@ export default class HelloWorldSceneAR extends Component {
     var worldCenterPosition = anchorMap.position;
     this.setState({ worldCenterPosition });
   }
-
 
   _setRef(component) {
     this.arRef = component;
