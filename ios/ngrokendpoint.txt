@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 http://b4e68bcd.ngrok.io/
-=======
-http://4556d3c0.ngrok.io/
->>>>>>> master

@@ -21,18 +21,18 @@ import ObjComponent from './objComponent';
 import { Actions } from 'react-native-router-flux';
 
 ////////////////
-let flowerSource = require('./res/object_flowers/object_flowers.vrx');
+let flowerSource = require('../res/object_flowers/object_flowers.vrx');
 let flowerResources = [
-  require('./res/object_flowers/object_flowers_diffuse.png'),
-  require('./res/object_flowers/object_flowers_normal.png'),
-  require('./res/object_flowers/object_flowers_specular.png'),
+  require('../res/object_flowers/object_flowers_diffuse.png'),
+  require('../res/object_flowers/object_flowers_normal.png'),
+  require('../res/object_flowers/object_flowers_specular.png'),
 ];
 
-let chairSource = require('./res/Eames-chair-DSW.obj');
+let chairSource = require('../res/Eames-chair-DSW.obj');
 let chairResources = [
-  require('./res/teak_B.jpg'),
-  require('./res/teak_D.jpg'),
-  require('./res/teak_R.jpg'),
+  require('../res/teak_B.jpg'),
+  require('../res/teak_D.jpg'),
+  require('../res/teak_R.jpg'),
 ];
 ////////////////
 export default class HelloWorldSceneAR extends Component {
