@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
 import HomePage from './HomePage';
-import InitialARScene from './HelloWorldSceneAR';
+import InitialARScene from './InitialARScene';
 import { View, Button, Icon, Footer } from 'native-base';
 import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 // import { viroKey } from '../secrets';
