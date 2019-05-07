@@ -2,21 +2,27 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
 
 import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  ViroARPlane,
-  ViroARPlaneSelector,
-  ViroBox,
   Viro3DObject,
-  ViroAmbientLight,
-  ViroNode,
+  ViroMaterials
 } from 'react-viro';
 
-import { Actions } from 'react-native-router-flux';
+
+
+ViroMaterials.createMaterials({
+  white: {
+    lightingModel: "PBR",
+    diffuseTexture: require('../res/car/object_car_main_Base_Color.png'),
+    metalnessTexture: require('../res/car/object_car_main_Metallic.png'),
+    roughnessTexture: require('../res/car/object_car_main_Roughness.png'),
+  },
+  wood: {
+    lightingModel: "PBR",
+    diffuseTexture: require('../res/chair/z7it.jpg'),
+    roughnessTexture: require('../res/chair/z7ipu_.jpg')
+  }
+})
 
 export default class ObjComponent extends Component {
   constructor() {
@@ -33,9 +39,10 @@ export default class ObjComponent extends Component {
       <Viro3DObject
             source={this.props.source}
             resources={this.props.resources}
+            materials={this.props.materials}
             ref={this._setRef}
             position={this.props.horizontal}
-            scale={[0.5, 0.5, 0.5]}
+            scale={this.props.size}
             type={this.props.type}
             onDrag={() => {}}
             dragType="FixedToPlane"
@@ -75,14 +82,6 @@ export default class ObjComponent extends Component {
   }
 }
 
-var styles = StyleSheet.create({
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
-  },
-});
+
 
 module.exports = ObjComponent;
