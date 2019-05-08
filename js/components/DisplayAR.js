@@ -5,7 +5,7 @@ import HomePage from './HomePage';
 import InitialARScene from './InitialARScene';
 import { View, Button, Icon, Footer } from 'native-base';
 import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
-// import { viroKey } from '../secrets';
+import { VIRO_KEY } from '../../secrets';
 import AddButton from './AddButton';
 
 const apiKey = 'D09E03E6-54C9-48B1-BB65-EC71FB38943D';
