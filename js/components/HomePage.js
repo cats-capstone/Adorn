@@ -12,8 +12,19 @@ import {
   Icon,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { database } from '../../firebase';
 
 export default class HomePage extends Component {
+  // postToFirebase() {
+  //   database
+  //     .ref('users')
+  //     .push()
+  //     .set({
+  //       name: 'Janelle',
+  //       size: 'smol',
+  //     });
+  // }
+
   render() {
     return (
       <Container>
