@@ -13,11 +13,11 @@ export default class Routes extends React.Component {
             key="HomePage"
             component={HomePage}
             title="HomePage"
-            initial={true}
+            // initial={true}
             hideNavBar="true"
           />
           <Scene key="DisplayAR" component={DisplayAR} hideNavBar="true" />
-          <Scene key="Products" component={Products} hideNavBar="true" />
+          <Scene key="Products" component={Products} initial={true} hideNavBar="true" />
         </Scene>
       </Router>
     );

@@ -1,7 +1,6 @@
 //Initial State
 const initalState = {
-  allItems: [],
-  selectedItem: {},
+  allItems: [{name: 'toilet'}],
 };
 
 //Action Types
@@ -19,7 +18,7 @@ const handlers = {
 };
 
 //ITEMS REDUCER
-export const itemsReducers = (state = initialState, action) => {
+export const itemsReducer = (state = initialState, action) => {
   if (handlers.hasOwnProperty(action.type)) {
     return handlers[action.type](state, action);
   }

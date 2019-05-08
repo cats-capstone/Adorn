@@ -12,14 +12,14 @@ import {
   Icon,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-
+import {connect} from 'react-redux'
 const dummyProducts = [
   {name: "chair"},
   {name: "flowerpot"},
   {name: "couch"},
 ]
 
-export default class Products extends Component {
+class Products extends Component {
   render() {
     return (
       <Container>
@@ -41,7 +41,7 @@ export default class Products extends Component {
         </Header>
         <Content padder>
             {
-              dummyProducts.map((product) => {
+              this.state.products.map((product) => {
                 return (
                 <Card>
                   <CardItem>
@@ -66,3 +66,16 @@ export default class Products extends Component {
     );
   }
 }
+
+
+
+
+const mapStateToProps = state => {
+  return {
+    products: state.itemsReducer.allItems 
+  }
+}
+
+
+export default connect(mapStateToProps, null)(Products)
+

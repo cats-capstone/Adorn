@@ -9,7 +9,6 @@ import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 import AddButton from './AddButton';
 import { VIRO_KEY } from '../../secrets';
 
-const apiKey = 'D09E03E6-54C9-48B1-BB65-EC71FB38943D';
 
 export default class DisplayAR extends Component {
   constructor() {
