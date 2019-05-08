@@ -7,6 +7,7 @@ import { View, Button, Icon, Footer, Text } from 'native-base';
 import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 // import { viroKey } from '../secrets';
 import AddButton from './AddButton';
+import { VIRO_KEY } from '../../secrets';
 
 const apiKey = 'D09E03E6-54C9-48B1-BB65-EC71FB38943D';
 
@@ -25,7 +26,7 @@ export default class DisplayAR extends Component {
         <StatusBar hidden={true} />
         <ViroARSceneNavigator
           style={localStyles.arView}
-          apiKey={apiKey}
+          apiKey={VIRO_KEY}
           initialScene={{ scene: InitialARScene }}
         />
         <View style={localStyles.noFlex}>
