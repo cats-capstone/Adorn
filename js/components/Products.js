@@ -13,6 +13,12 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
+const dummyProducts = [
+  {name: "chair"},
+  {name: "flowerpot"},
+  {name: "couch"},
+]
+
 export default class Products extends Component {
   render() {
     return (
@@ -22,7 +28,7 @@ export default class Products extends Component {
             <Icon
               name="ios-arrow-back"
               onPress={() => {
-                Actions.HomePage();
+                Actions.pop()
               }}
             />
           </Button>
@@ -34,18 +40,27 @@ export default class Products extends Component {
           </Button>
         </Header>
         <Content padder>
-          <Card>
-            <CardItem>
-              <Body>
-                <Text>
-                  Do you like me? Click the icon to add me to your room.
-                </Text>
-                <Button transparent>
-                  <Icon name="ios-add-circle-outline" />
-                </Button>
-              </Body>
-            </CardItem>
-          </Card>
+            {
+              dummyProducts.map((product) => {
+                return (
+                <Card>
+                  <CardItem>
+                    <Body>
+                      <Text>
+                        {product.name}
+                      </Text>
+                      <Text>
+                        Do you like me? Click the icon to add me to your room.
+                      </Text>
+                      <Button transparent>
+                          <Icon name="ios-add-circle-outline" />
+                      </Button>
+                    </Body>
+                    </CardItem>
+                </Card>
+                )
+              })
+            }
         </Content>
       </Container>
     );

@@ -14,7 +14,14 @@ import {
 import { Actions } from 'react-native-router-flux';
 
 export default class HomePage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      helloWorld: true
+    };
+  }
   render() {
+    console.log(`THIS IS THE STRING YOU ARE LOOKING FOR ${this.state.helloWorld}`)
     return (
       <Container>
         <Header>
@@ -25,6 +32,7 @@ export default class HomePage extends Component {
             <Icon
               name="ios-menu"
               onPress={() => {
+                this.setState({helloWorld: false})
                 Actions.Products();
               }}
             />

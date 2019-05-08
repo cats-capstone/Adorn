@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
 import HomePage from './HomePage';
 import InitialARScene from './InitialARScene';
-import { View, Button, Icon, Footer } from 'native-base';
+import { View, Button, Icon, Footer, Text } from 'native-base';
 import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 // import { viroKey } from '../secrets';
 import AddButton from './AddButton';
@@ -15,6 +15,7 @@ export default class DisplayAR extends Component {
     super();
     this.state = {
       run: true,
+      popupHidden: true
     };
   }
 
@@ -31,10 +32,19 @@ export default class DisplayAR extends Component {
           <Icon
             name="ios-add-circle-outline"
             onPress={() => {
-              Actions.Products();
+              if (this.state.popupHidden) {
+                this.setState({popupHidden: false})
+              }
+              else {
+                this.setState({popupHidden: true})
+              }
+              
+              // Actions.Products();
             }}
             style={localStyles.icon}
           />
+          {this.state.popupHidden ? <Text>Hello I am a popup</Text> : <Text></Text>}
+          
         </View>
       </View>
     );
