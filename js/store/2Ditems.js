@@ -2,7 +2,7 @@ import { database } from '../../firebase';
 
 //Initial State
 const initialState = {
-  allItems: [],
+  allItems: ['hello world'],
   selectedItem: {},
 };
 
@@ -18,8 +18,20 @@ export const selectItem = item => ({ type: SELECT_ITEM, item });
 export const fetchAllItems = () => {
   return async dispatch => {
     try {
-      //call to firebase here
-      //dispatch(getAllItems())
+      let arr = []
+      await database.ref('/furniture')
+     .once('value')
+     .then(function(snapshot) {
+       
+       //empty arr to populate
+       snapshot.forEach(function(childSnapshot) {
+         arr.push(childSnapshot.val())
+         
+       })
+       dispatch(getAllItems(arr))
+       
+       //dispatch
+   })
     } catch (error) {
       console.log('ERROR FETCHING ALL ITEMS', error);
     }

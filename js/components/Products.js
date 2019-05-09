@@ -17,10 +17,12 @@ import { fetchAllItems } from '../store/2Ditems';
 
 class Products extends Component {
   componentDidMount() {
-    this.props.loadInitialItems();
+    this.props.fetchInitialItems();
+    console.log('COMPONENT DID MOUNT')
   }
 
   render() {
+    console.log('THIS IS THE STATE', this.props.allItems)
     return (
       <Container>
         <Header>
@@ -28,7 +30,7 @@ class Products extends Component {
             <Icon
               name="ios-arrow-back"
               onPress={() => {
-                Actions.HomePage();
+                Actions.pop();
               }}
             />
           </Button>
@@ -57,6 +59,11 @@ class Products extends Component {
     );
   }
 }
+const mapState = state => {
+  return {
+    allItems: state.itemsReducers.allItems
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
@@ -66,6 +73,6 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked when the url changes
 export default connect(
-  null,
+  mapState,
   mapDispatch
 )(Products);
