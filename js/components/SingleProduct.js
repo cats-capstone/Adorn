@@ -14,13 +14,10 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchOneItem } from '../store/2Ditems'
 
 class SingleProduct extends Component {
-    componentDidMount() {
-        //set the product on state
-    }
     render() {
+        const {product} = this.props.selectedItem
         return (
             <Container>
                 <Header>
@@ -31,12 +28,12 @@ class SingleProduct extends Component {
                 <Content>
                     <Card transparent>
                         <CardItem header>
-                            <Text>THIS IS THE PRODUCT TITLE</Text>
+                            <Text>{product.Name}</Text>
                         </CardItem>
                         <CardItem cardBody>
                             {/* <Image source={{uri: 'IMAGE URL'}} /> */}
-                            <Text>THIS IS THE PRODUCT DESCRIPTION</Text>
-                            <Text>THIS IS THE PRODUCT PRICE</Text>
+                            <Text>{product.Description}</Text>
+                            <Text>{`Price: ${product.Price}`}</Text>
                         </CardItem>
                     </Card>
                 </Content>
@@ -47,7 +44,7 @@ class SingleProduct extends Component {
 
 const mapState = state => {
     return {
-        setProduct: (product) => dispatch(fetchOneItem(product))
+        selectedItem: state.itemsReducer.selectedItem
     }
 }
 

@@ -13,16 +13,16 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems } from '../store/2Ditems';
+import { fetchAllItems, fetchOneItem } from '../store/2Ditems';
 
 class Products extends Component {
   componentDidMount() {
     this.props.fetchInitialItems();
-    console.log('COMPONENT DID MOUNT')
+    // console.log('COMPONENT DID MOUNT')
   }
 
   render() {
-    console.log('THIS IS THE STATE', this.props.allItems)
+    // console.log('THIS IS THE STATE', this.props.allItems)
     return (
       <Container>
         <Header>
@@ -48,7 +48,12 @@ class Products extends Component {
                 <Text>
                   Do you like me? Click the icon to add me to your room.
                 </Text>
-                <Button transparent>
+                <Button
+                  transparent
+                  onPress={() => {
+                    console.log('PRESSED BUTTON; ALLITEMS[0].ID IS:', this.props.allItems[0].id, 'with type ', typeof this.props.allItems[0].id)
+                    this.props.fetchOneItem(this.props.allItems[0].id)
+                }}>
                   <Icon name="ios-add-circle-outline" />
                 </Button>
               </Body>
@@ -68,6 +73,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchInitialItems: () => dispatch(fetchAllItems()),
+    fetchOneItem: (productId) => dispatch(fetchOneItem(productId))
   };
 };
 
