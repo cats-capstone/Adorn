@@ -17,7 +17,7 @@ import { fetchAllItems } from '../store/2Ditems';
 
 class Products extends Component {
   componentDidMount() {
-    this.props.loadInitialItems();
+    this.props.fetchInitialItems();
   }
 
   render() {
