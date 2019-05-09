@@ -50,13 +50,13 @@
 		687F218EF9E24DF38A2C01DE /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A880EC26DA4F95A4A05273 /* MaterialIcons.ttf */; };
 		7D6C95831BE3497991563F66 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 514D7707C0464B41AF5A999E /* libRNVectorIcons-tvOS.a */; };
 		7ECDCC50AB664861828373C7 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6B377C9F98B435BA33AB981 /* FontAwesome5_Brands.ttf */; };
-		8290A485B3B0AF77C2F2266D /* Pods_CatsCapstone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1ECAFF695993DA8FBF7B67 /* Pods_CatsCapstone.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8761FB316E3C41B2AFA6805C /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24FB1E95FCCB41C49639DFFB /* libRNGestureHandler-tvOS.a */; };
 		98296BEC22808F6A00490829 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98296BC022808F6900490829 /* Ionicons.ttf */; };
 		98296BED22808F6A00490829 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98296BC022808F6900490829 /* Ionicons.ttf */; };
 		98296BEE22808F6A00490829 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98296BC022808F6900490829 /* Ionicons.ttf */; };
 		98296BEF22808F6A00490829 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98296BC022808F6900490829 /* Ionicons.ttf */; };
+		AB1159F4C3A55BF4D63851DC /* Pods_CatsCapstone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A3EAB2E5BBB0578FFFC7E1 /* Pods_CatsCapstone.framework */; };
 		AC12EA09DFAE4431B60391D5 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23861CAF78D471EAF6DFD13 /* SimpleLineIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B5242378240945ED91DF361C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2804651653984095BFD55B88 /* Entypo.ttf */; };
@@ -418,18 +418,15 @@
 		205D90B62F904EFF9B0EC6CD /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		24FB1E95FCCB41C49639DFFB /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; };
 		2804651653984095BFD55B88 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		2A1ECAFF695993DA8FBF7B67 /* Pods_CatsCapstone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatsCapstone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* CatsCapstone-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CatsCapstone-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* CatsCapstone-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CatsCapstone-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		47911D3AE8AE43A09AF63283 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		4C84C69FB651426785FA990A /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		514D7707C0464B41AF5A999E /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
-		56042A70CF1327FC2542E136 /* Pods-CatsCapstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsCapstone.debug.xcconfig"; path = "Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone.debug.xcconfig"; sourceTree = "<group>"; };
 		59CC2BB8DB5446C799A30BBB /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		7C559ED1AF8F509A0EF90661 /* Pods-CatsCapstone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsCapstone.release.xcconfig"; path = "Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone.release.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8489CE339F0A4F3EA536185D /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		85FD5EB5B1EF490C9970FF6F /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -437,10 +434,13 @@
 		9C1C54F0A05A43BB8D2BB693 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		9F18B9E30D5E4DC9B77DB35D /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		A23861CAF78D471EAF6DFD13 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		ADB590C4313BBBB00713CA5B /* Pods-CatsCapstone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsCapstone.release.xcconfig"; path = "Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone.release.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		B7A3EAB2E5BBB0578FFFC7E1 /* Pods_CatsCapstone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatsCapstone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF98B5979E04E5B891E5B30 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		C529FCA7BD774CD9A07A1D71 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		CE3CA348487E4FEA8359CE58 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
+		CF376ADB2D874DE19FF15968 /* Pods-CatsCapstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsCapstone.debug.xcconfig"; path = "Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone.debug.xcconfig"; sourceTree = "<group>"; };
 		CF804F2E86BB49AF9507CAE9 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		DA225CDACD5E48C5B5BABE46 /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -481,7 +481,7 @@
 				D67E524944494BF399E39478 /* libRNGestureHandler.a in Frameworks */,
 				198DC92433464AE698EA12A0 /* libRNVectorIcons.a in Frameworks */,
 				197C594D0F5D439A94C72BCB /* libRNSVG.a in Frameworks */,
-				8290A485B3B0AF77C2F2266D /* Pods_CatsCapstone.framework in Frameworks */,
+				AB1159F4C3A55BF4D63851DC /* Pods_CatsCapstone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,7 +659,7 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				2A1ECAFF695993DA8FBF7B67 /* Pods_CatsCapstone.framework */,
+				B7A3EAB2E5BBB0578FFFC7E1 /* Pods_CatsCapstone.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -794,8 +794,8 @@
 		E727CC25389D747459F405F7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				56042A70CF1327FC2542E136 /* Pods-CatsCapstone.debug.xcconfig */,
-				7C559ED1AF8F509A0EF90661 /* Pods-CatsCapstone.release.xcconfig */,
+				CF376ADB2D874DE19FF15968 /* Pods-CatsCapstone.debug.xcconfig */,
+				ADB590C4313BBBB00713CA5B /* Pods-CatsCapstone.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -825,15 +825,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CatsCapstone" */;
 			buildPhases = (
-				DA97FCE3308EBF1627331E40 /* [CP] Check Pods Manifest.lock */,
+				4780C87CF7DC6898D833DD99 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1EC867A4BC229A9FB7776DE9 /* [CP] Embed Pods Frameworks */,
-				001BE42F0DED7377AF04E637 /* [CP] Copy Pods Resources */,
 				93F72146AB0BAE52E84B2718 /* Execute Ngrok */,
 				88A7F31291EF995D6FC86E45 /* Copy ngrok endpoint */,
+				42562807A8F11BA263D14DF5 /* [CP] Embed Pods Frameworks */,
+				A7B7C8A021510E27F894B85C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -892,11 +892,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 3R4FLDWA7G;
+						DevelopmentTeam = MLVA5FFA88;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 3R4FLDWA7G;
+						DevelopmentTeam = MLVA5FFA88;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1353,36 +1353,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		001BE42F0DED7377AF04E637 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone-resources.sh",
-				"${PODS_ROOT}/GVRSDK/Resources/CardboardSDK.bundle",
-				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitCore.bundle",
-				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitDialogs.bundle",
-				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitHUD.bundle",
-				"${PODS_ROOT}/GVRSDK/Resources/MaterialRobotoFontLoader.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardboardSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitCore.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitDialogs.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialRobotoFontLoader.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1397,7 +1367,21 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		1EC867A4BC229A9FB7776DE9 /* [CP] Embed Pods Frameworks */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		42562807A8F11BA263D14DF5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1427,19 +1411,27 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+		4780C87CF7DC6898D833DD99 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Bundle React Native Code And Images";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CatsCapstone-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		88A7F31291EF995D6FC86E45 /* Copy ngrok endpoint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1475,9 +1467,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/ngrok_launch.sh;
+			shellScript = "$SRCROOT/ngrok_launch.sh";
 		};
-		DA97FCE3308EBF1627331E40 /* [CP] Check Pods Manifest.lock */ = {
+		A7B7C8A021510E27F894B85C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1485,18 +1477,26 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone-resources.sh",
+				"${PODS_ROOT}/GVRSDK/Resources/CardboardSDK.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitCore.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitDialogs.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/GoogleKitHUD.bundle",
+				"${PODS_ROOT}/GVRSDK/Resources/MaterialRobotoFontLoader.bundle",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CatsCapstone-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CardboardSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitCore.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitDialogs.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleKitHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialRobotoFontLoader.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CatsCapstone/Pods-CatsCapstone-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1574,7 +1574,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3R4FLDWA7G;
+				DEVELOPMENT_TEAM = MLVA5FFA88;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1614,7 +1614,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3R4FLDWA7G;
+				DEVELOPMENT_TEAM = MLVA5FFA88;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1646,12 +1646,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56042A70CF1327FC2542E136 /* Pods-CatsCapstone.debug.xcconfig */;
+			baseConfigurationReference = CF376ADB2D874DE19FF15968 /* Pods-CatsCapstone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3R4FLDWA7G;
+				DEVELOPMENT_TEAM = MLVA5FFA88;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1666,7 +1666,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = CatsCapstone1;
+				PRODUCT_BUNDLE_IDENTIFIER = CatsCapstone2;
 				PRODUCT_NAME = CatsCapstone;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1674,12 +1674,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C559ED1AF8F509A0EF90661 /* Pods-CatsCapstone.release.xcconfig */;
+			baseConfigurationReference = ADB590C4313BBBB00713CA5B /* Pods-CatsCapstone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3R4FLDWA7G;
+				DEVELOPMENT_TEAM = MLVA5FFA88;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1694,7 +1694,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = CatsCapstone1;
+				PRODUCT_BUNDLE_IDENTIFIER = CatsCapstone2;
 				PRODUCT_NAME = CatsCapstone;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
