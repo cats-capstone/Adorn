@@ -12,8 +12,29 @@ import {
   Icon,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import {database} from '../../firebase'
 
 export default class Products extends Component {
+  // constructor() {
+  //   super()
+
+  //   this.buildObj = this.buildObj.bind(this)
+  // }
+
+  // buildObj() {
+
+  // }
+
+  componentDidMount() {
+    database.ref('/furniture')
+      .once('value')
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          console.log('FIREBASE VALUE!!', childSnapshot.val())
+        })
+    })
+  }
+
   render() {
     return (
       <Container>
