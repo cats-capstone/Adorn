@@ -7,9 +7,8 @@ import store from './js/store/index';
 export default class RnrfExample extends Component {
   render() {
     return (
-      <Provider store={store}>
+
         <App />
-      </Provider>
     );
   }
 }
