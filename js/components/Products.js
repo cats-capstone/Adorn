@@ -12,8 +12,14 @@ import {
   Icon,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { fetchAllItems } from '../store/2Ditems';
 
-export default class Products extends Component {
+class Products extends Component {
+  componentDidMount() {
+    this.props.loadInitialItems();
+  }
+
   render() {
     return (
       <Container>
@@ -51,3 +57,15 @@ export default class Products extends Component {
     );
   }
 }
+
+const mapDispatch = dispatch => {
+  return {
+    fetchInitialItems: () => dispatch(fetchAllItems()),
+  };
+};
+
+// The `withRouter` wrapper makes sure that updates are not blocked when the url changes
+export default connect(
+  null,
+  mapDispatch
+)(Products);
