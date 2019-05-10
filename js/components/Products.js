@@ -46,6 +46,12 @@ class Products extends Component {
           </Body>
           <Right>
             <Button transparent>
+              <Icon name="ios- search" />
+            </Button>
+            <Button transparent>
+              <Icon name="ios-heart" />
+            </Button>
+            <Button transparent>
               <Icon name="ios-menu" />
             </Button>
           </Right>
