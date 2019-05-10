@@ -10,7 +10,11 @@ import {
   Title,
   CardItem,
   Icon,
+  Left,
+  Right,
+  Image,
 } from 'native-base';
+import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { fetchAllItems, fetchOneItem } from '../store/2Ditems';
@@ -18,47 +22,51 @@ import { fetchAllItems, fetchOneItem } from '../store/2Ditems';
 class Products extends Component {
   componentDidMount() {
     this.props.fetchInitialItems();
-    // console.log('COMPONENT DID MOUNT')
   }
 
   render() {
-    // console.log('THIS IS THE STATE', this.props.allItems)
+    console.log('THIS IS THE STATE', this.props.allItems);
+    allItems = this.props.allItems;
     return (
       <Container>
         <Header>
-          <Button transparent>
-            <Icon
-              name="ios-arrow-back"
-              onPress={() => {
-                Actions.pop();
-              }}
-            />
-          </Button>
+          <Left>
+            <Button transparent>
+              <Icon
+                name="ios-arrow-back"
+                onPress={() => {
+                  Actions.pop();
+                }}
+              />
+            </Button>
+          </Left>
           <Body>
             <Title>Furniture</Title>
           </Body>
-          <Button transparent>
-            <Icon name="ios-menu" />
-          </Button>
+          <Right>
+            <Button transparent>
+              <Icon name="ios-menu" />
+            </Button>
+          </Right>
         </Header>
         <Content padder>
-          <Card>
-            <CardItem>
-              <Body>
-                <Text>
-                  Do you like me? Click the icon to add me to your room.
-                </Text>
-                <Button
-                  transparent
-                  onPress={() => {
-                    console.log('PRESSED BUTTON; ALLITEMS[0].ID IS:', this.props.allItems[0].id, 'with type ', typeof this.props.allItems[0].id)
-                    this.props.fetchOneItem(this.props.allItems[0].id)
-                }}>
-                  <Icon name="ios-add-circle-outline" />
-                </Button>
-              </Body>
-            </CardItem>
-          </Card>
+          {allItems.map(item => (
+            <Card>
+              <CardItem key={item.Name}>
+                <Body>
+                  {/* <Image>{item.ImageUrl}</Image> */}
+                  <Text>{item.Name}</Text>
+                  <Text>${item.Price}</Text>
+                  <Button transparent>
+                    <Icon name="ios-heart-empty" style={localStyles.icons} />
+                  </Button>
+                  <Button transparent>
+                    <Icon name="ios-more" style={localStyles.icons} />
+                  </Button>
+                </Body>
+              </CardItem>
+            </Card>
+          ))}
         </Content>
       </Container>
     );
@@ -66,9 +74,9 @@ class Products extends Component {
 }
 const mapState = state => {
   return {
-    allItems: state.itemsReducers.allItems
-  }
-}
+    allItems: state.itemsReducers.allItems,
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
@@ -82,3 +90,9 @@ export default connect(
   mapState,
   mapDispatch
 )(Products);
+
+const localStyles = StyleSheet.create({
+  icons: {
+    fontSize: 25,
+  },
+});
