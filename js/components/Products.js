@@ -52,7 +52,7 @@ class Products extends Component {
         <Content padder>
           {allItems.map(item => (
             <Card>
-              <CardItem key={item.Name}>
+              <CardItem key={item.id}>
                 <Body>
                   {/* <Image>{item.ImageUrl}</Image> */}
                   <Text>{item.Name}</Text>
