@@ -12,7 +12,7 @@ import {
 
 
 
-export default class ObjComponent extends Component {
+export default class ObjsComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -27,7 +27,7 @@ export default class ObjComponent extends Component {
       white: {
         lightingModel: "PBR",
         diffuseTexture: {uri: this.props.diffuse},
-        specularTexture: {uri: this.props.specular}
+        // specularTexture: {uri: this.props.specular}
       }
     })
     return (
@@ -83,4 +83,4 @@ export default class ObjComponent extends Component {
 
 
 
-module.exports = ObjComponent;
+module.exports = ObjsComponent;
