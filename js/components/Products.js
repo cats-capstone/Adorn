@@ -17,7 +17,7 @@ import {
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems } from '../store/2Ditems';
+import { fetchAllItems, fetchOneItem } from '../store/2Ditems';
 
 class Products extends Component {
   componentDidMount() {
@@ -52,7 +52,7 @@ class Products extends Component {
         <Content padder>
           {allItems.map(item => (
             <Card>
-              <CardItem key={item.Name}>
+              <CardItem key={item.id}>
                 <Body>
                   {/* <Image>{item.ImageUrl}</Image> */}
                   <Text>{item.Name}</Text>
@@ -81,6 +81,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchInitialItems: () => dispatch(fetchAllItems()),
+    fetchOneItem: (productId) => dispatch(fetchOneItem(productId))
   };
 };
 
