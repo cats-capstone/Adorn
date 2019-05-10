@@ -14,6 +14,7 @@ import {
   Right,
   Image,
 } from 'native-base';
+import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -45,6 +46,12 @@ class Products extends Component {
           </Body>
           <Right>
             <Button transparent>
+              <Icon name="ios-search" />
+            </Button>
+            <Button transparent>
+              <Icon name="ios-heart" />
+            </Button>
+            <Button transparent>
               <Icon name="ios-menu" />
             </Button>
           </Right>
@@ -61,7 +68,14 @@ class Products extends Component {
                     <Icon name="ios-heart-empty" style={localStyles.icons} />
                   </Button>
                   <Button transparent>
-                    <Icon name="ios-more" style={localStyles.icons} />
+                    <Icon
+                      name="ios-more"
+                      style={localStyles.icons}
+                      onPress={() => {
+                        this.props.fetchOneItem(item.id);
+                        Actions.SingleProduct();
+                      }}
+                    />
                   </Button>
                 </Body>
               </CardItem>
@@ -81,7 +95,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchInitialItems: () => dispatch(fetchAllItems()),
-    fetchOneItem: (productId) => dispatch(fetchOneItem(productId))
+    fetchOneItem: productId => dispatch(fetchOneItem(productId)),
   };
 };
 
