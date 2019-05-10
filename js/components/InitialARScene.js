@@ -10,7 +10,8 @@ import {
 } from 'react-viro';
 
 import VrxComponent from './VrxComponent';
-import ObjComponent from './ObjComponent';
+import ObjsComponent from './ObjsComponent';
+import ARModels from './ARModels'
 
 
 ////////////////
@@ -33,22 +34,7 @@ export default class InitialARScene extends Component {
         size: [0.5, 0.5, 0.5]
       },
       ],
-      objs: [
-        { source: require('../res/car/object_car.obj'), 
-        resources: [require('../res/car/object_car.mtl')], 
-        materials: "white", 
-        type:"OBJ",
-        size: [0.5, 0.5, 0.5]},
-        { source: require('../res/chair/fad003.obj'),
-      resources: [require('../res/chair/fad003.mtl')],
-      materials: "wood",
-      type: "OBJ",
-      size: [0.05, 0.05, 0.05]},
-      {source: require('../res/CIMARR_N_Toilet/hsdc00.obj'), 
-      resources: [require('../res/CIMARR_N_Toilet/hsdc00.mtl')], 
-      materials: null, 
-      type: "OBJ",
-      size: [0.05, 0.05, 0.05]}]
+      objs: []
     };
 
     this._setRef = this._setRef.bind(this);
@@ -58,32 +44,7 @@ export default class InitialARScene extends Component {
     return (
       <ViroARScene ref="arscene" anchorDetectionTypes="PlanesHorizontal">
         <ViroAmbientLight color="#FFFFFF" />
-        <ViroARPlane
-          minHeight={0.5}
-          minWidth={0.5}
-          alignment={'Horizontal'}
-          onAnchorFound={this._onAnchorFound}
-        >
-          {this.state.vrxs.map(vrx => (
-            <VrxComponent
-              horizontal={this.state.worldCenterPosition}
-              source={vrx.source}
-              resources={vrx.resources}
-              type={vrx.type}
-              size={vrx.size}
-            />
-          ))}
-          {this.state.objs.map(obj => (
-            <ObjComponent 
-            horizontal={this.state.worldCenterPosition}
-            source={obj.source}
-            resources={obj.resources}
-            materials={obj.materials}
-            type={obj.type}
-            size={obj.size}
-            />
-          ))}
-        </ViroARPlane>
+          <ARModels />
       </ViroARScene>
     );
   }
