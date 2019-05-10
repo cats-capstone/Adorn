@@ -2,15 +2,7 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Viro3DObject,
-  ViroMaterials
-} from 'react-viro';
-
-
-
-
+import { Viro3DObject, ViroMaterials } from 'react-viro';
 
 export default class ObjComponent extends Component {
   constructor() {
@@ -25,33 +17,29 @@ export default class ObjComponent extends Component {
   render() {
     ViroMaterials.createMaterials({
       white: {
-        lightingModel: "PBR",
-        diffuseTexture: {uri: this.props.diffuse},
-        specularTexture: {uri: this.props.specular}
-      }
-    })
+        lightingModel: 'PBR',
+        diffuseTexture: { uri: this.props.diffuse },
+        // specularTexture: {uri: this.props.specular}
+      },
+    });
     return (
       <Viro3DObject
-            source={{uri: this.props.source}}
-            resources={[{uri: this.props.resources}]}
-            materials={this.props.materials}
-            scale={this.props.size}
-            type={this.props.type}
-
-
-            ref={this._setRef}
-            position={this.props.horizontal}
-            
-            
-            onDrag={() => {}}
-            dragType="FixedToPlane"
-            dragPlane={{
-              planePoint: this.props.horizontal,
-              planeNormal: [0, 1, 0],
-            }}
-            rotation={this.state.rotation}
-            onRotate={this._onRotate}
-          />
+        source={{ uri: this.props.source }}
+        resources={[{ uri: this.props.resources }]}
+        materials={this.props.materials}
+        scale={this.props.size}
+        type={this.props.type}
+        ref={this._setRef}
+        position={this.props.horizontal}
+        onDrag={() => {}}
+        dragType="FixedToPlane"
+        dragPlane={{
+          planePoint: this.props.horizontal,
+          planeNormal: [0, 1, 0],
+        }}
+        rotation={this.state.rotation}
+        onRotate={this._onRotate}
+      />
     );
   }
 
@@ -80,7 +68,5 @@ export default class ObjComponent extends Component {
     this.arRef = component;
   }
 }
-
-
 
 module.exports = ObjComponent;
