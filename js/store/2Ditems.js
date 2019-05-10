@@ -4,15 +4,18 @@ import { database } from '../../firebase';
 const initialState = {
   allItems: ['hello world'],
   selectedItem: {},
+  models: []
 };
 
 //Action Types
 const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
 const SELECT_ITEM = 'SELECT_ITEM';
+const SET_MODEL = 'SET_MODEL';
 
 //Action creators
 export const getAllItems = items => ({ type: GET_ALL_ITEMS, items });
 export const selectItem = item => ({ type: SELECT_ITEM, item });
+export const setModel = item => ({ type: SET_MODEL, item });
 
 //Thunks
 export const fetchAllItems = () => {
@@ -65,6 +68,10 @@ const handlers = {
     ...state,
     selectedItem: action.item,
   }),
+  [SET_MODEL]: (state, action) => ({
+    ...state,
+    models: [...state.models, action.item]
+  })
 };
 
 //ITEMS REDUCER
