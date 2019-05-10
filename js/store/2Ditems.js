@@ -18,22 +18,21 @@ export const selectItem = item => ({ type: SELECT_ITEM, item });
 export const fetchAllItems = () => {
   return async dispatch => {
     try {
-      let arr = []
-      await database.ref('/furniture')
-     .once('value')
-     .then(function(snapshot) {
-       
-       //empty arr to populate
-       snapshot.forEach(function(childSnapshot) {
-         const product = childSnapshot.val()
-         product.id = childSnapshot.key
-         arr.push(product)
-         
-       })
-       dispatch(getAllItems(arr))
-       
-       //dispatch
-   })
+      let arr = [];
+      await database
+        .ref('/furniture')
+        .once('value')
+        .then(function(snapshot) {
+          //empty arr to populate
+          snapshot.forEach(function(childSnapshot) {
+            const product = childSnapshot.val();
+            product.id = childSnapshot.key;
+            arr.push(product);
+          });
+          dispatch(getAllItems(arr));
+
+          //dispatch
+        });
     } catch (error) {
       console.log('ERROR FETCHING ALL ITEMS', error);
     }
@@ -41,20 +40,15 @@ export const fetchAllItems = () => {
 };
 
 export const fetchOneItem = productId => {
-  console.log('PRODUCTID UNDER FETCHONEITEM: ', productId)
   return async dispatch => {
     try {
-      //call to firebase here
-      //dispatch(selectItem())
-
-      await database.ref('/furniture')
-      .once('value').then(function(snapshot) {
-        // console.log('FIND SINGLE PRODUCT SNAPSHOT HERE, HARD CODED', snapshot.child("-LeNGqL7PffvyaEL_CQI").val())
-        // console.log('PRODUCTID: ', productId)
-        // console.log('PASSED VARIABLE: ', snapshot.child(productId).val())
-        const productInfo = snapshot.child(productId).val()
-        dispatch(selectItem(productInfo))
-      })
+      await database
+        .ref('/furniture')
+        .once('value')
+        .then(function(snapshot) {
+          const productInfo = snapshot.child(productId).val();
+          dispatch(selectItem(productInfo));
+        });
     } catch (error) {
       console.log('ERROR FETCHING ONE ITEM', error);
     }
