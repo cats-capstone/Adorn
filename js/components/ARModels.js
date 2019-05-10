@@ -8,8 +8,9 @@ import {
   ViroAmbientLight,
 } from 'react-viro';
 
-import ObjComponent from './ObjComponent';
+import ObjsComponent from './ObjsComponent';
 import {connect} from 'react-redux'
+import { fetchAllItems, fetchOneItem, setModel, setRender } from '../store/2Ditems';
 
 ////////////////
 
@@ -20,8 +21,6 @@ class ARModels extends Component {
     super();
     this.state = {
       worldCenterPosition: [0, 0, 0],
-      objs: [
-    ]
     };
 
     this._setRef = this._setRef.bind(this);
@@ -29,13 +28,10 @@ class ARModels extends Component {
   }
 
   componentDidMount() {
-    this.setState({objs: this.props.obgyn})
+    this.props.setRender(true)
   }
 
   render() {
-    console.log('RENDERING ARMODELS')
-    console.log('PROPS: ', this.props.obgyn)
-    console.log('OBJS ON STATE: ', this.state.objs)
     return (
         <ViroARPlane
           minHeight={0.5}
@@ -43,8 +39,8 @@ class ARModels extends Component {
           alignment={'Horizontal'}
           onAnchorFound={this._onAnchorFound}
         >
-          {this.state.objs.map(obj => (
-            <ObjComponent 
+          {this.props.objects.map(obj => (
+            <ObjsComponent 
             horizontal={this.state.worldCenterPosition}
             source={obj.source}
             resources={obj.resources}
@@ -73,12 +69,17 @@ class ARModels extends Component {
 
 const mapState = (state) => {
   return {
-    obgyn: state.itemsReducers.models
+    objects: state.itemsReducers.models,
+    renderStatus: state.itemsReducers.hasRendered
   }
 }
+const mapDispatch = dispatch => {
+  return {
+    setRender: status => dispatch(setRender(status))
+  };
+};
 
-
-module.exports = connect(mapState)(ARModels)
+module.exports = connect(mapState, mapDispatch)(ARModels)
 
 
 
