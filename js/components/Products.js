@@ -22,18 +22,11 @@ import { fetchAllItems } from '../store/2Ditems';
 class Products extends Component {
   componentDidMount() {
     this.props.fetchInitialItems();
-<<<<<<< HEAD
-    console.log('COMPONENT DID MOUNT');
-=======
->>>>>>> 6bfbbfab6906fdefc1931e9694ba965523fab946
   }
 
   render() {
     console.log('THIS IS THE STATE', this.props.allItems);
-<<<<<<< HEAD
-=======
     allItems = this.props.allItems;
->>>>>>> 6bfbbfab6906fdefc1931e9694ba965523fab946
     return (
       <Container>
         <Header>
