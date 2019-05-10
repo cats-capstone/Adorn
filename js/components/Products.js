@@ -18,9 +18,16 @@ import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems, fetchOneItem } from '../store/2Ditems';
+import { fetchAllItems, fetchOneItem, setModel, setRender } from '../store/2Ditems';
 
 class Products extends Component {
+  constructor() {
+    super();
+    this.state = {
+      popup: false,
+    };
+  }
+
   componentDidMount() {
     this.props.fetchInitialItems();
   }
@@ -56,7 +63,50 @@ class Products extends Component {
             </Button>
           </Right>
         </Header>
-        <Content padder>
+        
+        {this.state.popup ? 
+        <Container padder>
+        <Header>
+          <Body>
+            <Title>Single Product Page</Title>
+          </Body>
+        </Header>
+        <Content>
+          <Card transparent>
+            <CardItem header>
+              <Text>{this.props.selectedItem.Name}</Text>
+            </CardItem>
+            <CardItem cardBody>
+              {/* <Image source={{ uri: product.ImageUrl }} /> */}
+              <Text>{this.props.selectedItem.Description}</Text>
+              <Text>{`Price: ${this.props.selectedItem.Price}`}</Text>
+            </CardItem>
+            <Button block
+              onPress={() => {
+                this.props.setModel({source: this.props.selectedItem.Source, 
+                                    resources: this.props.selectedItem.Resources,
+                                    size: this.props.selectedItem.Scale,
+                                    type: this.props.selectedItem.Type,
+                                    materials: "white",
+                                    diffuse: this.props.selectedItem.DiffuseTextureUrl,
+                                    specular: this.props.selectedItem.SpecularTextureUrl})
+                if (this.props.renderStatus){
+                  Actions.pop()
+                }
+                else {
+                  Actions.DisplayAR();
+                }        
+              }}>
+              <Text>TRY IN YOUR ROOM</Text>
+            </Button>
+            <Button onPress={() => {this.setState({popup: false})}}>
+              <Text>Back to All Products</Text>
+            </Button>
+          </Card>
+        </Content>
+      </Container>
+          :
+          <Content padder>
           {allItems.map(item => (
             <Card>
               <CardItem key={item.id}>
@@ -73,15 +123,15 @@ class Products extends Component {
                       style={localStyles.icons}
                       onPress={() => {
                         this.props.fetchOneItem(item.id);
-                        Actions.SingleProduct();
+                        this.setState({popup: true})
                       }}
                     />
                   </Button>
                 </Body>
               </CardItem>
             </Card>
-          ))}
-        </Content>
+          ))}</Content>
+          }
       </Container>
     );
   }
@@ -89,13 +139,17 @@ class Products extends Component {
 const mapState = state => {
   return {
     allItems: state.itemsReducers.allItems,
+    selectedItem: state.itemsReducers.selectedItem,
+    renderStatus: state.itemsReducers.hasRendered
   };
 };
 
 const mapDispatch = dispatch => {
   return {
+    setModel: (product) => dispatch(setModel(product)),
     fetchInitialItems: () => dispatch(fetchAllItems()),
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
+    setRender: status => dispatch(setRender(status))
   };
 };
 
