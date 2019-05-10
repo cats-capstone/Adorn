@@ -1,68 +1,59 @@
 import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Container,
   Content,
   Text,
-  Card,
-  Header,
-  Body,
   Button,
-  Title,
-  CardItem,
-  Icon,
+  View,
+  Form,
+  Item,
+  Input,
+  Label,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { database } from '../../firebase';
 
 export default class HomePage extends Component {
-  // postToFirebase() {
-  //   database
-  //     .ref('users')
-  //     .push()
-  //     .set({
-  //       name: 'Janelle',
-  //       size: 'smol',
-  //     });
-  // }
-
   render() {
     return (
       <Container>
-        <Header>
-          <Body>
-            <Title>Home Page</Title>
-          </Body>
-          <Button transparent>
-            <Icon
-              name="ios-menu"
+        <Content>
+          <View style={localStyles.content}>
+            <Form>
+              <Item floatingLabel>
+                <Label>Username</Label>
+                <Input />
+              </Item>
+              <Item floatingLabel last>
+                <Label>Password</Label>
+                <Input />
+              </Item>
+            </Form>
+            <Button block style={localStyles.buttons}>
+              <Text>Sign In</Text>
+            </Button>
+            <Button
+              block
+              style={localStyles.buttons}
               onPress={() => {
                 Actions.Products();
               }}
-            />
-          </Button>
-        </Header>
-        <Content padder>
-          <Card>
-            <CardItem>
-              <Body>
-                <Text>
-                  This is the Home Page, Press button to go to to the AR stuff
-                </Text>
-              </Body>
-            </CardItem>
-          </Card>
-          <Button
-            dark
-            bordered
-            style={{ alignSelf: 'center', margin: 30 }}
-            onPress={() => {
-              Actions.DisplayAR();
-            }}
-          >
-            <Text>Go to AR</Text>
-          </Button>
+            >
+              <Text>Continue as Guest</Text>
+            </Button>
+          </View>
         </Content>
       </Container>
     );
   }
 }
+
+const localStyles = StyleSheet.create({
+  buttons: {
+    margin: 10,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+});
