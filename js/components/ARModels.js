@@ -8,7 +8,6 @@ import {
   ViroAmbientLight,
 } from 'react-viro';
 
-import VrxComponent from './VrxComponent';
 import ObjComponent from './ObjComponent';
 import {connect} from 'react-redux'
 
@@ -21,26 +20,7 @@ class ARModels extends Component {
     super();
     this.state = {
       worldCenterPosition: [0, 0, 0],
-      vrxs: [
-        { source: require('../res/car/object_car.obj'), 
-        resources: [require('../res/car/object_car.mtl')], 
-        materials: "white", 
-        type:"OBJ",
-        size: [0.5, 0.5, 0.5]
-      },
-      ],
       objs: [
-    //     // { source: require('../res/car/object_car.obj'), 
-    //     // resources: [require('../res/car/object_car.mtl')], 
-    //     // materials: "white", 
-    //     // type:"OBJ",
-    //     // size: [0.5, 0.5, 0.5]},
-        
-    //   // {source: require('../res/CIMARR_N_Toilet/hsdc00.obj'), 
-    //   // resources: [require('../res/CIMARR_N_Toilet/hsdc00.mtl')], 
-    //   // materials: null, 
-    //   // type: "OBJ",
-    //   // size: [0.05, 0.05, 0.05]}
     ]
     };
 
@@ -48,12 +28,9 @@ class ARModels extends Component {
     this._onAnchorFound = this._onAnchorFound.bind(this);
   }
 
-
   componentDidMount() {
     this.setState({objs: this.props.obgyn})
-
   }
-
 
   render() {
     console.log('RENDERING ARMODELS')
@@ -66,15 +43,6 @@ class ARModels extends Component {
           alignment={'Horizontal'}
           onAnchorFound={this._onAnchorFound}
         >
-        {this.state.vrxs.map(vrx => (
-            <VrxComponent
-              horizontal={this.state.worldCenterPosition}
-              source={vrx.source}
-              resources={vrx.resources}
-              type={vrx.type}
-              size={vrx.size}
-            />
-          ))}
           {this.state.objs.map(obj => (
             <ObjComponent 
             horizontal={this.state.worldCenterPosition}
@@ -83,6 +51,8 @@ class ARModels extends Component {
             materials={obj.materials}
             type={obj.type}
             size={obj.size}
+            diffuse={obj.diffuse}
+            specular={obj.specular}
             />
           ))}
         </ViroARPlane>

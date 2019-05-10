@@ -43,7 +43,9 @@ class SingleProduct extends Component {
                                     resources: product.Resources,
                                     size: product.Scale,
                                     type: product.Type,
-                                    materials: "white"})
+                                    materials: "white",
+                                    diffuse: product.DiffuseTextureUrl,
+                                    specular: product.SpecularTextureUrl})
                 Actions.DisplayAR();
               }}>
               <Text>TRY IN YOUR ROOM</Text>

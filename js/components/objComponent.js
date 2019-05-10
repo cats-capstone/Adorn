@@ -10,19 +10,7 @@ import {
 
 
 
-ViroMaterials.createMaterials({
-  white: {
-    lightingModel: "PBR",
-    // diffuseTexture: require('../res/car/object_car_main_Base_Color.png'),
-    // metalnessTexture: require('../res/car/object_car_main_Metallic.png'),
-    // roughnessTexture: require('../res/car/object_car_main_Roughness.png'),
-  },
-  wood: {
-    lightingModel: "PBR",
-    // diffuseTexture: require('../res/chair/z7it.jpg'),
-    // roughnessTexture: require('../res/chair/z7ipu_.jpg')
-  }
-})
+
 
 export default class ObjComponent extends Component {
   constructor() {
@@ -35,6 +23,13 @@ export default class ObjComponent extends Component {
     this._onRotate = this._onRotate.bind(this);
   }
   render() {
+    ViroMaterials.createMaterials({
+      white: {
+        lightingModel: "PBR",
+        diffuseTexture: {uri: this.props.diffuse},
+        specularTexture: {uri: this.props.specular}
+      }
+    })
     return (
       <Viro3DObject
             source={{uri: this.props.source}}
