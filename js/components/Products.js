@@ -30,16 +30,16 @@ class Products extends Component {
     return (
       <Container>
         <Header>
-          {/* <Left>
-          <Button transparent>
-            <Icon
-              name="ios-arrow-back"
-              onPress={() => {
-                Actions.pop();
-              }}
-            />
-          </Button>
-          </Left> */}
+          <Left>
+            <Button transparent>
+              <Icon
+                name="ios-arrow-back"
+                onPress={() => {
+                  Actions.pop();
+                }}
+              />
+            </Button>
+          </Left>
           <Body>
             <Title>Furniture</Title>
           </Body>
@@ -58,13 +58,10 @@ class Products extends Component {
                   <Text>{item.Name}</Text>
                   <Text>${item.Price}</Text>
                   <Button transparent>
-                    <Icon
-                      name="ios-add-circle-outline"
-                      style={localStyles.icons}
-                    />
+                    <Icon name="ios-heart-empty" style={localStyles.icons} />
                   </Button>
                   <Button transparent>
-                    <Icon name="ios-heart-empty" style={localStyles.icons} />
+                    <Icon name="ios-more" style={localStyles.icons} />
                   </Button>
                 </Body>
               </CardItem>
