@@ -10,7 +10,7 @@ import {
 } from 'react-viro';
 
 import VrxComponent from './VrxComponent';
-import ObjComponent from './ObjComponent';
+import ObjsComponent from './ObjsComponent';
 import ARModels from './ARModels'
 
 

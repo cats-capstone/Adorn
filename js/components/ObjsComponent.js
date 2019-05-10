@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import { Viro3DObject, ViroMaterials } from 'react-viro';
 
-export default class ObjComponent extends Component {
+export default class ObjsComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,11 +17,11 @@ export default class ObjComponent extends Component {
   render() {
     ViroMaterials.createMaterials({
       white: {
-        lightingModel: 'PBR',
-        diffuseTexture: { uri: this.props.diffuse },
+        lightingModel: "PBR",
+        diffuseTexture: {uri: this.props.diffuse},
         // specularTexture: {uri: this.props.specular}
-      },
-    });
+      }
+    })
     return (
       <Viro3DObject
         source={{ uri: this.props.source }}
@@ -69,4 +69,10 @@ export default class ObjComponent extends Component {
   }
 }
 
+<<<<<<< HEAD:js/components/objComponent.js
 module.exports = ObjComponent;
+=======
+
+
+module.exports = ObjsComponent;
+>>>>>>> d0d773ee71b3057a455b7feee1934c83d595eceb:js/components/ObjsComponent.js
