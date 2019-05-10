@@ -14,10 +14,12 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { fetchAllItems, fetchOneItem, setModel } from '../store/2Ditems';
 
 class SingleProduct extends Component {
   render() {
     const product = this.props.selectedItem;
+    console.log(product)
     return (
       <Container>
         <Header>
@@ -35,7 +37,15 @@ class SingleProduct extends Component {
               <Text>{product.Description}</Text>
               <Text>{`Price: ${product.Price}`}</Text>
             </CardItem>
-            <Button block>
+            <Button block
+              onPress={() => {
+                this.props.setModel({source: product.Source, 
+                                    resources: product.Resources,
+                                    size: product.Scale,
+                                    type: product.Type,
+                                    materials: "white"})
+                Actions.DisplayAR();
+              }}>
               <Text>TRY IN YOUR ROOM</Text>
             </Button>
           </Card>
@@ -51,4 +61,12 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(SingleProduct);
+const mapDispatch = dispatch => {
+  return {
+    setModel: (product) => dispatch(setModel(product)),
+    fetchInitialItems: () => dispatch(fetchAllItems()),
+    fetchOneItem: productId => dispatch(fetchOneItem(productId)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(SingleProduct);

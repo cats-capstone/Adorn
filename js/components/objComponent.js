@@ -37,13 +37,17 @@ export default class ObjComponent extends Component {
   render() {
     return (
       <Viro3DObject
-            source={this.props.source}
-            resources={this.props.resources}
+            source={{uri: this.props.source}}
+            resources={[{uri: this.props.resources}]}
             materials={this.props.materials}
-            ref={this._setRef}
-            position={this.props.horizontal}
             scale={this.props.size}
             type={this.props.type}
+
+
+            ref={this._setRef}
+            position={this.props.horizontal}
+            
+            
             onDrag={() => {}}
             dragType="FixedToPlane"
             dragPlane={{
