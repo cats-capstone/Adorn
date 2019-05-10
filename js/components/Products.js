@@ -14,6 +14,7 @@ import {
   Right,
   Image,
 } from 'native-base';
+import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
