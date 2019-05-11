@@ -12,7 +12,7 @@ import {
   Label,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { auth } from '../../firebase'
+import { database, auth } from '../../firebase'
 
 export default class HomePage extends Component {
   constructor() {
@@ -32,7 +32,11 @@ export default class HomePage extends Component {
     if (this.state.status === 'sign up') {
       auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(function() {
-          console.log('LOGIN WAS SUCCESSFUL!!!!!!')
+          const uId = auth.currentUser.uid
+          const userEmail = auth.currentUser.email
+          const usersRef = database.ref('/users')
+          usersRef.child(uId).set({email: userEmail})
+          console.log('SIGN UP WAS SUCCESSFUL! CHECK FB DB FOR USER')
           Actions.Products()
         })
         .catch(function(error) {
@@ -41,7 +45,6 @@ export default class HomePage extends Component {
     } else {
       auth.signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(function() {
-        console.log('SIGN IN WAS SUCCESSFUL!!!')
         Actions.Products()
       })
       .catch(function(error) {
