@@ -31,11 +31,20 @@ export default class HomePage extends Component {
     console.log('JUST HIT SUBMIT BUTTON!')
     if (this.state.status === 'sign up') {
       auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(function() {
+          console.log('LOGIN WAS SUCCESSFUL!!!!!!')
+          Actions.Products()
+        })
         .catch(function(error) {
           console.log(error.message)
       })
     } else {
-      auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
+      auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(function() {
+        console.log('SIGN IN WAS SUCCESSFUL!!!')
+        Actions.Products()
+      })
+      .catch(function(error) {
         console.log(error.message)
       })
     }
