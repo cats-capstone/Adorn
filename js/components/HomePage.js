@@ -28,7 +28,6 @@ export default class HomePage extends Component {
   }
 
   submit() {
-    console.log('JUST HIT SUBMIT BUTTON!')
     if (this.state.status === 'sign up') {
       auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(function() {
@@ -36,7 +35,6 @@ export default class HomePage extends Component {
           const userEmail = auth.currentUser.email
           const usersRef = database.ref('/users')
           usersRef.child(uId).set({email: userEmail})
-          console.log('SIGN UP WAS SUCCESSFUL! CHECK FB DB FOR USER')
           Actions.Products()
         })
         .catch(function(error) {

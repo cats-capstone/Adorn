@@ -19,6 +19,7 @@ import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { fetchAllItems, fetchOneItem, setModel, setRender } from '../store/2Ditems';
+import { database, auth } from '../../firebase'
 
 class Products extends Component {
   constructor() {
@@ -26,15 +27,34 @@ class Products extends Component {
     this.state = {
       popup: false,
     };
+
+    this.favoriteItem = this.favoriteItem.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
   }
 
+  favoriteItem(event, itemId) {
+    //for now, assuming there is a user logged in
+    event.persist()
+    const user = auth.currentUser.uid
+    database.ref('/users').child(user)
+      .once('value')
+      .then(function(snapshot) {
+        console.log('INSIDE THEN!!!')
+        if (!snapshot.hasChild('favorites')) {
+          database.ref('/users').child(`${user}/favorites`).set({0: itemId})
+        }
+        console.log('FAVORITE ADDED TO DB!')
+      })
+      .catch(function(error) {
+        console.log(error)
+    })
+  }
+
   render() {
-    console.log('THIS IS THE STATE', this.props.allItems);
-    allItems = this.props.allItems;
+    const allItems = this.props.allItems;
     return (
       <Container>
         <Header>
@@ -104,17 +124,17 @@ class Products extends Component {
             </Button>
           </Card>
         </Content>
-      </Container>
+        </Container>
           :
           <Content padder>
           {allItems.map(item => (
-            <Card>
-              <CardItem key={item.id}>
+            <Card key={item.id}>
+              <CardItem>
                 <Body>
                   {/* <Image>{item.ImageUrl}</Image> */}
                   <Text>{item.Name}</Text>
                   <Text>${item.Price}</Text>
-                  <Button transparent>
+                  <Button transparent onPress={event => this.favoriteItem(event, item.id)}>
                     <Icon name="ios-heart-empty" style={localStyles.icons} />
                   </Button>
                   <Button transparent>
@@ -130,7 +150,8 @@ class Products extends Component {
                 </Body>
               </CardItem>
             </Card>
-          ))}</Content>
+          ))}
+          </Content>
           }
       </Container>
     );
