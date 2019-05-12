@@ -22,6 +22,9 @@ export default class ObjsComponent extends Component {
     this._setRef = this._setRef.bind(this);
     this._onRotate = this._onRotate.bind(this);
   }
+  componentDidMount() {
+    this.setState({rotation: this.props.rotation})
+  }
   render() {
     ViroMaterials.createMaterials({
       white: {
@@ -34,7 +37,7 @@ export default class ObjsComponent extends Component {
       <Viro3DObject
             source={{uri: this.props.source}}
             resources={[{uri: this.props.resources}]}
-            materials={this.props.materials}
+            materials="white"
             scale={this.props.size}
             type={this.props.type}
 

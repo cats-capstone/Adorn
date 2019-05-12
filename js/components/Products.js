@@ -89,7 +89,8 @@ class Products extends Component {
                                     type: this.props.selectedItem.Type,
                                     materials: "white",
                                     diffuse: this.props.selectedItem.DiffuseTextureUrl,
-                                    specular: this.props.selectedItem.SpecularTextureUrl})
+                                    specular: this.props.selectedItem.SpecularTextureUrl,
+                                    rotation: this.props.selectedItem.Rotation})
                 if (this.props.renderStatus){
                   Actions.pop()
                 }
