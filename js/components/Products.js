@@ -13,6 +13,7 @@ import {
   Left,
   Right,
   Image,
+  Toast
 } from 'native-base';
 import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
@@ -29,27 +30,32 @@ class Products extends Component {
     };
 
     this.favoriteItem = this.favoriteItem.bind(this)
+    this.signOut = this.signOut.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
   }
 
-  favoriteItem(event, itemId) {
-    //for now, assuming there is a user logged in
-    event.persist()
-    const user = auth.currentUser.uid
-    database.ref('/users').child(user)
-      .once('value')
-      .then(function(snapshot) {
-        console.log('INSIDE THEN!!!')
-        if (!snapshot.hasChild('favorites')) {
-          database.ref('/users').child(`${user}/favorites`).set({0: itemId})
-        }
-        console.log('FAVORITE ADDED TO DB!')
+  favoriteItem(itemId) {
+    const user = auth.currentUser
+    if (user) {
+      const userRef = database.ref(`/users/${user.uid}`).child('favorites')
+      userRef.update({[itemId]: true})
+    } else {
+      Toast.show({
+        text: 'Sign in to add to your favorites!'
       })
-      .catch(function(error) {
-        console.log(error)
+    } 
+  }
+
+  signOut() {
+    auth.signOut()
+    .then(function() {
+      console.log('SIGNOUT WAS SUCCESSFUL!')
+    })
+    .catch(function(error) {
+      console.log('ERROR SIGNING OUT: ', error)
     })
   }
 
@@ -126,7 +132,13 @@ class Products extends Component {
         </Content>
         </Container>
           :
-          <Content padder>
+          <Content padder>  
+            <Button transparent
+                    onPress={this.signOut}>
+              <Text>
+                Sign Out
+              </Text>
+            </Button>
           {allItems.map(item => (
             <Card key={item.id}>
               <CardItem>
@@ -134,7 +146,7 @@ class Products extends Component {
                   {/* <Image>{item.ImageUrl}</Image> */}
                   <Text>{item.Name}</Text>
                   <Text>${item.Price}</Text>
-                  <Button transparent onPress={event => this.favoriteItem(event, item.id)}>
+                  <Button transparent onPress={() => this.favoriteItem(item.id)}>
                     <Icon name="ios-heart-empty" style={localStyles.icons} />
                   </Button>
                   <Button transparent>
