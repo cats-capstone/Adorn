@@ -13,8 +13,8 @@ import {
   Left,
   Right,
   Image,
+  Picker,
 } from 'native-base';
-import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -30,6 +30,7 @@ class Products extends Component {
     super();
     this.state = {
       popup: false,
+      category: 'All Furniture',
     };
   }
 
@@ -56,7 +57,7 @@ class Products extends Component {
                 </Button>
               </Left>
               <Body>
-                <Title>All Furniture</Title>
+                <Title>{this.state.category}</Title>
               </Body>
               <Right />
             </Header>
@@ -103,7 +104,7 @@ class Products extends Component {
                 </Button>
               </Left>
               <Body>
-                <Title>All Furniture</Title>
+                <Title>{this.state.category}</Title>
               </Body>
               <Right>
                 <Button transparent>
