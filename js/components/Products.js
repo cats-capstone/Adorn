@@ -52,7 +52,8 @@ class Products extends Component {
   signOut() {
     auth.signOut()
     .then(function() {
-      console.log('SIGNOUT WAS SUCCESSFUL!')
+      Actions.HomePage()
+      console.log('SIGN OUT SUCCESSFUL')
     })
     .catch(function(error) {
       console.log('ERROR SIGNING OUT: ', error)
