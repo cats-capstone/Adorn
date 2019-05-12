@@ -14,6 +14,8 @@ import {
   Right,
   Image,
   Picker,
+  Form,
+  Item,
 } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -36,6 +38,12 @@ class Products extends Component {
 
   componentDidMount() {
     this.props.fetchInitialItems();
+  }
+
+  onCategoryChange(value) {
+    this.setState({
+      category: value,
+    });
   }
 
   render() {
@@ -115,6 +123,52 @@ class Products extends Component {
                 </Button>
               </Right>
             </Header>
+            <Content>
+              <Form>
+                <Item picker>
+                  <Picker
+                    renderHeader={backAction => (
+                      <Header>
+                        <Left>
+                          <Button transparent onPress={backAction}>
+                            <Icon name="ios-arrow-back" />
+                          </Button>
+                        </Left>
+                        <Body style={{ flex: 3 }}>
+                          <Title>Categories</Title>
+                        </Body>
+                        <Right />
+                      </Header>
+                    )}
+                    mode="dropdown"
+                    iosIcon={<Icon name="arrow-down" />}
+                    style={{ width: undefined }}
+                    placeholder="Select a Category"
+                    placeholderStyle={{ color: '#bfc6ea' }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.category}
+                    onValueChange={this.onCategoryChange.bind(this)}
+                  >
+                    <Picker.Item label="All Furniture" value="All Furniture" />
+                    <Picker.Item label="My Favorites" value="My Favorites" />
+                    <Picker.Item label="Bedroom" value="Bedroom" />
+                    <Picker.Item label="Chairs" value="Chairs" />
+                    <Picker.Item label="Decoration" value="Decoration" />
+                    <Picker.Item label="Desks" value="Desks" />
+                    <Picker.Item label="Lighting" value="Lighting" />
+                    <Picker.Item
+                      label="Sofas & Armchairs"
+                      value="Sofas & Armchairs"
+                    />
+                    <Picker.Item label="Tables" value="Tables" />
+                    <Picker.Item
+                      label="TV & Media Furniture"
+                      value="TV & Media Furniture"
+                    />
+                  </Picker>
+                </Item>
+              </Form>
+            </Content>
             {allItems.map(item => (
               <Card>
                 <CardItem
@@ -159,7 +213,6 @@ const mapDispatch = dispatch => {
   };
 };
 
-// The `withRouter` wrapper makes sure that updates are not blocked when the url changes
 export default connect(
   mapState,
   mapDispatch
