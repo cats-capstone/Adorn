@@ -17,7 +17,13 @@ import {
   Form,
   Item,
 } from 'native-base';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  Modal,
+  TouchableHighlight,
+  View,
+  Alert,
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -31,7 +37,8 @@ class Products extends Component {
   constructor() {
     super();
     this.state = {
-      popup: false,
+      singleView: false,
+      modalVisible: false,
       category: 'All Furniture',
     };
   }
@@ -46,12 +53,15 @@ class Products extends Component {
     });
   }
 
+  openModal = () => this.setState({ modalVisible: true });
+  closeModal = () => this.setState({ modalVisible: false });
+
   render() {
     console.log('THIS IS THE STATE', this.props.allItems);
     allItems = this.props.allItems;
     return (
       <Container>
-        {this.state.popup ? (
+        {this.state.singleView ? (
           <Container padder>
             <Header>
               <Left>
@@ -59,7 +69,7 @@ class Products extends Component {
                   <Icon
                     name="ios-arrow-back"
                     onPress={() => {
-                      this.setState({ popup: false });
+                      this.setState({ singleView: false });
                     }}
                   />
                 </Button>
@@ -118,12 +128,33 @@ class Products extends Component {
                 <Button transparent>
                   <Icon name="ios-search" />
                 </Button>
-                <Button transparent>
+                <Button
+                  transparent
+                  onPress={() => {
+                    this.openModal(true);
+                  }}
+                >
                   <Icon name="ios-menu" />
                 </Button>
               </Right>
             </Header>
             <Content>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={this.state.modalVisible}
+              >
+                <View style={localStyles.modalContainer}>
+                  <Text style={localStyles.description}>
+                    {[
+                      'super fun text here, a list of items, such as settings, other stuff???',
+                    ]}
+                  </Text>
+                  <Button primary onPress={this.closeModal}>
+                    <Text>Cancel</Text>
+                  </Button>
+                </View>
+              </Modal>
               <Form>
                 <Item picker>
                   <Picker
@@ -176,7 +207,7 @@ class Products extends Component {
                   button
                   onPress={() => {
                     this.props.fetchOneItem(item.id);
-                    this.setState({ popup: true });
+                    this.setState({ singleView: true });
                   }}
                 >
                   <Body>
@@ -221,5 +252,20 @@ export default connect(
 const localStyles = StyleSheet.create({
   icons: {
     fontSize: 25,
+  },
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    borderColor: '#C0C0C0',
+    borderWidth: 2,
+    marginHorizontal: 60,
+    marginVertical: 120,
+  },
+  description: {
+    padding: 20,
+    fontSize: 18,
   },
 });
