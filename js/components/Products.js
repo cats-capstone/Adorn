@@ -107,6 +107,7 @@ class Products extends Component {
                       diffuse: this.props.selectedItem.DiffuseTextureUrl,
                       specular: this.props.selectedItem.SpecularTextureUrl,
                       rotation: this.props.selectedItem.Rotation,
+                      name: this.props.selectedItem.Name,
                     });
                     if (this.props.renderStatus) {
                       Actions.pop();

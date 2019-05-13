@@ -2,20 +2,11 @@
 
 import React, { Component } from 'react';
 
+import { ViroARScene, ViroARPlane, ViroAmbientLight } from 'react-viro';
 
-import {
-  ViroARScene,
-  ViroARPlane,
-  ViroAmbientLight,
-} from 'react-viro';
-
-import VrxComponent from './VrxComponent';
-import ObjsComponent from './ObjsComponent';
-import ARModels from './ARModels'
-
+import ARModels from './ARModels';
 
 ////////////////
-
 
 ////////////////
 export default class InitialARScene extends Component {
@@ -23,18 +14,7 @@ export default class InitialARScene extends Component {
     super();
     this.state = {
       worldCenterPosition: [0, 0, 0],
-      vrxs: [
-        { source: require('../res/object_flowers/object_flowers.vrx'), 
-        resources: [
-          require('../res/object_flowers/object_flowers_diffuse.png'),
-          require('../res/object_flowers/object_flowers_normal.png'),
-          require('../res/object_flowers/object_flowers_specular.png'),
-        ], 
-        type: 'VRX', 
-        size: [0.5, 0.5, 0.5]
-      },
-      ],
-      objs: []
+      objs: [],
     };
 
     this._setRef = this._setRef.bind(this);
@@ -44,7 +24,7 @@ export default class InitialARScene extends Component {
     return (
       <ViroARScene ref="arscene" anchorDetectionTypes="PlanesHorizontal">
         <ViroAmbientLight color="#FFFFFF" />
-          <ARModels />
+        <ARModels />
       </ViroARScene>
     );
   }
@@ -60,6 +40,5 @@ export default class InitialARScene extends Component {
     this.arRef = component;
   }
 }
-
 
 module.exports = InitialARScene;

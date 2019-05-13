@@ -3,7 +3,6 @@ import { Router, Scene } from 'react-native-router-flux';
 import DisplayAR from './DisplayAR';
 import HomePage from './HomePage';
 import Products from './Products';
-import SingleProduct from './SingleProduct';
 
 export default class Routes extends React.Component {
   render() {
@@ -19,11 +18,6 @@ export default class Routes extends React.Component {
           />
           <Scene key="DisplayAR" component={DisplayAR} hideNavBar="true" />
           <Scene key="Products" component={Products} hideNavBar="true" />
-          <Scene
-            key="SingleProduct"
-            component={SingleProduct}
-            hideNavBar="true"
-          />
         </Scene>
       </Router>
     );
