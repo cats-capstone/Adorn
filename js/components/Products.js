@@ -13,6 +13,7 @@ import {
   Left,
   Right,
   Image,
+  Toast,
   Picker,
   Form,
   Item,
@@ -20,14 +21,9 @@ import {
 import { StyleSheet, Modal, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
+import { database, auth } from '../../firebase'
 import { SearchBar } from 'react-native-elements';
-
-import {
-  fetchAllItems,
-  fetchOneItem,
-  setModel,
-  setRender,
-} from '../store/2Ditems';
 
 class Products extends Component {
   constructor() {
@@ -38,12 +34,24 @@ class Products extends Component {
       category: 'All Furniture',
       search: '',
     };
-
+      this.signOut = this.signOut.bind(this)
     // this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
+    this.props.fetchFavorites()
+  }
+
+  signOut() {
+    auth.signOut()
+    .then(function() {
+      Actions.HomePage()
+      console.log('SIGN OUT SUCCESSFUL')
+    })
+    .catch(function(error) {
+      console.log('ERROR SIGNING OUT: ', error)
+    })
   }
 
   onCategoryChange(value) {
@@ -220,7 +228,11 @@ class Products extends Component {
                       {/* <Image>{item.ImageUrl}</Image> */}
                       <Text>{item.Name}</Text>
                       <Text>${item.Price}</Text>
-                      <Button transparent>
+                      <Button transparent
+                      onPress={() => {
+                        this.props.addFavorite(item.id)
+                        // this.props.fetchFavorites()
+                      }}>
                         <Icon
                           name="ios-heart-empty"
                           style={localStyles.icons}
@@ -251,6 +263,8 @@ const mapDispatch = dispatch => {
     fetchInitialItems: () => dispatch(fetchAllItems()),
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
     setRender: status => dispatch(setRender(status)),
+    fetchFavorites: () => dispatch(fetchFavorites()),
+    addFavorite: productId => dispatch(addFavorite(productId))
   };
 };
 
