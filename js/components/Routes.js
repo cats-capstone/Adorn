@@ -4,6 +4,7 @@ import DisplayAR from './DisplayAR';
 import HomePage from './HomePage';
 import Products from './Products';
 import SingleProduct from './SingleProduct';
+import Favorites from './Favorites'
 
 export default class Routes extends React.Component {
   render() {
@@ -24,6 +25,7 @@ export default class Routes extends React.Component {
             component={SingleProduct}
             hideNavBar="true"
           />
+          <Scene key="Favorites" component={Favorites} hideNavBar="true" />
         </Scene>
       </Router>
     );
