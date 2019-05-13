@@ -21,7 +21,7 @@ import {
 import { StyleSheet, Modal, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
+import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender, deleteFavorite } from '../store/2Ditems';
 import { database, auth } from '../../firebase'
 import { SearchBar } from 'react-native-elements';
 
@@ -246,16 +246,22 @@ class Products extends Component {
                       {/* <Image>{item.ImageUrl}</Image> */}
                       <Text>{item.Name}</Text>
                       <Text>${item.Price}</Text>
-                      <Button transparent
-                      onPress={() => {
-                        this.props.addFavorite(item.id)
+                      {this.props.allFavorites.includes(item.id) ?
+                        <Icon onPress={() => {
+                        this.props.deleteFavorite(item.id)
                         // this.props.fetchFavorites()
-                      }}>
-                        <Icon
+                      }}
+                          name="ios-heart"
+                          style={localStyles.icons}
+                        /> :
+                        <Icon onPress={() => {
+                          this.props.addFavorite(item.id)
+                          // this.props.fetchFavorites()
+                        }}
                           name="ios-heart-empty"
                           style={localStyles.icons}
                         />
-                      </Button>
+                      }
                     </Body>
                   </CardItem>
                 </Card>
@@ -283,7 +289,8 @@ const mapDispatch = dispatch => {
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
     setRender: status => dispatch(setRender(status)),
     fetchFavorites: () => dispatch(fetchFavorites()),
-    addFavorite: productId => dispatch(addFavorite(productId))
+    addFavorite: productId => dispatch(addFavorite(productId)),
+    deleteFavorite: productId => dispatch(deleteFavorite(productId))
   };
 };
 
@@ -294,7 +301,8 @@ export default connect(
 
 const localStyles = StyleSheet.create({
   icons: {
-    fontSize: 25,
+    fontSize: 34,
+    color: "#007aff"
   },
   modalContainer: {
     flex: 1,

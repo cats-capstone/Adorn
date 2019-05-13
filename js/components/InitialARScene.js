@@ -9,8 +9,6 @@ import {
   ViroAmbientLight,
 } from 'react-viro';
 
-import VrxComponent from './VrxComponent';
-import ObjsComponent from './ObjsComponent';
 import ARModels from './ARModels'
 
 

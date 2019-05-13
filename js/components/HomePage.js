@@ -10,6 +10,8 @@ import {
   Item,
   Input,
   Label,
+  Header,
+  Title
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { database, auth } from '../../firebase'
@@ -19,7 +21,7 @@ export default class HomePage extends Component {
     super()
 
     this.state = {
-      status: 'sign up',
+      status: 'Sign up',
       email: '',
       password: ''
     }
@@ -28,7 +30,7 @@ export default class HomePage extends Component {
   }
 
   submit() {
-    if (this.state.status === 'sign up') {
+    if (this.state.status === 'Sign up') {
       auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(function() {
           const uId = auth.currentUser.uid
@@ -55,6 +57,9 @@ export default class HomePage extends Component {
     return (
       <Container>
         <Content>
+        <Header>
+                <Title>{this.state.status}</Title>
+        </Header>
           <View style={localStyles.content}>
             <Form>
               <Item floatingLabel>
@@ -77,19 +82,27 @@ export default class HomePage extends Component {
                     onPress={this.submit}>
               <Text>Submit</Text>
             </Button>
+            {this.state.status === 'Sign up' ?
+            <Button block style={localStyles.buttons}
+            onPress={()=>{
+              this.setState({status: 'Sign in'})
+              
+            }}>
+            <Text>Existing User? Sign In</Text>
+            </Button>
+            :
+            <Button block style={localStyles.buttons}
+                    onPress={()=>{
+                      this.setState({status: 'Sign up'})
+                    }}>
+              <Text>New User? Sign Up</Text>
+              </Button>
+            }
 
-            <Button block style={localStyles.buttons}
-                    onPress={()=>{
-                      this.setState({status: 'sign up'})
-                    }}>
-              <Text>Sign Up</Text>
-            </Button>
-            <Button block style={localStyles.buttons}
-                    onPress={()=>{
-                      this.setState({status: 'sign in'})
-                    }}>
-              <Text>Sign In</Text>
-            </Button>
+            
+            
+            
+            
             <Button
               block
               style={localStyles.buttons}
