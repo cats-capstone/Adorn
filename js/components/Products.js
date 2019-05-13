@@ -175,7 +175,10 @@ class Products extends Component {
                   <Text>{item.Name}</Text>
                   <Text>${item.Price}</Text>
                   <Button transparent
-                  onPress={() => this.props.addFavorite(item.id)} >
+                  onPress={() => {
+                    this.props.addFavorite(item.id)
+                    this.props.fetchFavorites()
+                  }} >
                     {/* <Icon name={this.isFavorite(item.id) ? 'heart' : 'ios-heart-empty'} style={localStyles.icons} /> */}
                         <Icon name='heart' style={localStyles.icons} />
                   </Button>

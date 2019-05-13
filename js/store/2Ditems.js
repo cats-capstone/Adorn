@@ -96,13 +96,12 @@ export const fetchFavorites = () => {
 }
 
 export const addFavorite = productId => {
-  return dispatch => {
+  return () => {
     try {
       const user = auth.currentUser
       if (user) {
         const userRef = database.ref(`/users/${user.uid}`).child('favorites')
         userRef.update({[productId]: true})
-        dispatch(favorite(productId))
       }
     } catch (error) {
       console.log('ERROR FAVORITING ITEM: ', error)
