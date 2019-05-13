@@ -27,6 +27,7 @@ DerivedData
 project.xcworkspace
 ios/Pods/*
 project.pbxproj
+ios/ngrokendpoint.txt
 
 # Android/IntelliJ
 #
