@@ -16,10 +16,8 @@ import {
   Picker,
   Form,
   Item,
-  List,
-  ListItem,
 } from 'native-base';
-import { StyleSheet, Modal, View, ListView } from 'react-native';
+import { StyleSheet, Modal, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -192,28 +190,32 @@ class Products extends Component {
                   </Picker>
                 </Item>
               </Form>
+
+              {allItems.map(item => (
+                <Card>
+                  <CardItem
+                    key={item.id}
+                    button
+                    onPress={() => {
+                      this.props.fetchOneItem(item.id);
+                      this.setState({ singleView: true });
+                    }}
+                  >
+                    <Body>
+                      {/* <Image>{item.ImageUrl}</Image> */}
+                      <Text>{item.Name}</Text>
+                      <Text>${item.Price}</Text>
+                      <Button transparent>
+                        <Icon
+                          name="ios-heart-empty"
+                          style={localStyles.icons}
+                        />
+                      </Button>
+                    </Body>
+                  </CardItem>
+                </Card>
+              ))}
             </Content>
-            {allItems.map(item => (
-              <Card>
-                <CardItem
-                  key={item.id}
-                  button
-                  onPress={() => {
-                    this.props.fetchOneItem(item.id);
-                    this.setState({ singleView: true });
-                  }}
-                >
-                  <Body>
-                    {/* <Image>{item.ImageUrl}</Image> */}
-                    <Text>{item.Name}</Text>
-                    <Text>${item.Price}</Text>
-                    <Button transparent>
-                      <Icon name="ios-heart-empty" style={localStyles.icons} />
-                    </Button>
-                  </Body>
-                </CardItem>
-              </Card>
-            ))}
           </Container>
         )}
       </Container>
