@@ -19,7 +19,7 @@ import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems, fetchOneItem, fetchFavorites, setModel, setRender } from '../store/2Ditems';
+import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
 import { database, auth } from '../../firebase'
 
 class Products extends Component {
@@ -31,7 +31,6 @@ class Products extends Component {
 
     // this.favoriteItem = this.favoriteItem.bind(this)
     // this.isFavorite = this.isFavorite.bind(this)
-    this.toggleFavorite = this.toggleFavorite.bind(this)
     this.signOut = this.signOut.bind(this)
   }
 
@@ -76,10 +75,6 @@ class Products extends Component {
   //     })
   //   }
   // }
-
-  toggleFavorite() {
-
-  }
 
   signOut() {
     auth.signOut()
@@ -179,8 +174,8 @@ class Products extends Component {
                   {/* <Image>{item.ImageUrl}</Image> */}
                   <Text>{item.Name}</Text>
                   <Text>${item.Price}</Text>
-                  <Button transparent>
-                  {/* onPress={() => this.favoriteItem(item.id)}> */}
+                  <Button transparent
+                  onPress={() => this.props.addFavorite(item.id)} >
                     {/* <Icon name={this.isFavorite(item.id) ? 'heart' : 'ios-heart-empty'} style={localStyles.icons} /> */}
                         <Icon name='heart' style={localStyles.icons} />
                   </Button>
@@ -218,7 +213,8 @@ const mapDispatch = dispatch => {
     fetchInitialItems: () => dispatch(fetchAllItems()),
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
     setRender: status => dispatch(setRender(status)),
-    fetchFavorites: () => dispatch(fetchFavorites())
+    fetchFavorites: () => dispatch(fetchFavorites()),
+    addFavorite: productId => dispatch(addFavorite(productId))
   };
 };
 
