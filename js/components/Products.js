@@ -13,94 +13,35 @@ import {
   Left,
   Right,
   Image,
-<<<<<<< HEAD
-  Toast
-=======
+  Toast,
   Picker,
   Form,
   Item,
->>>>>>> master
 } from 'native-base';
 import { StyleSheet, Modal, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
 import { database, auth } from '../../firebase'
-=======
 import { SearchBar } from 'react-native-elements';
-
-import {
-  fetchAllItems,
-  fetchOneItem,
-  setModel,
-  setRender,
-} from '../store/2Ditems';
->>>>>>> master
 
 class Products extends Component {
   constructor() {
     super();
     this.state = {
-<<<<<<< HEAD
-      popup: false
-    };
-
-    // this.favoriteItem = this.favoriteItem.bind(this)
-    // this.isFavorite = this.isFavorite.bind(this)
-    this.signOut = this.signOut.bind(this)
-=======
       singleView: false,
       modalVisible: false,
       category: 'All Furniture',
       search: '',
     };
-
+      this.signOut = this.signOut.bind(this)
     // this.updateSearch = this.updateSearch.bind(this);
->>>>>>> master
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
     this.props.fetchFavorites()
-    // const user = auth.currentUser
-    // if (user) {
-    //   const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-    //   userRef.once('value').then(function(snapshot) {
-    //     console.log('snapshot.val!!', snapshot.val())
-    //     let allFavs = []
-    //     snapshot.forEach(function(favorite) {
-    //       console.log('favorite.key!', favorite.key)
-    //       allFavs.push(favorite.key)
-    //     })
-    //     this.setState({favorites: allFavs})
-    //   })
-    // }
   }
-
-  // favoriteItem(itemId) {
-  //   const user = auth.currentUser
-  //   if (user) {
-  //     const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-  //     userRef.update({[itemId]: true})
-  //   } else {
-  //     Toast.show({
-  //       text: 'Sign in to add to your favorites!'
-  //     })
-  //   } 
-  // }
-
-  // isFavorite(itemId) {
-  //   const user = auth.currentUser
-  //   if (user) {
-  //     const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-  //     userRef.once('value')
-  //     .then(function(snapshot) {
-  //       console.log('snapshot.val(): ', snapshot.val())
-  //       return snapshot.hasChild(itemId)
-  //     })
-  //   }
-  // }
 
   signOut() {
     auth.signOut()
@@ -129,101 +70,6 @@ class Products extends Component {
   closeModal = () => this.setState({ modalVisible: false });
 
   render() {
-<<<<<<< HEAD
-    const allItems = this.props.allItems;
-    return (
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon
-                name="ios-arrow-back"
-                onPress={() => {
-                  Actions.pop();
-                }}
-              />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Furniture</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name="ios-search" />
-            </Button>
-            <Button transparent onPress={() => Actions.Favorites()}>
-              <Icon name="ios-heart" />
-            </Button>
-            <Button transparent>
-              <Icon name="ios-menu" />
-            </Button>
-          </Right>
-        </Header>
-        
-        {this.state.popup ?
-        <Container padder>
-        <Header>
-          <Body>
-            <Title>Single Product Page</Title>
-          </Body>
-        </Header>
-        <Content>
-          <Card transparent>
-            <CardItem header>
-              <Text>{this.props.selectedItem.Name}</Text>
-            </CardItem>
-            <CardItem cardBody>
-              {/* <Image source={{ uri: product.ImageUrl }} /> */}
-              <Text>{this.props.selectedItem.Description}</Text>
-              <Text>{`Price: ${this.props.selectedItem.Price}`}</Text>
-            </CardItem>
-            <Button block
-              onPress={() => {
-                this.props.setModel({source: this.props.selectedItem.Source, 
-                                    resources: this.props.selectedItem.Resources,
-                                    size: this.props.selectedItem.Scale,
-                                    type: this.props.selectedItem.Type,
-                                    materials: "white",
-                                    diffuse: this.props.selectedItem.DiffuseTextureUrl,
-                                    specular: this.props.selectedItem.SpecularTextureUrl})
-                if (this.props.renderStatus){
-                  Actions.pop()
-                }
-                else {
-                  Actions.DisplayAR();
-                }        
-              }}>
-              <Text>TRY IN YOUR ROOM</Text>
-            </Button>
-            <Button onPress={() => {this.setState({popup: false})}}>
-              <Text>Back to All Products</Text>
-            </Button>
-          </Card>
-        </Content>
-        </Container>
-          :
-          <Content padder>  
-            <Button transparent
-                    onPress={this.signOut}>
-              <Text>
-                Sign Out
-              </Text>
-            </Button>
-          {allItems.map(item => (
-            <Card key={item.id}>
-              <CardItem>
-                <Body>
-                  {/* <Image>{item.ImageUrl}</Image> */}
-                  <Text>{item.Name}</Text>
-                  <Text>${item.Price}</Text>
-                  <Button transparent
-                  onPress={() => {
-                    this.props.addFavorite(item.id)
-                    // this.props.fetchFavorites()
-                  }}>
-                    {/* <Icon name={this.isFavorite(item.id) ? 'heart' : 'ios-heart-empty'} style={localStyles.icons} /> */}
-                        <Icon name='heart' style={localStyles.icons} />
-=======
     console.log('THIS IS THE STATE', this.props.allItems);
     const { search } = this.state;
     allItems = this.props.allItems;
@@ -309,7 +155,6 @@ class Products extends Component {
                   <Text>text inside modal</Text>
                   <Button onPress={this.closeModal}>
                     <Text>Close</Text>
->>>>>>> master
                   </Button>
                 </View>
               </Modal>
@@ -360,15 +205,6 @@ class Products extends Component {
                       label="Sofas & Armchairs"
                       value="Sofas & Armchairs"
                     />
-<<<<<<< HEAD
-                  </Button>
-                </Body>
-              </CardItem>
-            </Card>
-          ))}
-          </Content>
-          }
-=======
                     <Picker.Item label="Tables" value="Tables" />
                     <Picker.Item
                       label="TV & Media Furniture"
@@ -392,7 +228,11 @@ class Products extends Component {
                       {/* <Image>{item.ImageUrl}</Image> */}
                       <Text>{item.Name}</Text>
                       <Text>${item.Price}</Text>
-                      <Button transparent>
+                      <Button transparent
+                      onPress={() => {
+                        this.props.addFavorite(item.id)
+                        // this.props.fetchFavorites()
+                      }}>
                         <Icon
                           name="ios-heart-empty"
                           style={localStyles.icons}
@@ -405,7 +245,6 @@ class Products extends Component {
             </Content>
           </Container>
         )}
->>>>>>> master
       </Container>
     );
   }
@@ -424,11 +263,8 @@ const mapDispatch = dispatch => {
     fetchInitialItems: () => dispatch(fetchAllItems()),
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
     setRender: status => dispatch(setRender(status)),
-<<<<<<< HEAD
     fetchFavorites: () => dispatch(fetchFavorites()),
     addFavorite: productId => dispatch(addFavorite(productId))
-=======
->>>>>>> master
   };
 };
 
