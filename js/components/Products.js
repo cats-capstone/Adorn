@@ -96,6 +96,7 @@ class Products extends Component {
                       materials: 'white',
                       diffuse: this.props.selectedItem.DiffuseTextureUrl,
                       specular: this.props.selectedItem.SpecularTextureUrl,
+                      rotation: this.props.selectedItem.Rotation,
                     });
                     if (this.props.renderStatus) {
                       Actions.pop();
