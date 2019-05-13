@@ -178,7 +178,7 @@ class Products extends Component {
                   onPress={() => {
                     this.props.addFavorite(item.id)
                     this.props.fetchFavorites()
-                  }} >
+                  }}>
                     {/* <Icon name={this.isFavorite(item.id) ? 'heart' : 'ios-heart-empty'} style={localStyles.icons} /> */}
                         <Icon name='heart' style={localStyles.icons} />
                   </Button>

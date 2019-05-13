@@ -115,8 +115,9 @@ export const deleteFavorite = productId => {
       const user = auth.currentUser
       if (user) {
         const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-        userRef.child(productId).removeValue()
+        userRef.child(productId).remove()
         dispatch(unfavorite(productId))
+        console.log('SUCCESSFULLY DELETED FAVORITE!')
       }
     } catch (error) {
       console.log('ERROR UNFAVORITING ITEM: ', error)
@@ -145,6 +146,12 @@ const handlers = {
   [ADD_FAVORITE]: (state, action) => ({
     ...state,
     favorites: [...state.favorites, action.item]
+  }),
+  [DELETE_FAVORITE]: (state, action) => ({
+    ...state,
+    favorites: state.favorites.filter(item => {
+      return item !== action.item
+    })
   }),
   [GET_FAVORITES]: (state, action) => ({
     ...state,
