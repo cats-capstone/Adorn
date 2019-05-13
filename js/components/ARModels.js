@@ -49,6 +49,7 @@ class ARModels extends Component {
             size={obj.size}
             diffuse={obj.diffuse}
             specular={obj.specular}
+            rotation={obj.rotation}
             />
           ))}
         </ViroARPlane>

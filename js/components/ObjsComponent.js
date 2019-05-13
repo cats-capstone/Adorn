@@ -14,19 +14,22 @@ export default class ObjsComponent extends Component {
     this._setRef = this._setRef.bind(this);
     this._onRotate = this._onRotate.bind(this);
   }
+  componentDidMount() {
+    this.setState({ rotation: this.props.rotation });
+  }
   render() {
     ViroMaterials.createMaterials({
       white: {
-        lightingModel: "PBR",
-        diffuseTexture: {uri: this.props.diffuse},
+        lightingModel: 'PBR',
+        diffuseTexture: { uri: this.props.diffuse },
         // specularTexture: {uri: this.props.specular}
-      }
-    })
+      },
+    });
     return (
       <Viro3DObject
         source={{ uri: this.props.source }}
         resources={[{ uri: this.props.resources }]}
-        materials={this.props.materials}
+        materials="white"
         scale={this.props.size}
         type={this.props.type}
         ref={this._setRef}
@@ -69,10 +72,4 @@ export default class ObjsComponent extends Component {
   }
 }
 
-<<<<<<< HEAD:js/components/objComponent.js
-module.exports = ObjComponent;
-=======
-
-
 module.exports = ObjsComponent;
->>>>>>> d0d773ee71b3057a455b7feee1934c83d595eceb:js/components/ObjsComponent.js
