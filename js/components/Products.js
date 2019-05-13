@@ -21,8 +21,15 @@ import {
 import { StyleSheet, Modal, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
-import { database, auth } from '../../firebase'
+import {
+  fetchAllItems,
+  fetchOneItem,
+  fetchFavorites,
+  addFavorite,
+  setModel,
+  setRender,
+} from '../store/2Ditems';
+import { database, auth } from '../../firebase';
 import { SearchBar } from 'react-native-elements';
 
 class Products extends Component {
@@ -34,24 +41,25 @@ class Products extends Component {
       category: 'All Furniture',
       search: '',
     };
-      this.signOut = this.signOut.bind(this)
+    this.signOut = this.signOut.bind(this);
     // this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
-    this.props.fetchFavorites()
+    this.props.fetchFavorites();
   }
 
   signOut() {
-    auth.signOut()
-    .then(function() {
-      Actions.HomePage()
-      console.log('SIGN OUT SUCCESSFUL')
-    })
-    .catch(function(error) {
-      console.log('ERROR SIGNING OUT: ', error)
-    })
+    auth
+      .signOut()
+      .then(function() {
+        Actions.HomePage();
+        console.log('SIGN OUT SUCCESSFUL');
+      })
+      .catch(function(error) {
+        console.log('ERROR SIGNING OUT: ', error);
+      });
   }
 
   onCategoryChange(value) {
@@ -116,6 +124,7 @@ class Products extends Component {
                       specular: this.props.selectedItem.SpecularTextureUrl,
                       rotation: this.props.selectedItem.Rotation,
                       name: this.props.selectedItem.Name,
+                      id: this.props.selectedItem.id,
                     });
                     if (this.props.renderStatus) {
                       Actions.pop();
@@ -229,11 +238,13 @@ class Products extends Component {
                       {/* <Image>{item.ImageUrl}</Image> */}
                       <Text>{item.Name}</Text>
                       <Text>${item.Price}</Text>
-                      <Button transparent
-                      onPress={() => {
-                        this.props.addFavorite(item.id)
-                        // this.props.fetchFavorites()
-                      }}>
+                      <Button
+                        transparent
+                        onPress={() => {
+                          this.props.addFavorite(item.id);
+                          // this.props.fetchFavorites()
+                        }}
+                      >
                         <Icon
                           name="ios-heart-empty"
                           style={localStyles.icons}
@@ -265,7 +276,7 @@ const mapDispatch = dispatch => {
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
     setRender: status => dispatch(setRender(status)),
     fetchFavorites: () => dispatch(fetchFavorites()),
-    addFavorite: productId => dispatch(addFavorite(productId))
+    addFavorite: productId => dispatch(addFavorite(productId)),
   };
 };
 

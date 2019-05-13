@@ -6,6 +6,7 @@ import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
 import { StatusBar, StyleSheet, Modal } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
+import { deleteModel } from '../store/2Ditems';
 
 export default class DisplayAR extends Component {
   constructor() {
@@ -39,7 +40,12 @@ export default class DisplayAR extends Component {
                 <CardItem>
                   <Text>{item.name}</Text>
                   <Right>
-                    <Icon name="ios-trash" />
+                    <Icon
+                      name="ios-trash"
+                      onPress={() => {
+                        this.props.deleteModel(item.id);
+                      }}
+                    />
                   </Right>
                 </CardItem>
               ))}
@@ -116,4 +122,13 @@ const mapState = state => {
   };
 };
 
-module.exports = connect(mapState)(DisplayAR);
+const mapDispatch = dispatch => {
+  return {
+    deleteModel: itemId => dispatch(deleteModel(itemId)),
+  };
+};
+
+module.exports = connect(
+  mapState,
+  mapDispatch
+)(DisplayAR);
