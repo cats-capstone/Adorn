@@ -3,6 +3,7 @@ import { database, auth } from '../../firebase';
 //Initial State
 const initialState = {
   allItems: ['hello world'],
+  filteredItems: [],
   selectedItem: {},
   models: [],
   hasRendered: false,
@@ -128,7 +129,7 @@ const handlers = {
   }),
   [SET_MODEL]: (state, action) => ({
     ...state,
-    models: [...state.models, action.item]
+    models: [...state.models, action.item],
   }),
   [SET_RENDER]: (state, action) => ({
     ...state, 
