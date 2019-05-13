@@ -44,8 +44,7 @@ class Favorites extends Component {
                 <Content>
                     {
                         this.props.allFavorites.length ? this.props.allFavorites.map(item => {
-                            console.log('ITEM FROM ALLFAVS:', item)
-                            return <FavoriteProduct productId={item} />
+                            return <FavoriteProduct key={item} productId={item} />
                         }) : <Text>You have no favorites yet!</Text>
                     }
                     {

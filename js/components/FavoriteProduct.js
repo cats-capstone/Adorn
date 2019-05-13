@@ -31,7 +31,6 @@ class FavoriteItem extends Component {
         database.ref(`/furniture/${this.props.productId}`).once('value')
         .then(snapshot => {
           const productInfo = snapshot.val()
-          console.log('PRODUCTINFO: ', productInfo)
           this.setState({product: productInfo})
         });
     }
@@ -50,7 +49,7 @@ class FavoriteItem extends Component {
                             block
                             onPress={() => {
                                 this.props.removeFavorite(this.props.productId)
-                                this.props.fetchFavorites()
+                                // this.props.fetchFavorites()
                             }}>
                             <Text>Delete from favorites</Text>
                         </Button>
