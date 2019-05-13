@@ -142,12 +142,10 @@ class Products extends Component {
                 visible={this.state.modalVisible}
               >
                 <View style={localStyles.modalContainer}>
-                  <ListView
-                    style={styles.listview}
-                    dataSource={this.state.dataSource}
-                    renderRow={data => <Text>{data}</Text>}
-                  />
-                  <Text style={styles.textModal}>text inside modal</Text>
+                  <Text>text inside modal</Text>
+                  <Button onPress={this.closeModal}>
+                    <Text>Close</Text>
+                  </Button>
                 </View>
               </Modal>
               <Form>
