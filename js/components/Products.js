@@ -19,34 +19,66 @@ import { DrawerNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems, fetchOneItem, setModel, setRender } from '../store/2Ditems';
+import { fetchAllItems, fetchOneItem, fetchFavorites, setModel, setRender } from '../store/2Ditems';
 import { database, auth } from '../../firebase'
 
 class Products extends Component {
   constructor() {
     super();
     this.state = {
-      popup: false,
+      popup: false
     };
 
-    this.favoriteItem = this.favoriteItem.bind(this)
+    // this.favoriteItem = this.favoriteItem.bind(this)
+    // this.isFavorite = this.isFavorite.bind(this)
+    this.toggleFavorite = this.toggleFavorite.bind(this)
     this.signOut = this.signOut.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
+    this.props.fetchFavorites()
+    // const user = auth.currentUser
+    // if (user) {
+    //   const userRef = database.ref(`/users/${user.uid}`).child('favorites')
+    //   userRef.once('value').then(function(snapshot) {
+    //     console.log('snapshot.val!!', snapshot.val())
+    //     let allFavs = []
+    //     snapshot.forEach(function(favorite) {
+    //       console.log('favorite.key!', favorite.key)
+    //       allFavs.push(favorite.key)
+    //     })
+    //     this.setState({favorites: allFavs})
+    //   })
+    // }
   }
 
-  favoriteItem(itemId) {
-    const user = auth.currentUser
-    if (user) {
-      const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-      userRef.update({[itemId]: true})
-    } else {
-      Toast.show({
-        text: 'Sign in to add to your favorites!'
-      })
-    } 
+  // favoriteItem(itemId) {
+  //   const user = auth.currentUser
+  //   if (user) {
+  //     const userRef = database.ref(`/users/${user.uid}`).child('favorites')
+  //     userRef.update({[itemId]: true})
+  //   } else {
+  //     Toast.show({
+  //       text: 'Sign in to add to your favorites!'
+  //     })
+  //   } 
+  // }
+
+  // isFavorite(itemId) {
+  //   const user = auth.currentUser
+  //   if (user) {
+  //     const userRef = database.ref(`/users/${user.uid}`).child('favorites')
+  //     userRef.once('value')
+  //     .then(function(snapshot) {
+  //       console.log('snapshot.val(): ', snapshot.val())
+  //       return snapshot.hasChild(itemId)
+  //     })
+  //   }
+  // }
+
+  toggleFavorite() {
+
   }
 
   signOut() {
@@ -82,7 +114,7 @@ class Products extends Component {
             <Button transparent>
               <Icon name="ios-search" />
             </Button>
-            <Button transparent>
+            <Button transparent onPress={() => Actions.Favorites()}>
               <Icon name="ios-heart" />
             </Button>
             <Button transparent>
@@ -91,7 +123,7 @@ class Products extends Component {
           </Right>
         </Header>
         
-        {this.state.popup ? 
+        {this.state.popup ?
         <Container padder>
         <Header>
           <Body>
@@ -147,8 +179,10 @@ class Products extends Component {
                   {/* <Image>{item.ImageUrl}</Image> */}
                   <Text>{item.Name}</Text>
                   <Text>${item.Price}</Text>
-                  <Button transparent onPress={() => this.favoriteItem(item.id)}>
-                    <Icon name="ios-heart-empty" style={localStyles.icons} />
+                  <Button transparent>
+                  {/* onPress={() => this.favoriteItem(item.id)}> */}
+                    {/* <Icon name={this.isFavorite(item.id) ? 'heart' : 'ios-heart-empty'} style={localStyles.icons} /> */}
+                        <Icon name='heart' style={localStyles.icons} />
                   </Button>
                   <Button transparent>
                     <Icon
@@ -183,7 +217,8 @@ const mapDispatch = dispatch => {
     setModel: (product) => dispatch(setModel(product)),
     fetchInitialItems: () => dispatch(fetchAllItems()),
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
-    setRender: status => dispatch(setRender(status))
+    setRender: status => dispatch(setRender(status)),
+    fetchFavorites: () => dispatch(fetchFavorites())
   };
 };
 

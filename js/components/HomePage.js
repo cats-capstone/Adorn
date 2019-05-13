@@ -52,7 +52,6 @@ export default class HomePage extends Component {
   }
 
   render() {
-    console.log('STATUS: ', this.state.status )
     return (
       <Container>
         <Content>
