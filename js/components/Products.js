@@ -16,14 +16,10 @@ import {
   Picker,
   Form,
   Item,
+  List,
+  ListItem,
 } from 'native-base';
-import {
-  StyleSheet,
-  Modal,
-  TouchableHighlight,
-  View,
-  Alert,
-} from 'react-native';
+import { StyleSheet, Modal, View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -145,14 +141,12 @@ class Products extends Component {
                 visible={this.state.modalVisible}
               >
                 <View style={localStyles.modalContainer}>
-                  <Text style={localStyles.description}>
-                    {[
-                      'super fun text here, a list of items, such as settings, other stuff???',
-                    ]}
-                  </Text>
-                  <Button primary onPress={this.closeModal}>
-                    <Text>Cancel</Text>
-                  </Button>
+                  <ListView
+                    style={styles.listview}
+                    dataSource={this.state.dataSource}
+                    renderRow={data => <Text>{data}</Text>}
+                  />
+                  <Text style={styles.textModal}>text inside modal</Text>
                 </View>
               </Modal>
               <Form>
