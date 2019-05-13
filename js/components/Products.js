@@ -20,6 +20,8 @@ import {
 import { StyleSheet, Modal, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { SearchBar } from 'react-native-elements';
+
 import {
   fetchAllItems,
   fetchOneItem,
@@ -34,7 +36,10 @@ class Products extends Component {
       singleView: false,
       modalVisible: false,
       category: 'All Furniture',
+      search: '',
     };
+
+    // this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
@@ -47,11 +52,18 @@ class Products extends Component {
     });
   }
 
+  updateSearch(text) {
+    this.setState({
+      search: text,
+    });
+  }
+
   openModal = () => this.setState({ modalVisible: true });
   closeModal = () => this.setState({ modalVisible: false });
 
   render() {
     console.log('THIS IS THE STATE', this.props.allItems);
+    const { search } = this.state;
     allItems = this.props.allItems;
     return (
       <Container>
@@ -120,15 +132,7 @@ class Products extends Component {
                 <Title>{this.state.category}</Title>
               </Body>
               <Right>
-                <Button transparent>
-                  <Icon name="ios-search" />
-                </Button>
-                <Button
-                  transparent
-                  onPress={() => {
-                    this.openModal(true);
-                  }}
-                >
+                <Button transparent onPress={this.openModal}>
                   <Icon name="ios-menu" />
                 </Button>
               </Right>
@@ -146,6 +150,17 @@ class Products extends Component {
                   </Button>
                 </View>
               </Modal>
+              <SearchBar
+                round
+                placeholder="I'm looking for..."
+                containerStyle={localStyles.searchBar}
+                inputStyle={localStyles.searchInput}
+                lightTheme={true}
+                searchIcon={{ size: 24 }}
+                onChangeText={text => this.updateSearch(text)}
+                value={search}
+                onClear={text => this.updateSearch('')}
+              />
               <Form>
                 <Item picker>
                   <Picker
@@ -262,5 +277,11 @@ const localStyles = StyleSheet.create({
   description: {
     padding: 20,
     fontSize: 18,
+  },
+  searchBar: {
+    backgroundColor: 'white',
+  },
+  searchInput: {
+    color: 'black',
   },
 });
