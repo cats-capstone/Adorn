@@ -2,15 +2,7 @@
 
 import React, { Component } from 'react';
 
-
-import {
-  Viro3DObject,
-  ViroMaterials
-} from 'react-viro';
-
-
-
-
+import { Viro3DObject, ViroMaterials } from 'react-viro';
 
 export default class ObjsComponent extends Component {
   constructor() {
@@ -23,38 +15,34 @@ export default class ObjsComponent extends Component {
     this._onRotate = this._onRotate.bind(this);
   }
   componentDidMount() {
-    this.setState({rotation: this.props.rotation})
+    this.setState({ rotation: this.props.rotation });
   }
   render() {
     ViroMaterials.createMaterials({
       white: {
-        lightingModel: "PBR",
-        diffuseTexture: {uri: this.props.diffuse},
+        lightingModel: 'PBR',
+        diffuseTexture: { uri: this.props.diffuse },
         // specularTexture: {uri: this.props.specular}
-      }
-    })
+      },
+    });
     return (
       <Viro3DObject
-            source={{uri: this.props.source}}
-            resources={[{uri: this.props.resources}]}
-            materials="white"
-            scale={this.props.size}
-            type={this.props.type}
-
-
-            ref={this._setRef}
-            position={this.props.horizontal}
-            
-            
-            onDrag={() => {}}
-            dragType="FixedToPlane"
-            dragPlane={{
-              planePoint: this.props.horizontal,
-              planeNormal: [0, 1, 0],
-            }}
-            rotation={this.state.rotation}
-            onRotate={this._onRotate}
-          />
+        source={{ uri: this.props.source }}
+        resources={[{ uri: this.props.resources }]}
+        materials="white"
+        scale={this.props.size}
+        type={this.props.type}
+        ref={this._setRef}
+        position={this.props.horizontal}
+        onDrag={() => {}}
+        dragType="FixedToPlane"
+        dragPlane={{
+          planePoint: this.props.horizontal,
+          planeNormal: [0, 1, 0],
+        }}
+        rotation={this.state.rotation}
+        onRotate={this._onRotate}
+      />
     );
   }
 
@@ -83,7 +71,5 @@ export default class ObjsComponent extends Component {
     this.arRef = component;
   }
 }
-
-
 
 module.exports = ObjsComponent;
