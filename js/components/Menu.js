@@ -25,9 +25,7 @@ export default class Menu extends Component {
                     <Left>
                         <Button
                             transparent
-                            onPress={() => {
-                                Actions.pop()
-                            }}>
+                            onPress={() => {Actions.pop()}}>
                             <Icon name="ios-arrow-back" />
                         </Button>
                     </Left>
