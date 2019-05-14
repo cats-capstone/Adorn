@@ -42,7 +42,6 @@ class Products extends Component {
       search: '',
     };
     this.signOut = this.signOut.bind(this);
-    // this.updateSearch = this.updateSearch.bind(this);
   }
 
   componentDidMount() {
@@ -75,7 +74,6 @@ class Products extends Component {
   closeModal = () => this.setState({ modalVisible: false });
 
   render() {
-    console.log('THIS IS THE STATE', this.props.allItems);
     const { search } = this.state;
     let allItems = [];
     if (this.state.category === 'All Furniture') {
@@ -260,7 +258,6 @@ class Products extends Component {
                         transparent
                         onPress={() => {
                           this.props.addFavorite(item.id);
-                          // this.props.fetchFavorites()
                         }}
                       >
                         <Icon
