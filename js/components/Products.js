@@ -233,31 +233,43 @@ class Products extends Component {
               </Form>
 
               {allItems.map(item => (
-                <Card>
-                  <CardItem
-                    key={item.id}
+                <Card
+                  key={item.id}>
+                  <CardItem 
                     button
                     onPress={() => {
                       this.props.fetchOneItem(item.id);
                       this.setState({ singleView: true });
                     }}
                   >
-                    <Body>
-                      {/* <Image>{item.ImageUrl}</Image> */}
-                      <Text>{item.Name}</Text>
-                      <Text>${item.Price}</Text>
-                      <Button transparent
-                      onPress={() => {
-                        this.props.addFavorite(item.id)
-                        // this.props.fetchFavorites()
-                      }}>
-                        <Icon
-                          name="ios-heart-empty"
-                          style={localStyles.icons}
-                        />
-                      </Button>
+                    <Body style={{flex: 1, flexDirection: 'row'}}>
+                      <Left>
+                        <CardItem style={{flex: 1, flexDirection: 'column'}}>
+                          <Text>{item.Name}</Text>
+                          <CardItem>
+                            <Text>${item.Price}</Text>
+                            <Button transparent
+                            onPress={() => {
+                              this.props.addFavorite(item.id)
+                            }}>
+                            <Icon
+                              name="ios-heart-empty"
+                              style={localStyles.icons}
+                            />
+                          </Button>
+                          </CardItem>
+                        </CardItem>
+                      </Left>
+
+
+                      <CardItem style={{width: '50%'}}>
+                      <Image
+                        source={{uri: item.ImageUrl}}
+                        style={{width: '100%', height: 125}}
+                      />
+                      </CardItem>
                     </Body>
-                  </CardItem>
+                  </CardItem>=
                 </Card>
               ))}
             </Content>
