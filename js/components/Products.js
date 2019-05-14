@@ -12,13 +12,11 @@ import {
   Icon,
   Left,
   Right,
-  Image,
-  Toast,
   Picker,
   Form,
   Item,
 } from 'native-base';
-import { StyleSheet, Modal, View } from 'react-native';
+import { StyleSheet, Modal, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
@@ -71,7 +69,7 @@ class Products extends Component {
   closeModal = () => this.setState({ modalVisible: false });
 
   render() {
-    console.log('THIS IS THE STATE', this.props.allItems);
+    // console.log('THIS IS THE STATE', this.props.allItems);
     const { search } = this.state;
     let allItems = [];
     if (this.state.category === 'All Furniture') {
@@ -83,14 +81,10 @@ class Products extends Component {
     else {
       allItems = this.props.allItems.filter((input)=> {return input.Category  === this.state.category})
     }
-    if (this.state.search === ''){
-      allItems = allItems
-    }
-    else {
+    if (this.state.search !== ''){
       allItems = allItems.filter((input)=> {return input.Name.toLowerCase().includes(this.state.search.toLowerCase())})
     }
-    
-    
+
     return (
       <Container>
         {this.state.singleView ? (
@@ -117,9 +111,15 @@ class Products extends Component {
                   <Text>{this.props.selectedItem.Name}</Text>
                 </CardItem>
                 <CardItem cardBody>
-                  {/* <Image source={{ uri: product.ImageUrl }} /> */}
+                  <Image
+                    source={{uri: this.props.selectedItem.ImageUrl}}
+                    style={{height: 300, flex: 1}} />
+                </CardItem>
+                <CardItem>
                   <Text>{this.props.selectedItem.Description}</Text>
-                  <Text>{`Price: ${this.props.selectedItem.Price}`}</Text>
+                </CardItem>
+                <CardItem>
+                <Text>{`Price: $ ${this.props.selectedItem.Price}`}</Text>
                 </CardItem>
                 <Button
                   block
