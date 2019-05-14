@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
-import HomePage from './HomePage';
 import InitialARScene from './InitialARScene';
-import { View, Button, Icon, Footer } from 'native-base';
-import { StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Icon } from 'native-base';
+import { StatusBar, StyleSheet } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
-import AddButton from './AddButton';
 
 export default class DisplayAR extends Component {
   constructor() {
@@ -47,7 +45,6 @@ var localStyles = StyleSheet.create({
     flex: 1,
   },
   icon: {
-    // position: 'absolute',
     height: 58,
     width: 58,
     top: 10,

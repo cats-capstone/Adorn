@@ -1,21 +1,13 @@
 'use strict';
 
 import React, { Component } from 'react';
-
-import {
-  ViroARScene,
-  ViroARPlane,
-  ViroAmbientLight,
-} from 'react-viro';
+import { StyleSheet } from 'react-native';
+import { ViroARPlane, ViroText, ViroARPlaneSelector } from 'react-viro';
 
 import ObjsComponent from './ObjsComponent';
-import {connect} from 'react-redux'
-import { fetchAllItems, fetchOneItem, setModel, setRender } from '../store/2Ditems';
+import { connect } from 'react-redux';
+import { setRender } from '../store/2Ditems';
 
-////////////////
-
-
-////////////////
 class ARModels extends Component {
   constructor() {
     super();
@@ -24,23 +16,22 @@ class ARModels extends Component {
     };
 
     this._setRef = this._setRef.bind(this);
-    this._onAnchorFound = this._onAnchorFound.bind(this);
+    this.onPlaneSelected = this.onPlaneSelected.bind(this);
   }
 
   componentDidMount() {
-    this.props.setRender(true)
+    this.props.setRender(true);
   }
 
   render() {
     return (
-        <ViroARPlane
-          minHeight={0.5}
-          minWidth={0.5}
-          alignment={'Horizontal'}
-          onAnchorFound={this._onAnchorFound}
-        >
-          {this.props.objects.map(obj => (
-            <ObjsComponent 
+      <ViroARPlaneSelector
+        minHeight={0.5}
+        minWidth={0.5}
+        onPlaneSelected={this.onPlaneSelected}
+      >
+        {this.props.objects.map(obj => (
+          <ObjsComponent
             horizontal={this.state.worldCenterPosition}
             source={obj.source}
             resources={obj.resources}
@@ -50,16 +41,14 @@ class ARModels extends Component {
             diffuse={obj.diffuse}
             specular={obj.specular}
             rotation={obj.rotation}
-            />
-          ))}
-        </ViroARPlane>
+          />
+        ))}
+      </ViroARPlaneSelector>
     );
   }
-  _onAnchorFound(anchorMap) {
-    if (anchorMap.type != 'plane') {
-      return;
-    }
-    var worldCenterPosition = anchorMap.position;
+
+  onPlaneSelected(anchorMap) {
+    const worldCenterPosition = anchorMap.position;
     this.setState({ worldCenterPosition });
   }
 
@@ -68,22 +57,19 @@ class ARModels extends Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = state => {
   return {
     objects: state.itemsReducers.models,
-    renderStatus: state.itemsReducers.hasRendered
-  }
-}
+    renderStatus: state.itemsReducers.hasRendered,
+  };
+};
 const mapDispatch = dispatch => {
   return {
-    setRender: status => dispatch(setRender(status))
+    setRender: status => dispatch(setRender(status)),
   };
 };
 
-module.exports = connect(mapState, mapDispatch)(ARModels)
-
-
-
-
-
-
+module.exports = connect(
+  mapState,
+  mapDispatch
+)(ARModels);
