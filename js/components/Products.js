@@ -12,13 +12,11 @@ import {
   Icon,
   Left,
   Right,
-  Image,
-  Toast,
   Picker,
   Form,
   Item,
 } from 'native-base';
-import { StyleSheet, Modal, View } from 'react-native';
+import { StyleSheet, Modal, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -87,14 +85,8 @@ class Products extends Component {
         return input.Category === this.state.category;
       });
     }
-    if (this.state.search === '') {
-      allItems = allItems;
-    } else {
-      allItems = allItems.filter(input => {
-        return input.Name.toLowerCase().includes(
-          this.state.search.toLowerCase()
-        );
-      });
+    if (this.state.search !== ''){
+      allItems = allItems.filter((input)=> {return input.Name.toLowerCase().includes(this.state.search.toLowerCase())})
     }
 
     return (
@@ -123,9 +115,15 @@ class Products extends Component {
                   <Text>{this.props.selectedItem.Name}</Text>
                 </CardItem>
                 <CardItem cardBody>
-                  {/* <Image source={{ uri: product.ImageUrl }} /> */}
+                  <Image
+                    source={{uri: this.props.selectedItem.ImageUrl}}
+                    style={{height: 300, flex: 1}} />
+                </CardItem>
+                <CardItem>
                   <Text>{this.props.selectedItem.Description}</Text>
-                  <Text>{`Price: ${this.props.selectedItem.Price}`}</Text>
+                </CardItem>
+                <CardItem>
+                <Text>{`Price: $ ${this.props.selectedItem.Price}`}</Text>
                 </CardItem>
                 <Button
                   block
@@ -241,34 +239,45 @@ class Products extends Component {
               </Form>
 
               {allItems.map(item => (
-                <Card>
-                  <CardItem
-                    key={item.id}
+                <Card
+                  key={item.id}>
+                  <CardItem 
                     button
                     onPress={() => {
                       this.props.fetchOneItem(item.id);
                       this.setState({ singleView: true });
                     }}
+                    style={{flex: 1, flexDirection: 'row'}}
                   >
-                    <Body>
-                      {/* <Image>{item.ImageUrl}</Image> */}
-                      <Text>{item.Name}</Text>
-                      <Text>${item.Price}</Text>
-                      <Button
-                        transparent
-                        onPress={() => {
-                          this.props.addFavorite(item.id);
-                        }}
-                      >
-                        <Icon
-                          name="ios-heart-empty"
-                          style={localStyles.icons}
-                        />
-                      </Button>
-                    </Body>
+                      <Left>
+                        <CardItem style={{flex: 1, flexDirection: 'column'}}>
+                          <Text style={{fontSize: 25}}>{item.Name}</Text>
+                          <CardItem>
+                            <Text>${item.Price}</Text>
+                            <Button transparent
+                            onPress={() => {
+                              this.props.addFavorite(item.id)
+                            }}>
+                            <Icon
+                              name="ios-heart-empty"
+                              style={localStyles.icons}
+                            />
+                          </Button>
+                          </CardItem>
+                        </CardItem>
+                      </Left>
+
+
+                      <CardItem style={{width: '50%'}}>
+                      <Image
+                        source={{uri: item.ImageUrl}}
+                        style={{width: '100%', height: 125}}
+                      />
+                      </CardItem>
                   </CardItem>
                 </Card>
               ))}
+
             </Content>
           </Container>
         )}
