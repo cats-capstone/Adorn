@@ -14,8 +14,8 @@ export default class DisplayAR extends Component {
     super();
     this.state = {
       modalVisible: false,
-      inidcator: false,
-      disabledButton: false,
+      // inidcator: false,
+      // disabledButton: false,
     };
   }
 
@@ -59,20 +59,19 @@ export default class DisplayAR extends Component {
             </Button>
           </View>
         </Modal>
-        <ActivityIndicator
+        {/* <ActivityIndicator
           style={localStyles.indicator}
           color="black"
           size="large"
           animating={this.state.indicator}
-        />
+        /> */}
         <View style={localStyles.addIcon}>
           <Icon
             name="ios-add-circle-outline"
             onPress={() => {
               Actions.Products();
-              this.setState({ disabledButton: true, indicator: true });
+              // this.setState({ disabledButton: true, indicator: true });
             }}
-            disabled={this.state.disabledButton}
             style={localStyles.icon}
           />
         </View>
