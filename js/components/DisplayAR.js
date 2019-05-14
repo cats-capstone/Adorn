@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
-import InitialARScene from './InitialARScene';
 import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
 import { StatusBar, StyleSheet, Modal } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
 import { deleteModel } from '../store/2Ditems';
+
+let InitialARScene = require('./InitialARScene');
 
 export default class DisplayAR extends Component {
   constructor() {
