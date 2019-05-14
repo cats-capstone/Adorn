@@ -12,13 +12,12 @@ import {
   Icon,
   Left,
   Right,
-  Image,
   Toast,
   Picker,
   Form,
   Item,
 } from 'native-base';
-import { StyleSheet, Modal, View } from 'react-native';
+import { StyleSheet, Modal, View, Image, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender, deleteFavorite } from '../store/2Ditems';
@@ -92,61 +91,6 @@ class Products extends Component {
     
     
     return (
-      <Container>
-        {this.state.singleView ? (
-          <Container padder>
-            <Header>
-              <Left>
-                <Button transparent>
-                  <Icon
-                    name="ios-arrow-back"
-                    onPress={() => {
-                      this.setState({ singleView: false });
-                    }}
-                  />
-                </Button>
-              </Left>
-              <Body>
-                <Title>{this.state.category}</Title>
-              </Body>
-              <Right />
-            </Header>
-            <Content>
-              <Card transparent>
-                <CardItem header>
-                  <Text>{this.props.selectedItem.Name}</Text>
-                </CardItem>
-                <CardItem cardBody>
-                  {/* <Image source={{ uri: product.ImageUrl }} /> */}
-                  <Text>{this.props.selectedItem.Description}</Text>
-                  <Text>{`Price: ${this.props.selectedItem.Price}`}</Text>
-                </CardItem>
-                <Button
-                  block
-                  onPress={() => {
-                    this.props.setModel({
-                      source: this.props.selectedItem.Source,
-                      resources: this.props.selectedItem.Resources,
-                      size: this.props.selectedItem.Scale,
-                      type: this.props.selectedItem.Type,
-                      materials: 'white',
-                      diffuse: this.props.selectedItem.DiffuseTextureUrl,
-                      specular: this.props.selectedItem.SpecularTextureUrl,
-                      rotation: this.props.selectedItem.Rotation,
-                    });
-                    if (this.props.renderStatus) {
-                      Actions.pop();
-                    } else {
-                      Actions.DisplayAR();
-                    }
-                  }}
-                >
-                  <Text>TRY IN YOUR ROOM</Text>
-                </Button>
-              </Card>
-            </Content>
-          </Container>
-        ) : (
           <Container padder>
             <Header>
               <Left>
@@ -164,6 +108,60 @@ class Products extends Component {
               </Right>
             </Header>
             <Content>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={this.state.singleView}
+                onRequestClose={() => {this.setState({ singleView: false })}}
+              >
+              <TouchableOpacity 
+            activeOpacity={1} 
+            onPressOut={() => {this.setState({ singleView: false })}}
+          >
+            <TouchableWithoutFeedback>
+              <View style={{marginHorizontal: 60,
+    marginVertical: 120}}>
+              <Card>
+              <CardItem style={{alignItems: 'center', justifyContent: 'center',}}>
+                <Text style={{textAlign: 'center', fontSize: 25, fontWeight: 'bold'}}>{this.props.selectedItem.Name}</Text>
+                </CardItem>
+                <CardItem>
+                <Image source={{uri: this.props.selectedItem.ImageUrl}} style={{height: 300, width: null, flex: 1, resizeMode: "contain"}} />
+                </CardItem>
+                <CardItem>
+                <Text>{this.props.selectedItem.Description}</Text>
+                </CardItem>
+                <CardItem>
+                <Text>{`Price: $${this.props.selectedItem.Price}`}</Text>
+                </CardItem>
+                <Button
+                  block
+                  onPress={() => {
+                    this.props.setModel({
+                      source: this.props.selectedItem.Source,
+                      resources: this.props.selectedItem.Resources,
+                      size: this.props.selectedItem.Scale,
+                      type: this.props.selectedItem.Type,
+                      materials: 'white',
+                      diffuse: this.props.selectedItem.DiffuseTextureUrl,
+                      specular: this.props.selectedItem.SpecularTextureUrl,
+                      rotation: this.props.selectedItem.Rotation,
+                    });
+                    this.setState({ singleView: false })
+                    if (this.props.renderStatus) {
+                      Actions.pop();
+                    } else {
+                      Actions.DisplayAR();
+                    }
+                  }}
+                >
+                  <Text>TRY IN YOUR ROOM</Text>
+                </Button>
+              </Card>
+              </View>
+              </TouchableWithoutFeedback>   
+          </TouchableOpacity>
+              </Modal>        
               <Modal
                 animationType="slide"
                 transparent={true}
@@ -268,8 +266,6 @@ class Products extends Component {
               ))}
             </Content>
           </Container>
-        )}
-      </Container>
     );
   }
 }
