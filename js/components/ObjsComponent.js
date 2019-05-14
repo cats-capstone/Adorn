@@ -22,7 +22,6 @@ export default class ObjsComponent extends Component {
       white: {
         lightingModel: 'PBR',
         diffuseTexture: { uri: this.props.diffuse },
-        // specularTexture: {uri: this.props.specular}
       },
     });
     return (
