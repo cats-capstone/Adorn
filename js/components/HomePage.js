@@ -59,7 +59,7 @@ export default class HomePage extends Component {
     return (
       <Container>
         <Content>
-        <Header>
+        <Header >
                 <Title>{this.state.status}</Title>
         </Header>
           <View style={localStyles.content} marginTop='10%'>

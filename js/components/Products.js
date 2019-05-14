@@ -92,7 +92,7 @@ class Products extends Component {
 
     return (
           <Container padder>
-            <Header>
+            <Header >
               <Left>
                 <Button transparent>
                   <Icon name="ios-person" style={{color: "#8754B4"}} />
@@ -119,9 +119,9 @@ class Products extends Component {
             onPressOut={() => {this.setState({ singleView: false })}}
           >
             <TouchableWithoutFeedback>
-              <View style={{marginHorizontal: 60,
-    marginVertical: 120}}>
-              <Card>
+              <View style={{marginHorizontal: '10%',
+                            marginVertical: '28%'}}>
+              <Card >
               <CardItem style={{alignItems: 'center', justifyContent: 'center',}}>
                 <Text style={{textAlign: 'center', fontSize: 25, fontWeight: 'bold'}}>{this.props.selectedItem.Name}</Text>
                 </CardItem>
