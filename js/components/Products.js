@@ -55,11 +55,8 @@ class Products extends Component {
       .signOut()
       .then(function() {
         Actions.HomePage();
-        console.log('SIGN OUT SUCCESSFUL');
       })
-      .catch(function(error) {
-        console.log('ERROR SIGNING OUT: ', error);
-      });
+      .catch(function(error) {});
   }
 
   onCategoryChange(value) {
@@ -67,7 +64,6 @@ class Products extends Component {
       category: value,
     });
   }
-
 
   updateSearch(text) {
     this.setState({
@@ -83,22 +79,26 @@ class Products extends Component {
     const { search } = this.state;
     let allItems = [];
     if (this.state.category === 'All Furniture') {
-      allItems = this.props.allItems
+      allItems = this.props.allItems;
+    } else if (this.state.category === 'My Favorites') {
+      allItems = this.props.allItems.filter(input => {
+        return this.props.allFavorites.includes(input.id);
+      });
+    } else {
+      allItems = this.props.allItems.filter(input => {
+        return input.Category === this.state.category;
+      });
     }
-    else if (this.state.category === "My Favorites") {
-      allItems = this.props.allItems.filter((input => {return this.props.allFavorites.includes(input.id)}))
+    if (this.state.search === '') {
+      allItems = allItems;
+    } else {
+      allItems = allItems.filter(input => {
+        return input.Name.toLowerCase().includes(
+          this.state.search.toLowerCase()
+        );
+      });
     }
-    else {
-      allItems = this.props.allItems.filter((input)=> {return input.Category  === this.state.category})
-    }
-    if (this.state.search === ''){
-      allItems = allItems
-    }
-    else {
-      allItems = allItems.filter((input)=> {return input.Name.toLowerCase().includes(this.state.search.toLowerCase())})
-    }
-    
-    
+
     return (
       <Container>
         {this.state.singleView ? (
@@ -284,7 +284,7 @@ const mapState = state => {
     allItems: state.itemsReducers.allItems,
     selectedItem: state.itemsReducers.selectedItem,
     renderStatus: state.itemsReducers.hasRendered,
-    allFavorites: state.itemsReducers.favorites
+    allFavorites: state.itemsReducers.favorites,
   };
 };
 

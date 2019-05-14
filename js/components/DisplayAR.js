@@ -20,7 +20,6 @@ export default class DisplayAR extends Component {
   closeModal = () => this.setState({ modalVisible: false });
 
   render() {
-    console.log('PROPS.OBJECTS', this.props.objects);
     return (
       <View style={localStyles.flex}>
         <StatusBar hidden={true} />
@@ -35,21 +34,23 @@ export default class DisplayAR extends Component {
           visible={this.state.modalVisible}
         >
           <View style={localStyles.modalContainer}>
-            <Card>
-              {this.props.objects.map(item => (
+            {this.props.objects.map(item => (
+              <Card key={item.id}>
                 <CardItem>
                   <Text>{item.name}</Text>
                   <Right>
                     <Icon
                       name="ios-trash"
+                      style={{ fontSize: 30 }}
                       onPress={() => {
                         this.props.deleteModel(item.id);
                       }}
                     />
                   </Right>
                 </CardItem>
-              ))}
-            </Card>
+              </Card>
+            ))}
+
             <Button onPress={this.closeModal}>
               <Text>Close</Text>
             </Button>

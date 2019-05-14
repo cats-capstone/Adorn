@@ -2,8 +2,7 @@ import { database, auth } from '../../firebase';
 
 //Initial State
 const initialState = {
-  allItems: ['hello world'],
-  filteredItems: [],
+  allItems: [],
   selectedItem: {},
   models: [],
   hasRendered: false,
@@ -35,15 +34,12 @@ export const fetchAllItems = () => {
         .ref('/furniture')
         .once('value')
         .then(function(snapshot) {
-          //empty arr to populate
           snapshot.forEach(function(childSnapshot) {
             const product = childSnapshot.val();
             product.id = childSnapshot.key;
             arr.push(product);
           });
           dispatch(getAllItems(arr));
-
-          //dispatch
         });
     } catch (error) {
       console.log('ERROR FETCHING ALL ITEMS', error);
@@ -59,6 +55,7 @@ export const fetchOneItem = productId => {
         .once('value')
         .then(function(snapshot) {
           const productInfo = snapshot.child(productId).val();
+          productInfo.id = productId;
           dispatch(selectItem(productInfo));
         });
     } catch (error) {
@@ -143,7 +140,9 @@ const handlers = {
   }),
   [DELETE_MODEL]: (state, action) => ({
     ...state,
-    models: state.models.filter(item => item.id !== action.itemId),
+    models: state.models.filter(item => {
+      return item.id !== action.itemId;
+    }),
   }),
 };
 
