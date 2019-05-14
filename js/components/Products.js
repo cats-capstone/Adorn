@@ -243,32 +243,32 @@ class Products extends Component {
                     }}
                     style={{flex: 1, flexDirection: 'row'}}
                   >
-                      <Left>
-                        <CardItem style={{flex: 1, flexDirection: 'column'}}>
-                          <Text style={{fontSize: 25}}>{item.Name}</Text>
-                          <CardItem>
-                            <Text>${item.Price}</Text>
-                            {this.props.allFavorites.includes(item.id) ?
-                        <Icon onPress={() => {
-                        this.props.deleteFavorite(item.id)
-                        // this.props.fetchFavorites()
-                      }}
-                          name="ios-heart"
-                          style={localStyles.icons}
-                        /> :
-                        <Icon onPress={() => {
-                          this.props.addFavorite(item.id)
-                          // this.props.fetchFavorites()
-                        }}
-                          name="ios-heart-empty"
-                          style={localStyles.icons}
-                        />
-                      }
-                          </CardItem>
-                        </CardItem>
+                      <Left style={{flex: 1, flexDirection: 'column'}}>
+
+                      <CardItem style={{flex: 1, flexDirection: 'row'}}>
+                        <Text style={{fontSize: 25, textAlign:'left'}}>{item.Name}</Text>
+                      </CardItem>
+
+                      <CardItem style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Left>
+                        {this.props.allFavorites.includes(item.id) ?
+                          <Icon style={{flex: 1}} onPress={() => {
+                            this.props.deleteFavorite(item.id)
+                            }}
+                            name="ios-heart"
+                            style={localStyles.icons}
+                            /> :
+                          <Icon style={{flex: 1}} onPress={() => {
+                            this.props.addFavorite(item.id)
+                            }}
+                            name="ios-heart-empty"
+                            style={localStyles.icons}
+                          />
+                        }
+                        </Left>
+                          <Text style={{flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>${item.Price}</Text>
+                      </CardItem>   
                       </Left>
-
-
                       <CardItem style={{width: '50%'}}>
                       <Image
                         source={{uri: item.ImageUrl}}
