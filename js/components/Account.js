@@ -21,46 +21,48 @@ import { auth } from '../../firebase'
 export default class Account extends Component {
     render() {
         return (
-           auth.currentUser ?
-                <Container>
-                    <Header>
-                        <Left>
-                            <Button
-                                transparent
-                                onPress={() => Actions.pop()}>
-                                <Icon name="ios-arrow-back" />
+            <Container>
+                <Header>
+                    <Left>
+                        <Button
+                            transparent
+                            onPress={() => Actions.pop()}>
+                            <Icon name="ios-arrow-back" />
+                        </Button>
+                    </Left>
+                    <Body>
+                    {
+                        auth.currentUser ? <Title>Account Info</Title> :
+                        <Title>No user signed in!</Title>
+                    }
+                    </Body>
+                <Right />
+                </Header>
+                {
+                    auth.currentUser ?
+                        <Content>
+                            <Text style={{margin: '10%'}}>
+                                {`Email: ${auth.currentUser.email}`}
+                            </Text>
+                            <Button style={localStyles.buttons}>
+                                <Text>Change Email</Text>
                             </Button>
-                        </Left>
-                        <Body>
-                            <Title>Account Info</Title>
-                        </Body>
-                        <Right />
-                    </Header>
-                    <Content>
-                        <Text style={{margin: '10%'}}>
-                            {`Email: ${auth.currentUser.email}`}
-                        </Text>
-                        <Button style={localStyles.buttons}>
-                            <Text>Change Email</Text>
-                        </Button>
-                        <Button style={localStyles.buttons}>
-                            <Text>Change Password</Text>
-                        </Button>
-                    </Content>
-                </Container>
-                :
-                <Container>
-                    <Header>
-                        <Title>
-                            No user logged in!
-                        </Title>
-                    </Header>
-                    <Content>
-                        <Text>
-                            No account? Sign up here!
-                        </Text>
-                    </Content>
-                </Container>
+                            <Button style={localStyles.buttons}>
+                                <Text>Change Password</Text>
+                            </Button>
+                        </Content> :
+                        <Content>
+                            <Text>
+                                No account?
+                            </Text>
+                            <Button
+                                style={localStyles.buttons}
+                                onPress={() => Actions.HomePage()}>
+                                <Text>Sign up now!</Text>
+                            </Button>
+                        </Content>
+                }
+            </Container>
         )
     }
 }
@@ -68,5 +70,6 @@ export default class Account extends Component {
 const localStyles = StyleSheet.create({
     buttons: {
         margin: '10%',
+        backgroundColor: '#8754B4'
     }
 })

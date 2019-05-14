@@ -107,9 +107,16 @@ class Products extends Component {
                 <Title>{this.state.category}</Title>
               </Body>
               <Right>
-                <Button transparent onPress={this.openModal}>
+                {/* <Button transparent onPress={this.openModal}>
                   <Icon name="ios-menu" style={{color: "#8754B4"}} />
-                </Button>
+                </Button> */}
+                {
+                     auth.currentUser &&
+                     <Button transparent
+                       onPress={this.signOut}>
+                       <Text>Sign Out</Text>
+                     </Button>
+                }
               </Right>
             </Header>
             <Content>

@@ -58,6 +58,7 @@ const localStyles = StyleSheet.create({
     buttons: {
         margin: '10%',
         marginLeft: 'auto',
-        marginRight: 'auto'
+        marginRight: 'auto',
+        backgroundColor: '#8754B4'
     }
 })
