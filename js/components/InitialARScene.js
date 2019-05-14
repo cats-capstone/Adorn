@@ -14,7 +14,7 @@ import { StyleSheet } from 'react-native';
 import { setRender } from '../store/2Ditems';
 import ObjsComponent from './ObjsComponent';
 
-export default class InitialARScene extends Component {
+export class InitialARScene extends Component {
   constructor() {
     super();
     this.state = {
