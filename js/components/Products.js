@@ -94,7 +94,11 @@ class Products extends Component {
           <Container padder>
             <Header>
               <Left>
-                <Button transparent>
+                <Button
+                  transparent
+                  onPress={
+                    () => Actions.Menu()
+                  }>
                   <Icon name="ios-person" />
                 </Button>
               </Left>
