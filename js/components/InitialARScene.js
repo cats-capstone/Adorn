@@ -59,7 +59,7 @@ export class InitialARScene extends Component {
           onPlaneSelected={this.onPlaneSelected}
         >
           {this.props.objects.map(obj => (
-            <ObjsComponent
+            <ObjsComponent key={obj.id}
               horizontal={this.state.worldCenterPosition}
               source={obj.source}
               resources={obj.resources}
