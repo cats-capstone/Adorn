@@ -99,7 +99,8 @@ class Products extends Component {
                   onPress={
                     () => Actions.Menu()
                   }>
-                  <Icon name="ios-person" />
+                  <Icon name="ios-person" 
+                        style={{color: "#8754B4"}}/>
                 </Button>
               </Left>
               <Body>
@@ -107,7 +108,7 @@ class Products extends Component {
               </Body>
               <Right>
                 <Button transparent onPress={this.openModal}>
-                  <Icon name="ios-menu" />
+                  <Icon name="ios-menu" style={{color: "#8754B4"}} />
                 </Button>
               </Right>
             </Header>
@@ -123,9 +124,9 @@ class Products extends Component {
             onPressOut={() => {this.setState({ singleView: false })}}
           >
             <TouchableWithoutFeedback>
-              <View style={{marginHorizontal: 60,
-    marginVertical: 120}}>
-              <Card>
+              <View style={{marginHorizontal: '10%',
+                            marginVertical: '28%'}}>
+              <Card >
               <CardItem style={{alignItems: 'center', justifyContent: 'center',}}>
                 <Text style={{textAlign: 'center', fontSize: 25, fontWeight: 'bold'}}>{this.props.selectedItem.Name}</Text>
                 </CardItem>
@@ -140,6 +141,7 @@ class Products extends Component {
                 </CardItem>
                 <Button
                   block
+                  style={{backgroundColor: "#8754B4"}}
                   onPress={() => {
                     this.props.setModel({
                       source: this.props.selectedItem.Source,
@@ -317,7 +319,7 @@ export default connect(
 const localStyles = StyleSheet.create({
   icons: {
     fontSize: 34,
-    color: "#007aff"
+    color: "#8754B4"
   },
   modalContainer: {
     flex: 1,
