@@ -3,8 +3,6 @@ import { Router, Scene } from 'react-native-router-flux';
 import DisplayAR from './DisplayAR';
 import HomePage from './HomePage';
 import Products from './Products';
-import SingleProduct from './SingleProduct';
-import Favorites from './Favorites'
 
 export default class Routes extends React.Component {
   render() {
