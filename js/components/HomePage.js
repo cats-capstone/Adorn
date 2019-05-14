@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image, } from 'react-native';
 import {
   Container,
   Content,
@@ -11,7 +11,9 @@ import {
   Input,
   Label,
   Header,
-  Title
+  Title,
+  Left,
+  Right
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { database, auth } from '../../firebase'
@@ -61,6 +63,7 @@ export default class HomePage extends Component {
                 <Title>{this.state.status}</Title>
         </Header>
           <View style={localStyles.content}>
+          <Image source={require('../res/logo.png')} style={{height: 300, width: null, flex: 1, resizeMode: "contain"}}/>
             <Form>
               <Item floatingLabel>
                 <Label>Email</Label>
@@ -82,6 +85,7 @@ export default class HomePage extends Component {
                     onPress={this.submit}>
               <Text>Submit</Text>
             </Button>
+            <Left>
             {this.state.status === 'Sign up' ?
             <Button block style={localStyles.buttons}
             onPress={()=>{
@@ -98,11 +102,8 @@ export default class HomePage extends Component {
               <Text>New User? Sign Up</Text>
               </Button>
             }
-
-            
-            
-            
-            
+            </Left>
+            <Right>
             <Button
               block
               style={localStyles.buttons}
@@ -112,6 +113,7 @@ export default class HomePage extends Component {
             >
               <Text>Continue as Guest</Text>
             </Button>
+            </Right>
           </View>
         </Content>
       </Container>

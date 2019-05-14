@@ -21,17 +21,6 @@ export default class InitialARScene extends Component {
     super();
     this.state = {
       worldCenterPosition: [0, 0, 0],
-      vrxs: [
-        { source: require('../res/object_flowers/object_flowers.vrx'), 
-        resources: [
-          require('../res/object_flowers/object_flowers_diffuse.png'),
-          require('../res/object_flowers/object_flowers_normal.png'),
-          require('../res/object_flowers/object_flowers_specular.png'),
-        ], 
-        type: 'VRX', 
-        size: [0.5, 0.5, 0.5]
-      },
-      ],
       objs: []
     };
 
