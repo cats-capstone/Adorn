@@ -95,7 +95,7 @@ class Products extends Component {
             <Header>
               <Left>
                 <Button transparent>
-                  <Icon name="ios-person" />
+                  <Icon name="ios-person" style={{color: "#8754B4"}} />
                 </Button>
               </Left>
               <Body>
@@ -103,7 +103,7 @@ class Products extends Component {
               </Body>
               <Right>
                 <Button transparent onPress={this.openModal}>
-                  <Icon name="ios-menu" />
+                  <Icon name="ios-menu" style={{color: "#8754B4"}} />
                 </Button>
               </Right>
             </Header>
@@ -136,6 +136,7 @@ class Products extends Component {
                 </CardItem>
                 <Button
                   block
+                  style={{backgroundColor: "#8754B4"}}
                   onPress={() => {
                     this.props.setModel({
                       source: this.props.selectedItem.Source,
@@ -313,7 +314,7 @@ export default connect(
 const localStyles = StyleSheet.create({
   icons: {
     fontSize: 34,
-    color: "#007aff"
+    color: "#8754B4"
   },
   modalContainer: {
     flex: 1,
