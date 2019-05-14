@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
 import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
-import { StatusBar, StyleSheet, Modal } from 'react-native';
+import { StatusBar, StyleSheet, Modal, ActivityIndicator } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
 import { deleteModel } from '../store/2Ditems';
@@ -14,6 +14,8 @@ export default class DisplayAR extends Component {
     super();
     this.state = {
       modalVisible: false,
+      inidcator: false,
+      disabledButton: false,
     };
   }
 
@@ -57,12 +59,20 @@ export default class DisplayAR extends Component {
             </Button>
           </View>
         </Modal>
+        <ActivityIndicator
+          style={localStyles.indicator}
+          color="black"
+          size="large"
+          animating={this.state.indicator}
+        />
         <View style={localStyles.addIcon}>
           <Icon
             name="ios-add-circle-outline"
             onPress={() => {
               Actions.Products();
+              this.setState({ disabledButton: true, indicator: true });
             }}
+            disabled={this.state.disabledButton}
             style={localStyles.icon}
           />
         </View>
@@ -115,6 +125,11 @@ var localStyles = StyleSheet.create({
     borderWidth: 2,
     marginHorizontal: 60,
     marginVertical: 120,
+  },
+  indicator: {
+    position: 'absolute',
+    left: 185,
+    bottom: 185,
   },
 });
 
