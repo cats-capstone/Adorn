@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image, } from 'react-native';
 import {
   Container,
   Content,
@@ -10,6 +10,10 @@ import {
   Item,
   Input,
   Label,
+  Header,
+  Title,
+  Left,
+  Right
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { database, auth } from '../../firebase'
@@ -19,7 +23,7 @@ export default class HomePage extends Component {
     super()
 
     this.state = {
-      status: 'sign up',
+      status: 'Sign up',
       email: '',
       password: ''
     }
@@ -28,7 +32,7 @@ export default class HomePage extends Component {
   }
 
   submit() {
-    if (this.state.status === 'sign up') {
+    if (this.state.status === 'Sign up') {
       auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(function() {
           const uId = auth.currentUser.uid
@@ -55,7 +59,11 @@ export default class HomePage extends Component {
     return (
       <Container>
         <Content>
+        <Header>
+                <Title>{this.state.status}</Title>
+        </Header>
           <View style={localStyles.content}>
+          <Image source={require('../res/logo.png')} style={{height: 300, width: null, flex: 1, resizeMode: "contain"}}/>
             <Form>
               <Item floatingLabel>
                 <Label>Email</Label>
@@ -77,19 +85,25 @@ export default class HomePage extends Component {
                     onPress={this.submit}>
               <Text>Submit</Text>
             </Button>
-
+            <Left>
+            {this.state.status === 'Sign up' ?
+            <Button block style={localStyles.buttons}
+            onPress={()=>{
+              this.setState({status: 'Sign in'})
+              
+            }}>
+            <Text>Existing User? Sign In</Text>
+            </Button>
+            :
             <Button block style={localStyles.buttons}
                     onPress={()=>{
-                      this.setState({status: 'sign up'})
+                      this.setState({status: 'Sign up'})
                     }}>
-              <Text>Sign Up</Text>
-            </Button>
-            <Button block style={localStyles.buttons}
-                    onPress={()=>{
-                      this.setState({status: 'sign in'})
-                    }}>
-              <Text>Sign In</Text>
-            </Button>
+              <Text>New User? Sign Up</Text>
+              </Button>
+            }
+            </Left>
+            <Right>
             <Button
               block
               style={localStyles.buttons}
@@ -99,6 +113,7 @@ export default class HomePage extends Component {
             >
               <Text>Continue as Guest</Text>
             </Button>
+            </Right>
           </View>
         </Content>
       </Container>
