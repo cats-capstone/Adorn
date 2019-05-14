@@ -3,6 +3,7 @@ import {
     Container,
     Header,
     Left,
+    Right,
     Content,
     Text,
     Button,
@@ -13,7 +14,7 @@ import {
     Item,
   } from 'native-base';
 
-  import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 export default class Menu extends Component {
@@ -27,15 +28,20 @@ export default class Menu extends Component {
                             onPress={() => {
                                 Actions.pop()
                             }}>
-                            <Icon name="ios-arrow-back"></Icon>
+                            <Icon name="ios-arrow-back" />
                         </Button>
                     </Left>
-                    <Body style={{flex: 1}}>
+                    <Body>
                         <Title>Menu</Title>
                     </Body>
+                    <Right />
                 </Header>
                 <Content>
-                        <Button style={localStyles.buttons}>
+                        <Button
+                            style={localStyles.buttons}
+                            onPress={() => {
+                                Actions.Account()
+                            }}>
                             <Text>Account</Text>
                         </Button>
                         <Button style={localStyles.buttons}>
