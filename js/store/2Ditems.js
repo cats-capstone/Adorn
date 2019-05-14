@@ -7,6 +7,7 @@ const initialState = {
   models: [],
   hasRendered: false,
   favorites: [],
+  savedRooms: [],
 };
 
 //Action Types
@@ -16,6 +17,7 @@ const SET_MODEL = 'SET_MODEL';
 const SET_RENDER = 'SET_RENDER';
 const GET_FAVORITES = 'GET_FAVORITES';
 const DELETE_MODEL = 'DELETE_MODEL';
+const GET_SAVED_ROOMS = 'GET_SAVED_ROOMS';
 
 //Action creators
 export const getAllItems = items => ({ type: GET_ALL_ITEMS, items });
@@ -24,6 +26,10 @@ export const setModel = item => ({ type: SET_MODEL, item });
 export const setRender = item => ({ type: SET_RENDER, item });
 export const allFavorites = favorites => ({ type: GET_FAVORITES, favorites });
 export const deleteModel = itemId => ({ type: DELETE_MODEL, itemId });
+export const allSavedRooms = savedRooms => ({
+  type: GET_SAVED_ROOMS,
+  savedRooms,
+});
 
 //Thunks
 export const fetchAllItems = () => {
@@ -116,6 +122,58 @@ export const deleteFavorite = productId => {
   };
 };
 
+// export const addSavedRoom = roomId => {
+//   return () => {
+//     try {
+//       const user = auth.currentUser;
+//       if(user) {
+//         const userRef = database.ref(`/users/${user.uid}`).child('rooms');
+//         userRef.update({[roomId]: something })
+//       }
+//     } catch (error) {
+//       console.log("Error adding saved room", error)
+//     }
+//   }
+// }
+
+// export const deleteSavedRoom = roomId => {
+//   return () => {
+//     try {
+//       const user = auth.currentUser;
+//       if (user) {
+//         const userRef = database.ref(`/users/${user.uid}`).child('rooms');
+//         userRef.child(roomId).remove();
+//       }
+//     } catch (error) {
+//       console.log('ERROR DELETING SAVED ROOM', error);
+//     }
+//   };
+// };
+
+// export const fetchSavedRooms = () => {
+//   return dispatch => {
+//     try {
+//       const user = auth.currentUser;
+//       if (user) {
+//         const userRef = database.ref(`/users/${user.uid}`);
+//         userRef.on('value', function(snapshot) {
+//           let savedRooms = [];
+//           if (snapshot.hasChild('rooms')) {
+//             snapshot.child('rooms').forEach(item => {
+//               savedRooms.push(item.key);
+//             });
+//             dispatch(allSavedRooms(savedRooms));
+//           }
+//         });
+//       } else {
+//         dispatch(allSavedRooms([]));
+//       }
+//     } catch (error) {
+//       console.log('ERROR FETCHING SAVED ROOMS! ', error);
+//     }
+//   };
+// };
+
 //handlers
 const handlers = {
   [GET_ALL_ITEMS]: (state, action) => ({
@@ -138,6 +196,10 @@ const handlers = {
     ...state,
     favorites: action.favorites,
   }),
+  // [GET_SAVED_ROOMS]: (state, action) => ({
+  //   ...state,
+  //   savedRooms: action.savedRooms
+  // }),
   [DELETE_MODEL]: (state, action) => ({
     ...state,
     models: state.models.filter(item => {

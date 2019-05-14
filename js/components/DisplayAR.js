@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { ViroARSceneNavigator } from 'react-viro';
+import { ViroARSceneNavigator, ViroConstants } from 'react-viro';
 import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
-import { StatusBar, StyleSheet, Modal } from 'react-native';
+import { StatusBar, StyleSheet, Modal, Alert } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
 import { deleteModel } from '../store/2Ditems';
+import { database, auth } from '../../firebase';
 
 let InitialARScene = require('./InitialARScene');
 
@@ -14,11 +15,40 @@ export default class DisplayAR extends Component {
     super();
     this.state = {
       modalVisible: false,
+      screenshots: 1,
     };
+    this.setRef = this.setRef.bind(this);
+    this.screenshot = this.screenshot.bind(this);
   }
 
+  setRef(component) {
+    this.arRef = component;
+  }
   openModal = () => this.setState({ modalVisible: true });
   closeModal = () => this.setState({ modalVisible: false });
+  screenshot = () => {
+    this.arRef.sceneNavigator
+      .takeScreenshot('saved-room', false)
+      .then(redirect => {
+        if (!redirect.success) {
+          if (redirect.error == ViroConstants.RECORD_ERROR_NO_PERMISSION) {
+            Alert.alert(
+              'Screenshot Error',
+              'Please allow camera permissions',
+              [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+              { cancelable: false }
+            );
+          }
+        } else if (redirect.success) {
+          Alert.alert(
+            'Sucess!',
+            'Your room has been saved',
+            [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+            { cancelable: false }
+          );
+        }
+      });
+  };
 
   render() {
     return (
@@ -28,6 +58,7 @@ export default class DisplayAR extends Component {
           style={localStyles.arView}
           apiKey={VIRO_KEY}
           initialScene={{ scene: InitialARScene }}
+          ref={this.setRef}
         />
         <Modal
           animationType="slide"
@@ -67,7 +98,11 @@ export default class DisplayAR extends Component {
           />
         </View>
         <View style={localStyles.saveIcon}>
-          <Icon name="ios-save" style={localStyles.icon} />
+          <Icon
+            name="ios-save"
+            style={localStyles.icon}
+            onPress={this.screenshot}
+          />
         </View>
         <View style={localStyles.deleteIcon}>
           <Icon

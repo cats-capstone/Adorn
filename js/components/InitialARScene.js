@@ -22,7 +22,6 @@ export class InitialARScene extends Component {
       showMessage: true,
     };
 
-    this._setRef = this._setRef.bind(this);
     this.onPlaneSelected = this.onPlaneSelected.bind(this);
   }
 
@@ -33,10 +32,6 @@ export class InitialARScene extends Component {
   onPlaneSelected(anchorMap) {
     const worldCenterPosition = anchorMap.position;
     this.setState({ worldCenterPosition, showMessage: false });
-  }
-
-  _setRef(component) {
-    this.arRef = component;
   }
 
   render() {
