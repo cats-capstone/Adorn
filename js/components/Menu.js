@@ -2,26 +2,37 @@ import React, { Component } from 'react';
 import {
     Container,
     Header,
+    Left,
     Content,
     Text,
     Button,
+    Icon,
+    Title,
+    Body,
     View,
-    Form,
     Item,
-    Input,
-    Label,
   } from 'native-base';
 
   import { StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 export default class Menu extends Component {
     render() {
         return (
             <Container>
                 <Header>
-                    <Text>
-                        Menu
-                    </Text>
+                    <Left>
+                        <Button
+                            transparent
+                            onPress={() => {
+                                Actions.pop()
+                            }}>
+                            <Icon name="ios-arrow-back"></Icon>
+                        </Button>
+                    </Left>
+                    <Body style={{flex: 1}}>
+                        <Title>Menu</Title>
+                    </Body>
                 </Header>
                 <Content>
                         <Button style={localStyles.buttons}>
