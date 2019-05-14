@@ -241,11 +241,11 @@ class Products extends Component {
                       this.props.fetchOneItem(item.id);
                       this.setState({ singleView: true });
                     }}
+                    style={{flex: 1, flexDirection: 'row'}}
                   >
-                    <Body style={{flex: 1, flexDirection: 'row'}}>
                       <Left>
                         <CardItem style={{flex: 1, flexDirection: 'column'}}>
-                          <Text>{item.Name}</Text>
+                          <Text style={{fontSize: 25}}>{item.Name}</Text>
                           <CardItem>
                             <Text>${item.Price}</Text>
                             <Button transparent
@@ -268,10 +268,10 @@ class Products extends Component {
                         style={{width: '100%', height: 125}}
                       />
                       </CardItem>
-                    </Body>
-                  </CardItem>=
+                  </CardItem>
                 </Card>
               ))}
+
             </Content>
           </Container>
         )}
