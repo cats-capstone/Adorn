@@ -12,17 +12,22 @@ import {
   Icon,
   Left,
   Right,
-  Image,
-  Toast,
   Picker,
   Form,
   Item,
 } from 'native-base';
-import { StyleSheet, Modal, View } from 'react-native';
+import { StyleSheet, Modal, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { fetchAllItems, fetchOneItem, fetchFavorites, addFavorite, setModel, setRender } from '../store/2Ditems';
-import { database, auth } from '../../firebase'
+import {
+  fetchAllItems,
+  fetchOneItem,
+  fetchFavorites,
+  addFavorite,
+  setModel,
+  setRender,
+} from '../store/2Ditems';
+import { database, auth } from '../../firebase';
 import { SearchBar } from 'react-native-elements';
 
 class Products extends Component {
@@ -34,24 +39,21 @@ class Products extends Component {
       category: 'All Furniture',
       search: '',
     };
-      this.signOut = this.signOut.bind(this)
-    // this.updateSearch = this.updateSearch.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchInitialItems();
-    this.props.fetchFavorites()
+    this.props.fetchFavorites();
   }
 
   signOut() {
-    auth.signOut()
-    .then(function() {
-      Actions.HomePage()
-      console.log('SIGN OUT SUCCESSFUL')
-    })
-    .catch(function(error) {
-      console.log('ERROR SIGNING OUT: ', error)
-    })
+    auth
+      .signOut()
+      .then(function() {
+        Actions.HomePage();
+      })
+      .catch(function(error) {});
   }
 
   onCategoryChange(value) {
@@ -59,7 +61,6 @@ class Products extends Component {
       category: value,
     });
   }
-
 
   updateSearch(text) {
     this.setState({
@@ -71,26 +72,23 @@ class Products extends Component {
   closeModal = () => this.setState({ modalVisible: false });
 
   render() {
-    console.log('THIS IS THE STATE', this.props.allItems);
     const { search } = this.state;
     let allItems = [];
     if (this.state.category === 'All Furniture') {
-      allItems = this.props.allItems
+      allItems = this.props.allItems;
+    } else if (this.state.category === 'My Favorites') {
+      allItems = this.props.allItems.filter(input => {
+        return this.props.allFavorites.includes(input.id);
+      });
+    } else {
+      allItems = this.props.allItems.filter(input => {
+        return input.Category === this.state.category;
+      });
     }
-    else if (this.state.category === "My Favorites") {
-      allItems = this.props.allItems.filter((input => {return this.props.allFavorites.includes(input.id)}))
-    }
-    else {
-      allItems = this.props.allItems.filter((input)=> {return input.Category  === this.state.category})
-    }
-    if (this.state.search === ''){
-      allItems = allItems
-    }
-    else {
+    if (this.state.search !== ''){
       allItems = allItems.filter((input)=> {return input.Name.toLowerCase().includes(this.state.search.toLowerCase())})
     }
-    
-    
+
     return (
       <Container>
         {this.state.singleView ? (
@@ -117,9 +115,15 @@ class Products extends Component {
                   <Text>{this.props.selectedItem.Name}</Text>
                 </CardItem>
                 <CardItem cardBody>
-                  {/* <Image source={{ uri: product.ImageUrl }} /> */}
+                  <Image
+                    source={{uri: this.props.selectedItem.ImageUrl}}
+                    style={{height: 300, flex: 1}} />
+                </CardItem>
+                <CardItem>
                   <Text>{this.props.selectedItem.Description}</Text>
-                  <Text>{`Price: ${this.props.selectedItem.Price}`}</Text>
+                </CardItem>
+                <CardItem>
+                <Text>{`Price: $ ${this.props.selectedItem.Price}`}</Text>
                 </CardItem>
                 <Button
                   block
@@ -133,6 +137,8 @@ class Products extends Component {
                       diffuse: this.props.selectedItem.DiffuseTextureUrl,
                       specular: this.props.selectedItem.SpecularTextureUrl,
                       rotation: this.props.selectedItem.Rotation,
+                      name: this.props.selectedItem.Name,
+                      id: this.props.selectedItem.id,
                     });
                     if (this.props.renderStatus) {
                       Actions.pop();
@@ -233,33 +239,45 @@ class Products extends Component {
               </Form>
 
               {allItems.map(item => (
-                <Card>
-                  <CardItem
-                    key={item.id}
+                <Card
+                  key={item.id}>
+                  <CardItem 
                     button
                     onPress={() => {
                       this.props.fetchOneItem(item.id);
                       this.setState({ singleView: true });
                     }}
+                    style={{flex: 1, flexDirection: 'row'}}
                   >
-                    <Body>
-                      {/* <Image>{item.ImageUrl}</Image> */}
-                      <Text>{item.Name}</Text>
-                      <Text>${item.Price}</Text>
-                      <Button transparent
-                      onPress={() => {
-                        this.props.addFavorite(item.id)
-                        // this.props.fetchFavorites()
-                      }}>
-                        <Icon
-                          name="ios-heart-empty"
-                          style={localStyles.icons}
-                        />
-                      </Button>
-                    </Body>
+                      <Left>
+                        <CardItem style={{flex: 1, flexDirection: 'column'}}>
+                          <Text style={{fontSize: 25}}>{item.Name}</Text>
+                          <CardItem>
+                            <Text>${item.Price}</Text>
+                            <Button transparent
+                            onPress={() => {
+                              this.props.addFavorite(item.id)
+                            }}>
+                            <Icon
+                              name="ios-heart-empty"
+                              style={localStyles.icons}
+                            />
+                          </Button>
+                          </CardItem>
+                        </CardItem>
+                      </Left>
+
+
+                      <CardItem style={{width: '50%'}}>
+                      <Image
+                        source={{uri: item.ImageUrl}}
+                        style={{width: '100%', height: 125}}
+                      />
+                      </CardItem>
                   </CardItem>
                 </Card>
               ))}
+
             </Content>
           </Container>
         )}
@@ -272,7 +290,7 @@ const mapState = state => {
     allItems: state.itemsReducers.allItems,
     selectedItem: state.itemsReducers.selectedItem,
     renderStatus: state.itemsReducers.hasRendered,
-    allFavorites: state.itemsReducers.favorites
+    allFavorites: state.itemsReducers.favorites,
   };
 };
 
@@ -283,7 +301,7 @@ const mapDispatch = dispatch => {
     fetchOneItem: productId => dispatch(fetchOneItem(productId)),
     setRender: status => dispatch(setRender(status)),
     fetchFavorites: () => dispatch(fetchFavorites()),
-    addFavorite: productId => dispatch(addFavorite(productId))
+    addFavorite: productId => dispatch(addFavorite(productId)),
   };
 };
 

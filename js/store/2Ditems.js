@@ -2,12 +2,11 @@ import { database, auth } from '../../firebase';
 
 //Initial State
 const initialState = {
-  allItems: ['hello world'],
-  filteredItems: [],
+  allItems: [],
   selectedItem: {},
   models: [],
   hasRendered: false,
-  favorites: []
+  favorites: [],
 };
 
 //Action Types
@@ -15,14 +14,16 @@ const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
 const SELECT_ITEM = 'SELECT_ITEM';
 const SET_MODEL = 'SET_MODEL';
 const SET_RENDER = 'SET_RENDER';
-const GET_FAVORITES = 'GET_FAVORITES'
+const GET_FAVORITES = 'GET_FAVORITES';
+const DELETE_MODEL = 'DELETE_MODEL';
 
 //Action creators
 export const getAllItems = items => ({ type: GET_ALL_ITEMS, items });
 export const selectItem = item => ({ type: SELECT_ITEM, item });
 export const setModel = item => ({ type: SET_MODEL, item });
-export const setRender = item => ({type: SET_RENDER, item})
-export const allFavorites = favorites => ({type: GET_FAVORITES, favorites})
+export const setRender = item => ({ type: SET_RENDER, item });
+export const allFavorites = favorites => ({ type: GET_FAVORITES, favorites });
+export const deleteModel = itemId => ({ type: DELETE_MODEL, itemId });
 
 //Thunks
 export const fetchAllItems = () => {
@@ -33,15 +34,12 @@ export const fetchAllItems = () => {
         .ref('/furniture')
         .once('value')
         .then(function(snapshot) {
-          //empty arr to populate
           snapshot.forEach(function(childSnapshot) {
             const product = childSnapshot.val();
             product.id = childSnapshot.key;
             arr.push(product);
           });
           dispatch(getAllItems(arr));
-
-          //dispatch
         });
     } catch (error) {
       console.log('ERROR FETCHING ALL ITEMS', error);
@@ -57,6 +55,7 @@ export const fetchOneItem = productId => {
         .once('value')
         .then(function(snapshot) {
           const productInfo = snapshot.child(productId).val();
+          productInfo.id = productId;
           dispatch(selectItem(productInfo));
         });
     } catch (error) {
@@ -68,54 +67,54 @@ export const fetchOneItem = productId => {
 export const fetchFavorites = () => {
   return dispatch => {
     try {
-      const user = auth.currentUser
+      const user = auth.currentUser;
       if (user) {
-        const userRef = database.ref(`/users/${user.uid}`)
-        userRef.on('value', (function(snapshot) {
-          let favs = []
+        const userRef = database.ref(`/users/${user.uid}`);
+        userRef.on('value', function(snapshot) {
+          let favs = [];
           if (snapshot.hasChild('favorites')) {
             snapshot.child('favorites').forEach(item => {
-              favs.push(item.key)
-            })
-            dispatch(allFavorites(favs))
+              favs.push(item.key);
+            });
+            dispatch(allFavorites(favs));
           }
-        }))
+        });
       } else {
-        dispatch(allFavorites([]))
+        dispatch(allFavorites([]));
       }
     } catch (error) {
-      console.log('ERROR FETCHING FAVORITES! ', error)
+      console.log('ERROR FETCHING FAVORITES! ', error);
     }
-  }
-}
+  };
+};
 
 export const addFavorite = productId => {
   return () => {
     try {
-      const user = auth.currentUser
+      const user = auth.currentUser;
       if (user) {
-        const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-        userRef.update({[productId]: true})
+        const userRef = database.ref(`/users/${user.uid}`).child('favorites');
+        userRef.update({ [productId]: true });
       }
     } catch (error) {
-      console.log('ERROR FAVORITING ITEM: ', error)
+      console.log('ERROR FAVORITING ITEM: ', error);
     }
-  }
-}
+  };
+};
 
 export const deleteFavorite = productId => {
   return () => {
     try {
-      const user = auth.currentUser
+      const user = auth.currentUser;
       if (user) {
-        const userRef = database.ref(`/users/${user.uid}`).child('favorites')
-        userRef.child(productId).remove()
+        const userRef = database.ref(`/users/${user.uid}`).child('favorites');
+        userRef.child(productId).remove();
       }
     } catch (error) {
-      console.log('ERROR UNFAVORITING ITEM: ', error)
+      console.log('ERROR UNFAVORITING ITEM: ', error);
     }
-  }
-}
+  };
+};
 
 //handlers
 const handlers = {
@@ -132,13 +131,19 @@ const handlers = {
     models: [...state.models, action.item],
   }),
   [SET_RENDER]: (state, action) => ({
-    ...state, 
-    hasRendered: action
+    ...state,
+    hasRendered: action,
   }),
   [GET_FAVORITES]: (state, action) => ({
     ...state,
-    favorites: action.favorites
-  })
+    favorites: action.favorites,
+  }),
+  [DELETE_MODEL]: (state, action) => ({
+    ...state,
+    models: state.models.filter(item => {
+      return item.id !== action.itemId;
+    }),
+  }),
 };
 
 //ITEMS REDUCER
