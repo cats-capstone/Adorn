@@ -5,7 +5,7 @@ import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
 import { StatusBar, StyleSheet, Modal, Alert } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
-import { deleteModel } from '../store/2Ditems';
+import { deleteModel, addSavedRoom } from '../store/2Ditems';
 import { database, auth } from '../../firebase';
 
 let InitialARScene = require('./InitialARScene');
@@ -27,27 +27,36 @@ export default class DisplayAR extends Component {
   openModal = () => this.setState({ modalVisible: true });
   closeModal = () => this.setState({ modalVisible: false });
   screenshot = () => {
-    this.arRef.sceneNavigator
-      .takeScreenshot('saved-room', false)
-      .then(redirect => {
-        if (!redirect.success) {
-          if (redirect.error == ViroConstants.RECORD_ERROR_NO_PERMISSION) {
-            Alert.alert(
-              'Screenshot Error',
-              'Please allow camera permissions',
-              [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-              { cancelable: false }
-            );
-          }
-        } else if (redirect.success) {
+    if (!auth.currentUser.uid) {
+      Alert.alert(
+        'Saving Error',
+        'Please log in to your account to save your room',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+        { cancelable: false }
+      );
+    }
+    let uId = auth.currentUser.uid;
+    let timeStamp = new Date().valueOf();
+    let fileName = `${uId}${timeStamp}`;
+    this.arRef.sceneNavigator.takeScreenshot(fileName, false).then(redirect => {
+      if (!redirect.success) {
+        if (redirect.error == ViroConstants.RECORD_ERROR_NO_PERMISSION) {
           Alert.alert(
-            'Sucess!',
-            'Your room has been saved',
+            'Screenshot Error',
+            'Please allow camera permissions',
             [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
             { cancelable: false }
           );
         }
-      });
+      } else if (redirect.success) {
+        Alert.alert(
+          'Sucess!',
+          'Your room has been saved',
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+          { cancelable: false }
+        );
+      }
+    });
   };
 
   render() {
@@ -64,11 +73,13 @@ export default class DisplayAR extends Component {
           animationType="slide"
           transparent={true}
           visible={this.state.modalVisible}
-          onRequestClose={() => {this.setState({ modalVisible: false })}}
+          onRequestClose={() => {
+            this.setState({ modalVisible: false });
+          }}
         >
           <View style={localStyles.modalContainer}>
             <Card>
-            {this.props.objects.map(item => (
+              {this.props.objects.map(item => (
                 <CardItem key={item.id}>
                   <Text>{item.name}</Text>
                   <Right>
@@ -81,8 +92,7 @@ export default class DisplayAR extends Component {
                     />
                   </Right>
                 </CardItem>
-              
-            ))}
+              ))}
             </Card>
 
             <Button onPress={this.closeModal}>
@@ -118,7 +128,7 @@ export default class DisplayAR extends Component {
   }
 }
 
-var localStyles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   flex: {
     flex: 1,
   },
@@ -161,6 +171,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     deleteModel: itemId => dispatch(deleteModel(itemId)),
+    // addSavedRoom: roomId => dispatch(addSavedRoom(roomId)),
   };
 };
 

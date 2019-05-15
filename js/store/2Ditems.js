@@ -122,33 +122,33 @@ export const deleteFavorite = productId => {
   };
 };
 
-// export const addSavedRoom = roomId => {
-//   return () => {
-//     try {
-//       const user = auth.currentUser;
-//       if(user) {
-//         const userRef = database.ref(`/users/${user.uid}`).child('rooms');
-//         userRef.update({[roomId]: something })
-//       }
-//     } catch (error) {
-//       console.log("Error adding saved room", error)
-//     }
-//   }
-// }
+export const addSavedRoom = roomId => {
+  return () => {
+    try {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = database.ref(`/users/${user.uid}`).child('rooms');
+        userRef.update({ [roomId]: something });
+      }
+    } catch (error) {
+      console.log('Error adding saved room', error);
+    }
+  };
+};
 
-// export const deleteSavedRoom = roomId => {
-//   return () => {
-//     try {
-//       const user = auth.currentUser;
-//       if (user) {
-//         const userRef = database.ref(`/users/${user.uid}`).child('rooms');
-//         userRef.child(roomId).remove();
-//       }
-//     } catch (error) {
-//       console.log('ERROR DELETING SAVED ROOM', error);
-//     }
-//   };
-// };
+export const deleteSavedRoom = roomId => {
+  return () => {
+    try {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = database.ref(`/users/${user.uid}`).child('rooms');
+        userRef.child(roomId).remove();
+      }
+    } catch (error) {
+      console.log('ERROR DELETING SAVED ROOM', error);
+    }
+  };
+};
 
 // export const fetchSavedRooms = () => {
 //   return dispatch => {
