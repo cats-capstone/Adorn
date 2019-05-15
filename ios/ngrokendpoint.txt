@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 http://1a88d2d1.ngrok.io/
-=======
-http://65a6dc73.ngrok.io/
->>>>>>> 8df23a028ffddb69c9d28ea59eb12a9caa330a55
