@@ -64,11 +64,12 @@ export default class DisplayAR extends Component {
           animationType="slide"
           transparent={true}
           visible={this.state.modalVisible}
+          onRequestClose={() => {this.setState({ modalVisible: false })}}
         >
           <View style={localStyles.modalContainer}>
+            <Card>
             {this.props.objects.map(item => (
-              <Card key={item.id}>
-                <CardItem>
+                <CardItem key={item.id}>
                   <Text>{item.name}</Text>
                   <Right>
                     <Icon
@@ -80,8 +81,9 @@ export default class DisplayAR extends Component {
                     />
                   </Right>
                 </CardItem>
-              </Card>
+              
             ))}
+            </Card>
 
             <Button onPress={this.closeModal}>
               <Text>Close</Text>
@@ -144,10 +146,7 @@ var localStyles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: 'white',
-    borderRadius: 4,
-    borderColor: '#C0C0C0',
-    borderWidth: 2,
+    backgroundColor: 'rgba(52, 52, 52, 0)',
     marginHorizontal: 60,
     marginVertical: 120,
   },
