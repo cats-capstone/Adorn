@@ -17,8 +17,7 @@ const SET_MODEL = 'SET_MODEL';
 const SET_RENDER = 'SET_RENDER';
 const GET_FAVORITES = 'GET_FAVORITES';
 const DELETE_MODEL = 'DELETE_MODEL';
-const ACTIVATE_INDICATOR = 'ACTIVATE_INDICATOR';
-const DEACTIVATE_INDICATOR = 'DEACTIVATE_INDICATOR';
+const SET_INDICATOR = 'SET_INDICATOR';
 
 //Action creators
 export const getAllItems = items => ({ type: GET_ALL_ITEMS, items });
@@ -27,8 +26,7 @@ export const setModel = item => ({ type: SET_MODEL, item });
 export const setRender = item => ({ type: SET_RENDER, item });
 export const allFavorites = favorites => ({ type: GET_FAVORITES, favorites });
 export const deleteModel = itemId => ({ type: DELETE_MODEL, itemId });
-export const activateIndicator = () => ({ type: ACTIVATE_INDICATOR });
-export const deactivateIndicator = () => ({ type: DEACTIVATE_INDICATOR });
+export const setIndicator = item => ({ type: SET_INDICATOR, item });
 
 //Thunks
 export const fetchAllItems = () => {
@@ -139,13 +137,9 @@ const handlers = {
     ...state,
     hasRendered: action,
   }),
-  [ACTIVATE_INDICATOR]: (state, action) => ({
+  [SET_INDICATOR]: (state, action) => ({
     ...state,
-    indicator: true,
-  }),
-  [DEACTIVATE_INDICATOR]: (state, action) => ({
-    ...state,
-    indicator: false,
+    indicator: action.item,
   }),
   [GET_FAVORITES]: (state, action) => ({
     ...state,

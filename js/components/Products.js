@@ -35,7 +35,7 @@ import {
   setModel,
   setRender,
   deleteFavorite,
-  deactivateIndicator,
+  setIndicator,
 } from '../store/2Ditems';
 import { database, auth } from '../../firebase';
 import { SearchBar } from 'react-native-elements';
@@ -56,7 +56,7 @@ class Products extends Component {
   componentDidMount() {
     this.props.fetchInitialItems();
     this.props.fetchFavorites();
-    this.props.deactivateIndicator();
+    this.props.setIndicator(false);
   }
 
   signOut() {
@@ -361,7 +361,7 @@ const mapDispatch = dispatch => {
     fetchFavorites: () => dispatch(fetchFavorites()),
     addFavorite: productId => dispatch(addFavorite(productId)),
     deleteFavorite: productId => dispatch(deleteFavorite(productId)),
-    deactivateIndicator: () => dispatch(deactivateIndicator()),
+    setIndicator: status => dispatch(setIndicator(status)),
   };
 };
 

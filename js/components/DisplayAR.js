@@ -5,7 +5,7 @@ import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
 import { StatusBar, StyleSheet, Modal, ActivityIndicator } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
-import { deleteModel, activateIndicator } from '../store/2Ditems';
+import { deleteModel, setIndicator } from '../store/2Ditems';
 
 let InitialARScene = require('./InitialARScene');
 
@@ -74,7 +74,7 @@ export default class DisplayAR extends Component {
           <Icon
             name="ios-add-circle-outline"
             onPress={() => {
-              this.props.activateIndicator;
+              this.props.setIndicator(true);
               Actions.Products();
             }}
             style={localStyles.icon}
@@ -145,7 +145,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     deleteModel: itemId => dispatch(deleteModel(itemId)),
-    activateIndicator: () => dispatch(activateIndicator()),
+    setIndicator: status => dispatch(setIndicator(status)),
   };
 };
 
