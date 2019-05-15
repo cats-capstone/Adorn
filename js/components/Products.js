@@ -30,6 +30,7 @@ import {
 } from '../store/2Ditems';
 import { database, auth } from '../../firebase';
 import { SearchBar } from 'react-native-elements';
+import Menu from './Menu'
 
 class Products extends Component {
   constructor() {
@@ -96,9 +97,7 @@ class Products extends Component {
               <Left>
                 <Button
                   transparent
-                  onPress={
-                    () => Actions.Menu()
-                  }>
+                  onPress={this.openModal}>
                   <Icon name="ios-person" 
                         style={{color: "#8754B4"}}/>
                 </Button>
@@ -107,9 +106,6 @@ class Products extends Component {
                 <Title>{this.state.category}</Title>
               </Body>
               <Right>
-                {/* <Button transparent onPress={this.openModal}>
-                  <Icon name="ios-menu" style={{color: "#8754B4"}} />
-                </Button> */}
                 {
                      auth.currentUser &&
                      <Button transparent
@@ -182,12 +178,7 @@ class Products extends Component {
                 transparent={true}
                 visible={this.state.modalVisible}
               >
-                <View style={localStyles.modalContainer}>
-                  <Text>text inside modal</Text>
-                  <Button onPress={this.closeModal}>
-                    <Text>Close</Text>
-                  </Button>
-                </View>
+              <Menu close={this.closeModal} />
               </Modal>
               <SearchBar
                 round
@@ -327,17 +318,6 @@ const localStyles = StyleSheet.create({
   icons: {
     fontSize: 34,
     color: "#8754B4"
-  },
-  modalContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    borderRadius: 4,
-    borderColor: '#C0C0C0',
-    borderWidth: 2,
-    marginHorizontal: 60,
-    marginVertical: 120,
   },
   description: {
     padding: 20,
