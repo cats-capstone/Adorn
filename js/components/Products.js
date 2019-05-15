@@ -119,7 +119,7 @@ class Products extends Component {
             onPressOut={() => {this.setState({ singleView: false })}}
           >
             <TouchableWithoutFeedback>
-              <View style={{marginHorizontal: '10%',
+              <View block style={{marginHorizontal: '10%',
                             marginVertical: '28%'}}>
               <Card >
               <CardItem style={{alignItems: 'center', justifyContent: 'center',}}>

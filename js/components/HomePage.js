@@ -77,6 +77,7 @@ export default class HomePage extends Component {
                 <Input
                   name="password"
                   value={this.state.password}
+                  secureTextEntry={true}
                   onChangeText={text => this.setState({password: text})} />
               </Item>
             </Form>
