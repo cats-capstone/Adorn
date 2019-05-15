@@ -20,21 +20,7 @@ import { Actions } from 'react-native-router-flux';
 export default class Menu extends Component {
     render() {
         return (
-            <Container>
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => {Actions.pop()}}>
-                            <Icon name="ios-arrow-back" />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>Menu</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <Content>
+                <View style={localStyles.modalContainer}>
                         <Button
                             style={localStyles.buttons}
                             onPress={() => {
@@ -45,16 +31,24 @@ export default class Menu extends Component {
                         <Button style={localStyles.buttons}>
                             <Text>Saved Rooms</Text>
                         </Button>
-                        <Button style={localStyles.buttons}>
-                            <Text>Settings</Text>
+                        <Button style={localStyles.buttons}
+                                onPress={() => this.props.close()}>
+                            <Text>Close</Text>
                         </Button>
-                </Content>
-            </Container>
+                </View>
         )
     }
 }
 
 const localStyles = StyleSheet.create({
+    modalContainer: {
+        backgroundColor: 'white',
+        borderRadius: 4,
+        borderColor: '#C0C0C0',
+        borderWidth: 2,
+        marginHorizontal: 60,
+        marginVertical: 120   
+    },
     buttons: {
         margin: '10%',
         marginLeft: 'auto',
