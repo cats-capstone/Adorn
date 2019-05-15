@@ -119,9 +119,9 @@ class Products extends Component {
             onPressOut={() => {this.setState({ singleView: false })}}
           >
             <TouchableWithoutFeedback>
-              <View block style={{marginHorizontal: '10%',
-                            marginVertical: '28%'}}>
-              <Card >
+              <View style={{marginHorizontal: '10%',
+                            marginVertical: '28%', borderRadius: 4,}}>
+              <Card style ={{borderRadius: 4,}}>
               <CardItem style={{alignItems: 'center', justifyContent: 'center',}}>
                 <Text style={{textAlign: 'center', fontSize: 25, fontWeight: 'bold'}}>{this.props.selectedItem.Name}</Text>
                 </CardItem>
