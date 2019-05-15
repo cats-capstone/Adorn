@@ -49,6 +49,7 @@ export default class DisplayAR extends Component {
           );
         }
       } else if (redirect.success) {
+        this.props.addSavedRoom(redirect.url);
         Alert.alert(
           'Sucess!',
           'Your room has been saved',
@@ -78,7 +79,7 @@ export default class DisplayAR extends Component {
           }}
         >
           <View style={localStyles.modalContainer}>
-            <Card>
+            <Card style={{ borderRadius: 4 }}>
               {this.props.objects.map(item => (
                 <CardItem key={item.id}>
                   <Text>{item.name}</Text>
@@ -95,7 +96,11 @@ export default class DisplayAR extends Component {
               ))}
             </Card>
 
-            <Button onPress={this.closeModal}>
+            <Button
+              block
+              style={{ backgroundColor: '#8754B4', borderRadius: 4 }}
+              onPress={this.closeModal}
+            >
               <Text>Close</Text>
             </Button>
           </View>
@@ -159,6 +164,7 @@ const localStyles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0)',
     marginHorizontal: 60,
     marginVertical: 120,
+    borderRadius: 4,
   },
 });
 
@@ -171,7 +177,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     deleteModel: itemId => dispatch(deleteModel(itemId)),
-    // addSavedRoom: roomId => dispatch(addSavedRoom(roomId)),
+    addSavedRoom: roomId => dispatch(addSavedRoom(roomId)),
   };
 };
 

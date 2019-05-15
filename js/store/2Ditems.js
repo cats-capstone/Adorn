@@ -1,4 +1,4 @@
-import { database, auth } from '../../firebase';
+import { database, auth, storage } from '../../firebase';
 
 //Initial State
 const initialState = {
@@ -127,8 +127,9 @@ export const addSavedRoom = roomId => {
     try {
       const user = auth.currentUser;
       if (user) {
-        const userRef = database.ref(`/users/${user.uid}`).child('rooms');
-        userRef.update({ [roomId]: something });
+        const imagesRef = storage.ref(`${user.uid}`);
+
+        imagesRef.putString(roomId);
       }
     } catch (error) {
       console.log('Error adding saved room', error);
@@ -136,19 +137,19 @@ export const addSavedRoom = roomId => {
   };
 };
 
-export const deleteSavedRoom = roomId => {
-  return () => {
-    try {
-      const user = auth.currentUser;
-      if (user) {
-        const userRef = database.ref(`/users/${user.uid}`).child('rooms');
-        userRef.child(roomId).remove();
-      }
-    } catch (error) {
-      console.log('ERROR DELETING SAVED ROOM', error);
-    }
-  };
-};
+// export const deleteSavedRoom = roomId => {
+//   return () => {
+//     try {
+//       const user = auth.currentUser;
+//       if (user) {
+//         const userRef = database.ref(`/users/${user.uid}`).child('rooms');
+//         userRef.child(roomId).remove();
+//       }
+//     } catch (error) {
+//       console.log('ERROR DELETING SAVED ROOM', error);
+//     }
+//   };
+// };
 
 // export const fetchSavedRooms = () => {
 //   return dispatch => {
