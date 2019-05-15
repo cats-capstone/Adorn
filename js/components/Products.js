@@ -22,6 +22,7 @@ import { connect } from 'react-redux';
 import {
   fetchAllItems,
   fetchOneItem,
+  selectItem,
   fetchFavorites,
   addFavorite,
   setModel,
@@ -108,9 +109,9 @@ class Products extends Component {
               <Right>
                 {
                      auth.currentUser &&
-                     <Button transparent
+                     <Button transparent 
                        onPress={this.signOut}>
-                       <Text>Sign Out</Text>
+                       <Text style={{color: "#8754B4"}}>Sign Out</Text>
                      </Button>
                 }
               </Right>
@@ -249,7 +250,7 @@ class Products extends Component {
                   <CardItem 
                     button
                     onPress={() => {
-                      this.props.fetchOneItem(item.id);
+                      this.props.selectItem(item);
                       this.setState({ singleView: true });
                     }}
                     style={{flex: 1, flexDirection: 'row'}}
@@ -312,7 +313,8 @@ const mapDispatch = dispatch => {
     setRender: status => dispatch(setRender(status)),
     fetchFavorites: () => dispatch(fetchFavorites()),
     addFavorite: productId => dispatch(addFavorite(productId)),
-    deleteFavorite: productId => dispatch(deleteFavorite(productId))
+    deleteFavorite: productId => dispatch(deleteFavorite(productId)),
+    selectItem: product => dispatch(selectItem(product))
   };
 };
 
