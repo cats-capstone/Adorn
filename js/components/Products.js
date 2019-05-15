@@ -177,8 +177,15 @@ class Products extends Component {
                 animationType="slide"
                 transparent={true}
                 visible={this.state.modalVisible}
+                onRequestClose={() => this.setState({modalVisible: false})}
               >
-              <Menu close={this.closeModal} />
+              <TouchableOpacity
+                activeOpacity={1} 
+                onPressOut={() => this.setState({modalVisible: false})} >
+                <TouchableWithoutFeedback>
+                  <Menu close={this.closeModal} />
+                </TouchableWithoutFeedback>
+              </TouchableOpacity>
               </Modal>
               <SearchBar
                 round

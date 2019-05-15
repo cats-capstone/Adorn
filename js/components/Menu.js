@@ -16,26 +16,36 @@ import {
 
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { auth } from '../../firebase'
 
 export default class Menu extends Component {
     render() {
         return (
-                <View style={localStyles.modalContainer}>
-                        <Button
-                            style={localStyles.buttons}
-                            onPress={() => {
-                                Actions.Account()
-                            }}>
-                            <Text>Account</Text>
-                        </Button>
-                        <Button style={localStyles.buttons}>
-                            <Text>Saved Rooms</Text>
-                        </Button>
+           <View style={localStyles.modalContainer}>
+               {
+                   auth.currentUser ?
+                    <View>
+                        <Text>Welcome {auth.currentUser.email}!</Text>
                         <Button style={localStyles.buttons}
-                                onPress={() => this.props.close()}>
-                            <Text>Close</Text>
+                            onPress={this.props.close}>
+                        <Text>View Saved Rooms</Text>
                         </Button>
-                </View>
+                    </View> :
+
+                    <View>
+                        <Text>You're not signed in!</Text>
+                        <Text>Don't have an account?</Text>
+                        <Button style={localStyles.buttons}
+                                onPress={() => {
+                                    this.props.close()
+                                    Actions.HomePage()
+                                }}>
+                            <Text>Sign up now!</Text>
+                        </Button>
+                    </View>
+
+               }
+           </View>
         )
     }
 }
