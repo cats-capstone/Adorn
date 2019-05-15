@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
-import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
+import { View, Icon, Button, Text, Card, CardItem, Left, Body } from 'native-base';
 import { StatusBar, StyleSheet, Modal } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
@@ -39,16 +39,16 @@ export default class DisplayAR extends Component {
             <Card style={{borderRadius: 4,}}>
             {this.props.objects.map(item => (
                 <CardItem key={item.id}>
-                  <Text>{item.name}</Text>
-                  <Right>
-                    <Icon
+                <Left>
+                <Text>{item.name}</Text>
+                </Left>
+                  <Icon
                       name="ios-trash"
                       style={{ fontSize: 30 }}
                       onPress={() => {
                         this.props.deleteModel(item.id);
                       }}
                     />
-                  </Right>
                 </CardItem>
               
             ))}
