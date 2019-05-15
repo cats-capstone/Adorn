@@ -5,7 +5,7 @@ import { View, Icon, Button, Text, Card, CardItem, Right } from 'native-base';
 import { StatusBar, StyleSheet, Modal, ActivityIndicator } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
-import { deleteModel } from '../store/2Ditems';
+import { deleteModel, activateIndicator } from '../store/2Ditems';
 
 let InitialARScene = require('./InitialARScene');
 
@@ -14,8 +14,6 @@ export default class DisplayAR extends Component {
     super();
     this.state = {
       modalVisible: false,
-      // inidcator: false,
-      // disabledButton: false,
     };
   }
 
@@ -35,11 +33,13 @@ export default class DisplayAR extends Component {
           animationType="slide"
           transparent={true}
           visible={this.state.modalVisible}
-          onRequestClose={() => {this.setState({ modalVisible: false })}}
+          onRequestClose={() => {
+            this.setState({ modalVisible: false });
+          }}
         >
-          <View style={localStyles.modalContainer} >
-            <Card style={{borderRadius: 4,}}>
-            {this.props.objects.map(item => (
+          <View style={localStyles.modalContainer}>
+            <Card style={{ borderRadius: 4 }}>
+              {this.props.objects.map(item => (
                 <CardItem key={item.id}>
                   <Text>{item.name}</Text>
                   <Right>
@@ -52,27 +52,30 @@ export default class DisplayAR extends Component {
                     />
                   </Right>
                 </CardItem>
-              
-            ))}
+              ))}
             </Card>
 
-            <Button block style={{backgroundColor: "#8754B4", borderRadius: 4}} onPress={this.closeModal}>
+            <Button
+              block
+              style={{ backgroundColor: '#8754B4', borderRadius: 4 }}
+              onPress={this.closeModal}
+            >
               <Text>Close</Text>
             </Button>
           </View>
         </Modal>
-        {/* <ActivityIndicator
+        <ActivityIndicator
           style={localStyles.indicator}
           color="black"
           size="large"
-          animating={this.state.indicator}
-        /> */}
+          animating={this.props.indicator}
+        />
         <View style={localStyles.addIcon}>
           <Icon
             name="ios-add-circle-outline"
             onPress={() => {
+              this.props.activateIndicator;
               Actions.Products();
-              // this.setState({ disabledButton: true, indicator: true });
             }}
             style={localStyles.icon}
           />
@@ -128,19 +131,21 @@ var localStyles = StyleSheet.create({
   indicator: {
     position: 'absolute',
     left: 185,
-    bottom: 185,
+    bottom: 300,
   },
 });
 
 const mapState = state => {
   return {
     objects: state.itemsReducers.models,
+    indicator: state.itemsReducers.indicator,
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     deleteModel: itemId => dispatch(deleteModel(itemId)),
+    activateIndicator: () => dispatch(activateIndicator()),
   };
 };
 
