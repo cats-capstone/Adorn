@@ -35,8 +35,8 @@ export default class DisplayAR extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() => {this.setState({ modalVisible: false })}}
         >
-          <View style={localStyles.modalContainer}>
-            <Card>
+          <View style={localStyles.modalContainer} >
+            <Card style={{borderRadius: 4,}}>
             {this.props.objects.map(item => (
                 <CardItem key={item.id}>
                   <Text>{item.name}</Text>
@@ -54,7 +54,7 @@ export default class DisplayAR extends Component {
             ))}
             </Card>
 
-            <Button onPress={this.closeModal}>
+            <Button block style={{backgroundColor: "#8754B4", borderRadius: 4}} onPress={this.closeModal}>
               <Text>Close</Text>
             </Button>
           </View>
@@ -114,6 +114,7 @@ var localStyles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0)',
     marginHorizontal: 60,
     marginVertical: 120,
+    borderRadius: 4,
   },
 });
 

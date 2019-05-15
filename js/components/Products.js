@@ -128,8 +128,8 @@ class Products extends Component {
           >
             <TouchableWithoutFeedback>
               <View style={{marginHorizontal: '10%',
-                            marginVertical: '28%'}}>
-              <Card >
+                            marginVertical: '28%', borderRadius: 4,}}>
+              <Card style ={{borderRadius: 4,}}>
               <CardItem style={{alignItems: 'center', justifyContent: 'center',}}>
                 <Text style={{textAlign: 'center', fontSize: 25, fontWeight: 'bold'}}>{this.props.selectedItem.Name}</Text>
                 </CardItem>
