@@ -101,7 +101,7 @@ export default class Menu extends Component {
                         <Left>
                             <Button style={localStyles.iconButtons}>
                                 <Icon active 
-                                name='mail' 
+                                name='key' 
                                 style={localStyles.icons} />
                             </Button>
                         </Left>
