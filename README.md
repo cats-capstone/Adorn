@@ -10,8 +10,8 @@ Adorn is built with the following technologies
 - [React Native](https://facebook.github.io/react-native/) - Mobile application framework
 - [Native Base UI](https://nativebase.io/) - Styling and user interface
 - [Firebase](http://firebase.google.com/docs) - Storage of user data and furniture data
-- [Cloudinary] (https://cloudinary.com/documentation) - File storage for meshes and textures
-- [ngrok] (https://ngrok.com/docs) - Tunneling proxy
+- [Cloudinary](https://cloudinary.com/documentation) - File storage for meshes and textures
+- [ngrok](https://ngrok.com/docs) - Tunneling proxy
 
 
 ## Installation
