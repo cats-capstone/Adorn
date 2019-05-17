@@ -28,6 +28,7 @@ export class InitialARScene extends Component {
 
   componentDidMount() {
     this.props.setRender(true);
+    
   }
 
   onPlaneSelected(anchorMap) {
@@ -42,22 +43,23 @@ export class InitialARScene extends Component {
   render() {
     return (
       <ViroARScene ref="arscene" anchorDetectionTypes="PlanesHorizontal">
-        <ViroARCamera>
+        {/* <ViroARCamera>
           <ViroText
-            text="Aim the camera at the floor and tap to select"
+            text="Aim the camera at the floor"
             scale={[0.5, 0.5, 0.5]}
             position={[0, -0.1, -1]}
             extrusionDepth={1}
             style={localStyles.message}
             visible={this.state.showMessage}
           />
-        </ViroARCamera>
+        </ViroARCamera> */}
         <ViroAmbientLight color="#FFFFFF" />
-        <ViroARPlaneSelector
+        {/* <ViroARPlaneSelector
           minHeight={0.5}
           minWidth={0.5}
           onPlaneSelected={this.onPlaneSelected}
-        >
+        > */}
+        
           {this.props.objects.map(obj => (
             <ObjsComponent key={obj.id}
               horizontal={this.state.worldCenterPosition}
@@ -71,7 +73,8 @@ export class InitialARScene extends Component {
               rotation={obj.rotation}
             />
           ))}
-        </ViroARPlaneSelector>
+          {/* </ViroARPlaneSelector> */}
+        
       </ViroARScene>
     );
   }
