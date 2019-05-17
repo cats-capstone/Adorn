@@ -9,6 +9,7 @@ export default class ObjsComponent extends Component {
     super();
     this.state = {
       rotation: [0, 0, 0],
+      position: [0, 0, 0]
     };
 
     this._setRef = this._setRef.bind(this);
@@ -16,6 +17,7 @@ export default class ObjsComponent extends Component {
   }
   componentDidMount() {
     this.setState({ rotation: this.props.rotation });
+    this.setState({position: this.props.position})
   }
   render() {
     ViroMaterials.createMaterials({
@@ -32,7 +34,7 @@ export default class ObjsComponent extends Component {
         scale={this.props.size}
         type={this.props.type}
         ref={this._setRef}
-        position={this.props.horizontal}
+        position={this.state.position}
         onDrag={() => {}}
         dragType="FixedToPlane"
         dragPlane={{
