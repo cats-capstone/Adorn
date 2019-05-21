@@ -9,7 +9,7 @@ export default class ObjsComponent extends Component {
     super();
     this.state = {
       rotation: [0, 0, 0],
-      position: [0, 0, 0]
+      position: [0, 0, 0],
     };
 
     this._setRef = this._setRef.bind(this);
@@ -17,7 +17,7 @@ export default class ObjsComponent extends Component {
   }
   componentDidMount() {
     this.setState({ rotation: this.props.rotation });
-    this.setState({ position: this.props.horizontal})
+    this.setState({ position: this.props.horizontal });
   }
   render() {
     ViroMaterials.createMaterials({
@@ -27,7 +27,7 @@ export default class ObjsComponent extends Component {
       },
     });
     return (
-      <Viro3DObject 
+      <Viro3DObject
         source={{ uri: this.props.source }}
         resources={[{ uri: this.props.resources }]}
         materials="white"
@@ -37,10 +37,6 @@ export default class ObjsComponent extends Component {
         position={[0, -0.5, -1]}
         onDrag={() => {}}
         dragType="FixedToWorld"
-        // dragPlane={{
-        //   planePoint: this.props.horizontal,
-        //   planeNormal: [0, 1, 0],
-        // }}
         rotation={this.state.rotation}
         onRotate={this._onRotate}
       />
