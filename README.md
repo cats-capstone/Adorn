@@ -36,9 +36,7 @@
 
  Browse the available furniture and click on a desired piece to view its details. Click on the "try in your room" button to view it in the AR Scene. 
  
- <br/>
- 
- <video src="js/res/adorn-demo-1.mp4" width="320" height="200" controls preload></video>
+ ![](/js/res/adorn-demo-1.mp4.gif)
 
  You can move the piece around using one finger gestures and rotate the piece using two fingers.
 *insert gif/image here of moving and rotating a piece of furniture*
