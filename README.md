@@ -38,7 +38,7 @@
  
  <br/>
  
-![](https://media.giphy.com/media/5Uucc7sMqFqRamHESn/200w_d.gif)
+![](https://media.giphy.com/media/2tSLXK7sB8MorH6fBI/200w_d.gif)
 
  You can move the piece around using one finger gestures and rotate the piece using two fingers.
 *insert gif/image here of moving and rotating a piece of furniture*
