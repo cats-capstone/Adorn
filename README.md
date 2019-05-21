@@ -17,9 +17,12 @@
 
  `git clone https://github.com/cats-capstone/adorn.git`
  
- Next, install dependencies and link libraries. For issues linking libraries, check [this out](https://facebook.github.io/react-native/docs/linking-libraries-ios)
+ Next, install dependencies. 
  
  `npm install`
+ 
+ Then, link libraries. For issues linking libraries, check [this out](https://facebook.github.io/react-native/docs/linking-libraries-ios)
+ 
  `react-native link`
  
  Then, visit ViroMedia.com and request an API key. Create a file in the root directory of your project called `secrets.js`. Export your API key as `export const VIRO_KEY = 'YOUR_API_KEY_STRING_HERE'`. 
