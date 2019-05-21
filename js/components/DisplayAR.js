@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { ViroARSceneNavigator } from 'react-viro';
-import { View, Icon, Button, Text, Card, CardItem, Left, Body } from 'native-base';
+import { View, Icon, Button, Text, Card, CardItem, Left } from 'native-base';
 import { StatusBar, StyleSheet, Modal } from 'react-native';
 import { VIRO_KEY } from '../../secrets';
 import { connect } from 'react-redux';
@@ -33,28 +33,33 @@ export default class DisplayAR extends Component {
           animationType="slide"
           transparent={true}
           visible={this.state.modalVisible}
-          onRequestClose={() => {this.setState({ modalVisible: false })}}
+          onRequestClose={() => {
+            this.setState({ modalVisible: false });
+          }}
         >
-          <View style={localStyles.modalContainer} >
-            <Card style={{borderRadius: 4,}}>
-            {this.props.objects.map(item => (
+          <View style={localStyles.modalContainer}>
+            <Card style={{ borderRadius: 4 }}>
+              {this.props.objects.map(item => (
                 <CardItem key={item.id}>
-                <Left>
-                <Text>{item.name}</Text>
-                </Left>
+                  <Left>
+                    <Text>{item.name}</Text>
+                  </Left>
                   <Icon
-                      name="ios-trash"
-                      style={{ fontSize: 30 }}
-                      onPress={() => {
-                        this.props.deleteModel(item.id);
-                      }}
-                    />
+                    name="ios-trash"
+                    style={{ fontSize: 30 }}
+                    onPress={() => {
+                      this.props.deleteModel(item.id);
+                    }}
+                  />
                 </CardItem>
-              
-            ))}
+              ))}
             </Card>
 
-            <Button block style={{backgroundColor: "#8754B4", borderRadius: 4}} onPress={this.closeModal}>
+            <Button
+              block
+              style={{ backgroundColor: '#8754B4', borderRadius: 4 }}
+              onPress={this.closeModal}
+            >
               <Text>Close</Text>
             </Button>
           </View>
