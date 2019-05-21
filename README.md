@@ -1,58 +1,53 @@
 # Adorn
 
-Adorn utilizes augmented reality to allow you to visualize 3D models of furniture in your choice of space
+ Adorn utilizes Augmented Reality (AR) to allow you to visualize 3D models of furniture in your choice of space.
 
 ## Technologies
 
-Adorn is built with the following technologies
-
-- [Viro](https://docs.viromedia.com/docs/) - Augmented Reality engine
+- [Viro](https://docs.viromedia.com/docs/) - AR platform
 - [React Native](https://facebook.github.io/react-native/) - Mobile application framework
 - [Native Base UI](https://nativebase.io/) - Styling and user interface
 - [Firebase](http://firebase.google.com/docs) - Storage of user data and furniture data
 - [Cloudinary](https://cloudinary.com/documentation) - File storage for meshes and textures
 - [ngrok](https://ngrok.com/docs) - Tunneling proxy
 
-## Dependencies
-
 ## Installation
 
-Fork and clone repository
+ First, fork and clone this repository. 
 
  `git clone https://github.com/cats-capstone/adorn.git`
  
- Install Dependencies
+ Next, install dependencies and link libraries. For issues linking libraries, check [this out](https://facebook.github.io/react-native/docs/linking-libraries-ios)
  
  `npm install`
+ `react-native link`
  
- Run on Xcode (Version 10+ and iOS device required)
+ Then, visit ViroMedia.com and request an API key. Create a file in the root directory of your project called `secrets.js`. Export your API key as `export const VIRO_KEY = 'YOUR_API_KEY_STRING_HERE'`. 
  
- ## Getting Started
+ Finally, run the project on your device through Xcode (Version 10+ and iOS device required)
  
- this is how you get started!
  
  ## Usage
 
-*Give your users a sense of the workflow for using your project/tool.*
-*For a website this might include code for running locally.*
-*For an API this might include method and parameter specs.*
+ Once your app is up and running, you can start by creating an account or using the app as a guest. 
+
+ Browse the available furniture and click on a desired piece to view its details. Click on the "try in your room" button to view it in the AR Scene. 
+*insert gif/image here of clicking button, going to AR scene*
+
+ You can move the piece around using one finger gestures and rotate the piece using two fingers.
+*insert gif/image here of moving and rotating a piece of furniture*
+
+ You can add more items by pressing the add icon, or delete items from the room by pressing the delete icon.
 
 ## Demo
 
-Capstone Video
+ For a full demonstration, check out our video here.
 
 ## Team
-Janelle Henney
-Helen Li
-Barry Ng
+- [Janelle Henney](https://github.com/janellehenney)
+- [Helen Li](https://github.com/li-helen)
+- [Barry Ng](https://github.com/hucklebarry)
 
-## Patches and pull requests
-
-Your patches are welcome. Here's our suggested workflow:
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Send us a pull request with a description of your work.
  
  ## License
  
