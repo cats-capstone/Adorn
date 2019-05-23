@@ -34,7 +34,7 @@
 
  Once your app is up and running, you can start by creating an account or using the app as a guest. 
 
- Browse the available furniture and click on a desired piece to view its details. Click on the "try in your room" button to view it in the AR Scene. 
+ Browse the available furniture and click on a desired piece to view its details. 
 
  Move the piece around using one finger gestures and rotate the piece using two fingers.
 
