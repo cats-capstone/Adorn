@@ -42,7 +42,7 @@
 
 ## Demo
 
- For a full demonstration, check out our video here.
+ For a full demonstration, check out [our video here](https://www.youtube.com/watch?v=eNqGN8KIJxc&feature=youtu.be).
 
 ## Team
 - [Janelle Henney](https://github.com/janellehenney)
